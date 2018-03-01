@@ -3,12 +3,51 @@
 
 //////////////////////////////////////////////////////////////////////////////
 /// Static Load
+
+//Tether Surface 1 is static compiled in.
+
+/datum/map_template/tether_lateload/surface_2
+	name = "Tether - Surface 2"
+	mappath = 'tether-02-surface2.dmm'
+
+/datum/map_template/tether_lateload/surface_3
+	name = "Tether - Surface 3"
+	mappath = 'tether-03-surface3.dmm'
+
+/datum/map_template/tether_lateload/transit_space
+	name = "Tether - Transit"
+	mappath = 'tether-04-transit.dmm'
+
+/datum/map_template/tether_lateload/station_1
+	name = "Tether - Station 1"
+	mappath = 'tether-05-station1.dmm'
+
+/datum/map_template/tether_lateload/station_2
+	name = "Tether - Station 2"
+	mappath = 'tether-06-station2.dmm'
+
+/datum/map_template/tether_lateload/station_3
+	name = "Tether - Station 3"
+	mappath = 'tether-07-station3.dmm'
+
+/datum/map_template/tether_lateload/mining
+	name = "Tether - Mining"
+	mappath = 'tether-08-mining.dmm'
+
+/datum/map_template/tether_lateload/solars
+	name = "Tether - Solars"
+	mappath = 'tether-09-solars.dmm'
+
+/datum/map_template/tether_lateload/colony
+	name = "Tether - Colony"
+	mappath = 'tether-10-colony.dmm'
+
 /datum/map_template/tether_lateload/tether_misc
 	name = "Tether - Misc"
 	desc = "Misc areas, like some transit areas, holodecks, merc area."
-	mappath = 'tether_misc.dmm'
+	mappath = 'tether-11-misc.dmm'
 
-	associated_map_datum = /datum/map_z_level/tether_lateload/ships
+	associated_map_datum = /datum/map_z_level/tether_lateload/misc
 
 /datum/map_z_level/tether_lateload/misc
 	name = "Misc"
@@ -17,7 +56,7 @@
 /datum/map_template/tether_lateload/tether_ships
 	name = "Tether - Ships"
 	desc = "Ship transit map and whatnot."
-	mappath = 'tether_ships.dmm'
+	mappath = 'tether-12-ships.dmm'
 
 	associated_map_datum = /datum/map_z_level/tether_lateload/ships
 

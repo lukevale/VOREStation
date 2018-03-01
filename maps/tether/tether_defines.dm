@@ -115,7 +115,18 @@
 		/area/tether/surfacebase/emergency_storage/atrium)
 
 	lateload_z_levels = list(
-		list("Tether - Misc","Tether - Ships"), //Stock Tether lateload maps
+		list(
+		"Tether - Surface 2",
+		"Tether - Surface 3",
+		"Tether - Transit",
+		"Tether - Station 1",
+		"Tether - Station 2",
+		"Tether - Station 3",
+		"Tether - Mining",
+		"Tether - Solars",
+		"Tether - Colony",
+		"Tether - Misc",
+		"Tether - Ships"), //Stock Tether lateload maps,
 		list("Alien Ship - Z1 Ship"),
 		list("Desert Planet - Z1 Beach","Desert Planet - Z2 Cave"),
 		list("Remmi Aerostat - Z1 Aerostat","Remmi Aerostat - Z2 Surface")

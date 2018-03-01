@@ -151,7 +151,7 @@ var/global/use_preloader = FALSE
 								var/no_afterchange = no_changeturf || zexpansion
 								if(!no_afterchange || (model_key != space_key))
 									if(!grid_models[model_key])
-										throw EXCEPTION("Undefined model key in DMM.")
+										throw EXCEPTION("Undefined model key in DMM. [dmm_file] - [model_key]")
 									parse_grid(grid_models[model_key], model_key, xcrd, ycrd, zcrd, no_changeturf || zexpansion)
 								#ifdef TESTING
 								else
