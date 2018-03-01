@@ -13,14 +13,9 @@ SUBSYSTEM_DEF(mapping)
 	flags |= SS_NO_INIT // Make extra sure we don't initialize twice.
 
 /datum/controller/subsystem/mapping/Initialize(timeofday)
-	loadEngine()
-	// TODO - This probably should be here
-	// // Pick a random away mission.
-	// createRandomZlevel()
-	// Mining generation probably should be here too
-	// TODO - Other stuff related to maps and areas could be moved here too.  Look at /tg
 	if(using_map)
 		loadLateMaps()
+	loadEngine()
 	..()
 
 /datum/controller/subsystem/mapping/proc/loadEngine()
