@@ -61,9 +61,12 @@
 /turf/simulated/floor/proc/make_plating(var/place_product, var/defer_icon_update)
 
 	cut_overlays()
-	if(islist(decals))
-		decals.Cut()
-		decals = null
+	// VOREStation Edit - We are flooring switching to plating, swap out old_decals for decals.
+	if(flooring)
+		var/tmp/list/underfloor_decals = old_decals
+		old_decals = decals
+		decals = underfloor_decals
+	// VOREStation Edit End
 
 	name = base_name
 	desc = base_desc
