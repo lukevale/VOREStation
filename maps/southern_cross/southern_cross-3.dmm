@@ -3346,10 +3346,6 @@
 /area/surface/outpost/main/security)
 "ha" = (
 /obj/structure/closet/secure_closet/explorer,
-/obj/machinery/alarm{
-	dir = 1;
-	pixel_y = -22
-	},
 /obj/effect/floor_decal/borderfloor,
 /obj/effect/floor_decal/corner/green/border,
 /turf/simulated/floor/tiled,
@@ -3371,6 +3367,10 @@
 /obj/effect/floor_decal/borderfloor,
 /obj/effect/floor_decal/corner/green/border,
 /obj/item/weapon/pickaxe,
+/obj/machinery/alarm{
+	dir = 1;
+	pixel_y = -22
+	},
 /turf/simulated/floor/tiled,
 /area/surface/outpost/main/security)
 "hd" = (
@@ -3401,6 +3401,10 @@
 /obj/machinery/mech_recharger,
 /obj/structure/extinguisher_cabinet{
 	pixel_x = -25
+	},
+/obj/machinery/alarm{
+	dir = 1;
+	pixel_y = -22
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/surface/outpost/main/first_aid)
@@ -14077,7 +14081,7 @@
 /turf/simulated/shuttle/wall/voidcraft/hard_corner,
 /area/surface/outpost/wall)
 "DS" = (
-/turf/simulated/shuttle/wall/voidcraft{
+/turf/simulated/wall/dungeon{
 	icon = 'icons/obj/doors/shuttledoors.dmi';
 	icon_state = "door_locked";
 	name = "Wall Gate"
@@ -37865,7 +37869,7 @@ Dy
 Dy
 Dy
 Dy
-vI
+Dy
 vI
 vI
 Dy

@@ -5266,6 +5266,7 @@
 /area/centcom/command)
 "lh" = (
 /turf/simulated/shuttle/wall/no_join{
+	base_state = "orange";
 	icon = 'icons/turf/shuttle_orange.dmi';
 	icon_state = "orange"
 	},
@@ -19359,6 +19360,9 @@
 	},
 /turf/simulated/mineral,
 /area/space)
+"Tj" = (
+/turf/simulated/shuttle/wall/hard_corner,
+/area/centcom/evac)
 
 (1,1,1) = {"
 aa
@@ -50303,11 +50307,11 @@ kL
 kL
 kL
 kL
-iY
+Tj
 ns
 ns
 ns
-iY
+Tj
 kL
 kL
 kL
@@ -51321,7 +51325,7 @@ iY
 iY
 iY
 iY
-iY
+Tj
 kL
 kL
 kL
@@ -56975,7 +56979,7 @@ iY
 iY
 iY
 iY
-iY
+Tj
 kL
 kL
 kL
@@ -57756,11 +57760,11 @@ lD
 lD
 lD
 lD
-iY
+Tj
 lB
 lB
 lB
-iY
+Tj
 kl
 ox
 ox

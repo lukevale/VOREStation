@@ -1184,16 +1184,18 @@
 	icon_state = "warning_dust";
 	dir = 1
 	},
+/obj/item/weapon/cell/high,
 /turf/simulated/floor/tiled/asteroid_steel,
 /area/surface/outpost/mining_main/cave)
 "cy" = (
 /obj/structure/table/steel,
-/obj/item/weapon/cell/high,
 /obj/effect/floor_decal/industrial/warning/dust{
 	tag = "icon-warning_dust (NORTH)";
 	icon_state = "warning_dust";
 	dir = 1
 	},
+/obj/machinery/cell_charger,
+/obj/item/weapon/cell/high,
 /turf/simulated/floor/tiled/asteroid_steel,
 /area/surface/outpost/mining_main/cave)
 "cz" = (
@@ -4138,9 +4140,6 @@
 	outdoors = 0
 	},
 /area/surface/cave/explored/normal)
-"CF" = (
-/turf/simulated/mineral/floor/ignore_mapgen/sif,
-/area/surface/cave/unexplored/deep)
 "Dp" = (
 /turf/simulated/shuttle/wall/voidcraft/hard_corner,
 /area/surface/outpost/wall/checkpoint)
@@ -4148,10 +4147,6 @@
 /obj/item/stack/flag/green,
 /turf/simulated/mineral/floor/ignore_mapgen/sif,
 /area/surface/cave/explored/normal)
-"GL" = (
-/obj/item/stack/flag/green,
-/turf/simulated/mineral/floor/ignore_mapgen/sif,
-/area/surface/cave/unexplored/normal)
 "GU" = (
 /obj/item/stack/flag/green,
 /turf/simulated/mineral/floor/ignore_mapgen/sif,
@@ -4182,10 +4177,6 @@
 	},
 /turf/simulated/shuttle/floor/voidcraft/external,
 /area/surface/outpost/wall/checkpoint)
-"Wf" = (
-/obj/item/stack/flag/green,
-/turf/simulated/mineral/floor/ignore_mapgen/sif,
-/area/surface/cave/unexplored/deep)
 "WA" = (
 /turf/simulated/shuttle/wall/voidcraft,
 /area/surface/outpost/wall/checkpoint)
@@ -36031,7 +36022,7 @@ ae
 ae
 ae
 ae
-ag
+af
 af
 af
 af
@@ -36288,7 +36279,7 @@ ae
 ae
 ae
 ae
-GL
+Fc
 af
 af
 Fc
@@ -41055,7 +41046,7 @@ ab
 ab
 ab
 ab
-CF
+ac
 ac
 ac
 ac
@@ -41312,7 +41303,7 @@ ab
 ab
 ab
 ab
-Wf
+GU
 ac
 ac
 GU
@@ -41433,7 +41424,7 @@ ae
 ae
 ae
 ae
-ag
+ae
 af
 af
 af
@@ -41690,7 +41681,7 @@ ae
 ae
 ae
 ae
-ag
+ae
 af
 af
 af
@@ -41947,7 +41938,7 @@ ae
 ae
 ae
 ae
-ag
+ae
 af
 af
 af
@@ -42204,7 +42195,7 @@ ae
 ae
 ae
 ae
-ag
+ae
 af
 af
 af
@@ -43230,7 +43221,7 @@ ae
 ae
 ae
 ae
-ag
+af
 af
 af
 af
@@ -43487,11 +43478,11 @@ ae
 ae
 ae
 ae
-GL
+Fc
+af
 af
 Fc
 ae
-af
 af
 af
 af
