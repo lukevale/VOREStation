@@ -810,6 +810,16 @@ Note that amputating the affected organ does in fact remove the infection from t
 		tbrute = 3
 	return "[tbrute][tburn]"
 
+/obj/item/organ/external/take_damage()
+	..()
+
+	if(!cannot_amputate)
+		if(nonsolid && damage >= max_damage)
+			droplimb(DROPLIMB_BLUNT)
+
+		if(robotic >= ORGAN_NANOFORM && damage >= max_damage)
+			droplimb(DROPLIMB_BURN)
+
 /****************************************************
 			   DISMEMBERMENT
 ****************************************************/
@@ -819,8 +829,10 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 	if(cannot_amputate || !owner)
 		return
-
-	if(disintegrate == DROPLIMB_EDGE && nonsolid)
+	//VOREStation Add
+	if(robotic >= ORGAN_NANOFORM)
+		disintegrate = DROPLIMB_BURN //Ashes will be fine
+	else if(disintegrate == DROPLIMB_EDGE && nonsolid) //VOREStation Add End
 		disintegrate = DROPLIMB_BLUNT //splut
 
 	switch(disintegrate)
