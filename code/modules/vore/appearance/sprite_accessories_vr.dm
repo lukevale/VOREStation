@@ -265,6 +265,13 @@
 	color_blend_mode = ICON_MULTIPLY
 	extra_overlay = "vulp-inner"
 
+/datum/sprite_accessory/ears/bunny_floppy
+	name = "floopy bunny ears (colorable)"
+	desc = ""
+	icon_state = "flopy_bun"
+	do_colouration = 1
+	color_blend_mode = ICON_MULTIPLY
+
 // Special snowflake ears go below here.
 
 /datum/sprite_accessory/ears/molenar_kitsune
