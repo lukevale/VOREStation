@@ -1,167 +1,15 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
-"aU" = (
-/turf/space,
-/area/space)
-"cX" = (
-/obj/machinery/access_button{
-	command = "cycle_interior";
-	frequency = 1379;
-	master_tag = "glacial_airlock_control";
-	name = "Engine Access";
-	pixel_x = 26;
-	pixel_y = 36
-	},
-/turf/simulated/floor/plating,
-/area/glace)
-"dc" = (
-/turf/simulated/floor/plating,
-/area/glace)
-"dZ" = (
-/obj/machinery/power/fusion_core/mapped{
-	id_tag = "glacial"
-	},
-/obj/structure/cable/yellow{
-	d2 = 2;
-	icon_state = "0-2"
-	},
-/turf/simulated/floor/reinforced/airless,
-/area/glace)
-"eq" = (
-/obj/structure/sign/warning/radioactive{
-	pixel_y = 32
-	},
-/turf/simulated/floor/plating,
-/area/glace)
-"fF" = (
-/obj/structure/low_wall/bay/reinforced/orange,
-/obj/structure/window/bay/phoronreinforced,
-/obj/machinery/door/blast/angled{
-	dir = 4;
-	id = "glacialengineport";
-	layer = 3.3;
-	name = "Reactor Blast Door"
-	},
-/turf/simulated/floor/plating,
-/area/glace)
-"fM" = (
+"ac" = (
 /obj/machinery/door/airlock/angled_bay/hatch/engineering{
 	dir = 4;
 	name = "Engine Monitoring Room";
 	req_access = null
 	},
 /obj/machinery/door/firedoor/glass,
-/turf/simulated/floor/plating,
-/area/glace)
-"gh" = (
-/obj/machinery/door/blast/angled{
-	id = "glac_engineblast";
-	name = "Engine Blast Doors"
-	},
-/turf/simulated/floor/plating,
-/area/glace)
-"lQ" = (
-/obj/structure/sign/warning/secure_area{
-	pixel_x = -32
-	},
-/turf/simulated/floor/plating,
-/area/glace)
-"mz" = (
-/obj/machinery/fusion_fuel_injector/mapped{
-	dir = 4;
-	id_tag = "glacial"
-	},
-/turf/simulated/floor/plating,
-/area/glace)
-"mC" = (
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/space)
-"nF" = (
-/obj/machinery/button/remote/blast_door{
-	desc = "A remote control-switch for the engine control room blast doors.";
-	id = "glac_engineblast";
-	name = "Engine Access Blast Doors";
-	pixel_x = -7;
-	pixel_y = 25;
-	req_access = null
-	},
-/obj/machinery/embedded_controller/radio/airlock/access_controller{
-	id_tag = "glacial_airlock_control";
-	name = "Engine Access";
-	pixel_x = 6;
-	pixel_y = 39;
-	tag_exterior_door = "glacial_airlock_exterior";
-	tag_interior_door = "glacial_airlock_interior"
-	},
-/turf/simulated/floor/plating,
-/area/glace)
-"oi" = (
-/obj/machinery/light/small{
-	dir = 1
-	},
-/turf/simulated/floor/plating,
-/area/glace)
-"pk" = (
-/obj/machinery/fusion_fuel_injector/mapped{
-	dir = 8;
-	id_tag = "glacial"
-	},
-/turf/simulated/floor/plating,
-/area/glace)
-"qC" = (
-/obj/machinery/disposal,
-/turf/simulated/floor/plating,
-/area/glace)
-"qD" = (
-/obj/structure/cable/yellow{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/turf/simulated/floor/plating,
-/area/glace)
-"rz" = (
-/obj/machinery/power/apc/angled{
-	cell_type = /obj/item/weapon/cell/infinite;
-	dir = 8
-	},
-/turf/simulated/floor/plating,
-/area/glace)
-"sl" = (
-/obj/structure/table/reinforced,
-/obj/item/clothing/gloves/yellow,
-/obj/item/clothing/gloves/yellow,
-/obj/item/clothing/gloves/yellow,
-/obj/item/stack/cable_coil{
-	pixel_x = 3;
-	pixel_y = 3
-	},
-/obj/item/stack/cable_coil{
-	pixel_x = 3;
-	pixel_y = 3
-	},
-/obj/item/stack/cable_coil{
-	pixel_x = 3;
-	pixel_y = 3
-	},
-/turf/simulated/floor/plating,
-/area/glace)
-"td" = (
-/obj/structure/sign/warning/radioactive{
-	pixel_x = -32
-	},
-/turf/simulated/wall/bay/r_wall/orange,
-/area/glace)
-"tl" = (
-/obj/fiftyspawner/uranium,
-/turf/simulated/floor/plating,
-/area/glace)
-"uh" = (
-/obj/machinery/light{
-	dir = 8
-	},
-/turf/simulated/floor/plating,
-/area/glace)
-"un" = (
+"aL" = (
 /obj/machinery/power/emitter/gyrotron/anchored{
 	dir = 1;
 	id_tag = "glacial"
@@ -172,37 +20,869 @@
 	icon_state = "0-8"
 	},
 /turf/simulated/floor/plating,
-/area/glace)
-"vN" = (
-/obj/structure/sign/warning/radioactive{
-	pixel_y = 32
+/area/space)
+"aN" = (
+/obj/machinery/door/airlock/angled_bay/hatch/engineering{
+	name = "Engineering Access";
+	req_access = list()
 	},
-/obj/machinery/light{
-	dir = 1
-	},
+/obj/machinery/door/firedoor/glass,
 /turf/simulated/floor/plating,
-/area/glace)
-"wH" = (
+/area/space)
+"aU" = (
+/turf/space,
+/area/space)
+"bb" = (
+/obj/structure/cable/cyan{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/obj/machinery/power/apc/angled/hidden{
+	dir = 8
+	},
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor/plating,
+/area/space)
+"bk" = (
 /obj/machinery/access_button{
-	command = "cycle_exterior";
-	dir = 4;
+	command = "cycle_interior";
 	frequency = 1379;
 	master_tag = "glacial_airlock_control";
 	name = "Engine Access";
-	pixel_x = -24;
+	pixel_x = 38;
+	pixel_y = 25
+	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 10;
+	icon_state = "4-10"
+	},
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/space)
+"bx" = (
+/obj/machinery/door/firedoor/glass,
+/obj/machinery/door/airlock/angled_bay/hatch{
+	dir = 4;
+	frequency = 1379;
+	id_tag = "glacial_airlock_exterior";
+	locked = 1;
+	name = "Engine Access";
+	stripe_color = "#333333"
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/space)
+"bO" = (
+/obj/structure/railing/grey{
+	dir = 1
+	},
+/obj/machinery/power/terminal{
+	dir = 4
+	},
+/obj/structure/cable/yellow{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/turf/simulated/floor/plating,
+/area/space)
+"cH" = (
+/obj/structure/catwalk,
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/space)
+"dl" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/eris/steel/techfloor,
+/area/space)
+"dq" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/obj/structure/railing/grey{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/space)
+"dr" = (
+/obj/structure/low_wall/bay/reinforced/orange,
+/obj/structure/window/bay/phoronreinforced,
+/obj/machinery/door/blast/angled/open{
+	dir = 4;
+	id = "glacialblastengine";
+	name = "Engine Monitoring Room Blast Doors"
+	},
+/turf/simulated/floor/plating/eris/under,
+/area/space)
+"dt" = (
+/obj/structure/sign/warning/radioactive{
+	pixel_y = 32
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/space)
+"dR" = (
+/obj/machinery/button/remote/blast_door{
+	desc = "A remote control-switch for the engine control room blast doors.";
+	id = "glac_engineblast";
+	name = "Engine Access Blast Doors";
+	pixel_x = -7;
+	pixel_y = 25;
+	req_access = null
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/space)
+"dS" = (
+/obj/machinery/door/blast/angled/open{
+	dir = 4;
+	id = "glacialblastengine";
+	name = "Engine Monitoring Room Blast Doors"
+	},
+/obj/machinery/door/airlock/angled_bay/hatch/engineering{
+	dir = 4;
+	name = "Engine Monitoring Room";
+	req_access = null
+	},
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/space)
+"ew" = (
+/obj/machinery/power/smes{
+	capacity = 2e+007;
+	charge = 1e+007;
+	input_attempt = 1;
+	input_level_max = 2e+006;
+	output_level = 600000;
+	output_level_max = 2e+006
+	},
+/obj/structure/cable{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/turf/simulated/floor/plating,
+/area/space)
+"ft" = (
+/obj/structure/catwalk,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/plating,
+/area/space)
+"gi" = (
+/obj/structure/cable/cyan{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/space)
+"gk" = (
+/obj/effect/overmap/visitable/ship/glace,
+/turf/space,
+/area/space)
+"gs" = (
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/cable/yellow{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/structure/cable/yellow{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/space)
+"gH" = (
+/obj/structure/cable/yellow{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/obj/machinery/power/hydromagnetic_trap,
+/turf/simulated/floor/reinforced/airless,
+/area/space)
+"gR" = (
+/obj/structure/sign/warning/secure_area{
+	pixel_x = -32
+	},
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/space)
+"hh" = (
+/obj/structure/catwalk,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/plating,
+/area/space)
+"hl" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/turf/simulated/floor/plating,
+/area/space)
+"hy" = (
+/obj/machinery/light{
+	dir = 8
+	},
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/space)
+"hB" = (
+/obj/machinery/disposal,
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor/plating,
+/area/space)
+"hE" = (
+/obj/structure/catwalk,
+/obj/machinery/firealarm/angled/hidden{
+	dir = 1
+	},
+/turf/simulated/floor/plating,
+/area/space)
+"hX" = (
+/obj/structure/railing/grey{
+	dir = 1
+	},
+/obj/structure/railing/grey{
+	dir = 8
+	},
+/turf/simulated/floor/plating,
+/area/space)
+"iq" = (
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/space)
+"kf" = (
+/obj/machinery/shield_capacitor/advanced{
+	anchored = 1
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 9
+	},
+/obj/structure/railing/grey{
+	dir = 8
+	},
+/obj/structure/cable,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/space)
+"kD" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/space)
+"kO" = (
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/embedded_controller/radio/airlock/access_controller{
+	dir = 4;
+	id_tag = "glacial_airlock_control";
+	name = "Engine Access";
+	pixel_x = -26;
+	tag_exterior_door = "glacial_airlock_exterior";
+	tag_interior_door = "glacial_airlock_interior"
+	},
+/turf/simulated/floor/plating,
+/area/space)
+"kQ" = (
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 5;
+	icon_state = "2-5"
+	},
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/space)
+"kS" = (
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/machinery/light/small{
+	dir = 4
+	},
+/obj/structure/catwalk,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/plating,
+/area/space)
+"kW" = (
+/obj/structure/sign/warning/radioactive{
 	pixel_y = -32
 	},
-/turf/simulated/wall/bay/r_wall/orange,
-/area/glace)
-"xE" = (
-/obj/structure/table/reinforced,
-/obj/fiftyspawner/tritium,
-/obj/fiftyspawner/deuterium,
-/obj/fiftyspawner/deuterium,
-/obj/fiftyspawner/deuterium,
+/obj/machinery/light,
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
-/area/glace)
-"xP" = (
+/area/space)
+"lh" = (
+/obj/structure/table/steel,
+/obj/machinery/cell_charger,
+/obj/item/weapon/cell/apc,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/space)
+"lt" = (
+/obj/machinery/fusion_fuel_injector/mapped{
+	dir = 8;
+	id_tag = "glacial"
+	},
+/turf/simulated/floor/plating,
+/area/space)
+"lO" = (
+/obj/structure/catwalk,
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/turf/simulated/floor/plating,
+/area/space)
+"lX" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/sign/department/shield{
+	pixel_x = 32
+	},
+/turf/simulated/floor/plating,
+/area/space)
+"ml" = (
+/obj/structure/reagent_dispensers/watertank,
+/obj/structure/railing/grey{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/eris/steel/techfloor,
+/area/space)
+"mo" = (
+/turf/simulated/floor/plating,
+/area/space)
+"mv" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 10;
+	icon_state = "4-10"
+	},
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/space)
+"mA" = (
+/turf/simulated/wall/rshull,
+/area/space)
+"mL" = (
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/space)
+"no" = (
+/obj/machinery/door/blast/angled{
+	id = "glac_engineblast";
+	name = "Engine Blast Doors"
+	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/space)
+"nF" = (
+/obj/structure/cable/yellow{
+	d1 = 5;
+	d2 = 10;
+	icon_state = "5-10"
+	},
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/space)
+"nQ" = (
+/obj/structure/railing/grey{
+	dir = 1
+	},
+/obj/structure/railing/grey{
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 5
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/space)
+"nS" = (
+/obj/structure/table/steel,
+/obj/item/weapon/storage/box/lights/mixed,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 5
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/space)
+"pb" = (
+/obj/structure/cable/cyan{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/obj/machinery/power/apc/angled/hidden{
+	dir = 1
+	},
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor/plating,
+/area/space)
+"ph" = (
+/obj/machinery/button/remote/blast_door{
+	desc = "A remote control-switch for the engine control room blast doors.";
+	dir = 8;
+	id = "glac_engineblast";
+	name = "Engine Access Blast Doors";
+	pixel_x = 31;
+	pixel_y = 5;
+	req_access = null
+	},
+/obj/machinery/access_button{
+	command = "cycle_interior";
+	dir = 8;
+	frequency = 1379;
+	master_tag = "glacial_airlock_control";
+	name = "Engine Access";
+	pixel_x = 29;
+	pixel_y = -7
+	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/space)
+"pi" = (
+/obj/structure/table/steel,
+/obj/machinery/recharger,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 6
+	},
+/obj/machinery/alarm/angled/hidden{
+	dir = 8;
+	req_one_access = list()
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/space)
+"pL" = (
+/obj/machinery/light/small{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/plating,
+/area/space)
+"pY" = (
+/obj/fiftyspawner/uranium,
+/obj/structure/closet/walllocker{
+	name = "Fuel Locker";
+	pixel_y = 32
+	},
+/obj/structure/railing/grey{
+	dir = 4
+	},
+/obj/structure/table/reinforced,
+/turf/simulated/floor/plating,
+/area/space)
+"re" = (
+/obj/machinery/light/small,
+/turf/simulated/floor/tiled/eris/steel/techfloor,
+/area/space)
+"rk" = (
+/obj/machinery/door/airlock/angled_bay/double/glass{
+	dir = 8;
+	door_color = "#e6ab22";
+	name = "Engineering Tool Storage";
+	stripe_color = "#913013"
+	},
+/obj/machinery/door/firedoor/multi_tile{
+	dir = 2
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/steel_grid,
+/area/space)
+"rl" = (
+/obj/machinery/power/terminal{
+	dir = 4
+	},
+/obj/structure/cable/yellow{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/obj/machinery/firealarm/angled/hidden{
+	dir = 1
+	},
+/turf/simulated/floor/plating,
+/area/space)
+"rq" = (
+/obj/structure/table/steel,
+/obj/random/maintenance/engineering,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 10
+	},
+/obj/structure/railing/grey{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/space)
+"rS" = (
+/obj/structure/sign/warning/radioactive{
+	pixel_x = -32
+	},
+/obj/structure/railing/grey,
+/obj/machinery/telecomms/allinone,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/space)
+"rV" = (
+/obj/machinery/power/apc/angled/hidden{
+	dir = 8
+	},
+/obj/structure/cable{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/turf/simulated/floor/tiled/eris/steel/techfloor,
+/area/space)
+"rW" = (
+/obj/structure/catwalk,
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/plating,
+/area/space)
+"sx" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/plating,
+/area/space)
+"sB" = (
+/obj/structure/bed/chair/office/dark{
+	dir = 1
+	},
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/space)
+"tf" = (
+/obj/machinery/light/small,
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/space)
+"tI" = (
+/obj/structure/cable/yellow{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/space)
+"uq" = (
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/cable/yellow{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/turf/simulated/floor/plating,
+/area/space)
+"uu" = (
+/obj/effect/catwalk_plated/dark,
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/plating,
+/area/space)
+"uF" = (
+/obj/structure/table/steel,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 4
+	},
+/obj/machinery/firealarm/angled/hidden{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/space)
+"uP" = (
+/obj/machinery/light/small,
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/plating,
+/area/space)
+"uW" = (
+/obj/structure/table/reinforced,
+/obj/item/clothing/gloves/yellow,
+/obj/item/clothing/gloves/yellow,
+/obj/item/clothing/gloves/yellow,
+/obj/item/stack/cable_coil{
+	pixel_x = 3;
+	pixel_y = 3
+	},
+/obj/item/stack/cable_coil{
+	pixel_x = 3;
+	pixel_y = 3
+	},
+/obj/item/stack/cable_coil{
+	pixel_x = 3;
+	pixel_y = 3
+	},
+/obj/machinery/firealarm/angled/hidden{
+	dir = 1
+	},
+/turf/simulated/floor/plating,
+/area/space)
+"vg" = (
+/obj/machinery/light/small{
+	dir = 8
+	},
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/space)
+"vy" = (
+/obj/structure/low_wall/bay/reinforced/orange,
+/obj/structure/window/bay/phoronreinforced,
+/obj/machinery/door/blast/angled{
+	id = "glacialengineport";
+	layer = 3.3;
+	name = "Reactor Blast Door"
+	},
+/turf/simulated/floor/plating,
+/area/space)
+"wq" = (
+/obj/machinery/door/blast/angled{
+	id = "glac_engineblast";
+	name = "Engine Blast Doors"
+	},
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/space)
+"wW" = (
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/machinery/light/small,
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/space)
+"wX" = (
+/obj/machinery/power/fusion_core/mapped{
+	id_tag = "glacial"
+	},
+/obj/structure/cable/yellow{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/space)
+"xe" = (
+/obj/machinery/power/port_gen/pacman/super/potato,
+/obj/structure/cable/yellow{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/turf/simulated/floor/plating,
+/area/space)
+"xr" = (
+/obj/machinery/recharge_station,
+/obj/machinery/light/small{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/space)
+"xT" = (
+/obj/structure/bed/chair/bay/chair{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/space)
+"yf" = (
+/obj/structure/cable/yellow{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/structure/cable/yellow{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/space)
+"zo" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/space)
+"zT" = (
+/obj/machinery/light/small{
+	dir = 1
+	},
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/space)
+"Bo" = (
+/obj/machinery/power/terminal{
+	dir = 4
+	},
+/obj/structure/cable/yellow{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/turf/simulated/floor/plating,
+/area/space)
+"Bv" = (
+/obj/structure/closet/radiation,
+/obj/structure/catwalk,
+/obj/machinery/alarm/angled/hidden{
+	dir = 8;
+	req_one_access = list()
+	},
+/turf/simulated/floor/plating,
+/area/space)
+"Bw" = (
+/turf/simulated/wall/bay/r_wall/orange,
+/area/space)
+"BZ" = (
 /obj/machinery/computer/fusion_fuel_control{
 	id_tag = "glacial"
 	},
@@ -223,135 +903,112 @@
 	req_access = null
 	},
 /turf/simulated/floor/plating,
-/area/glace)
-"yb" = (
-/obj/machinery/light/small,
-/turf/simulated/floor/plating,
-/area/glace)
-"Ak" = (
-/obj/machinery/access_button{
-	command = "cycle_exterior";
-	dir = 8;
-	frequency = 1379;
-	master_tag = "glacial_airlock_control";
-	name = "Engine Access";
-	pixel_x = 24;
-	pixel_y = -32
+/area/space)
+"Cf" = (
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
 	},
 /turf/simulated/floor/plating,
-/area/glace)
-"Bo" = (
-/obj/structure/sign/warning/radioactive{
-	pixel_y = 32
+/area/space)
+"CP" = (
+/obj/machinery/vending/engivend{
+	req_access = null;
+	req_log_access = null
 	},
-/obj/machinery/fusion_fuel_compressor,
-/turf/simulated/floor/plating,
-/area/glace)
-"Cq" = (
-/obj/machinery/button/remote/blast_door{
-	desc = "A remote control-switch for the engine control room blast doors.";
-	dir = 8;
-	id = "glac_engineblast";
-	name = "Engine Access Blast Doors";
-	pixel_x = 31;
-	pixel_y = 5;
-	req_access = null
+/turf/simulated/floor/tiled/eris/steel/techfloor,
+/area/space)
+"CQ" = (
+/obj/machinery/light/small{
+	dir = 1
 	},
-/obj/machinery/access_button{
-	command = "cycle_interior";
-	dir = 8;
-	frequency = 1379;
-	master_tag = "glacial_airlock_control";
-	name = "Engine Access";
-	pixel_x = 29;
-	pixel_y = -7
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/plating,
-/area/glace)
-"Dg" = (
-/obj/machinery/door/firedoor/glass,
-/obj/machinery/door/airlock/angled_bay/hatch{
-	dir = 4;
-	frequency = 1379;
-	id_tag = "glacial_airlock_exterior";
-	locked = 1;
-	name = "Engine Access";
-	stripe_color = "#333333"
+/area/space)
+"CV" = (
+/obj/machinery/light{
+	dir = 4
 	},
-/turf/simulated/floor/plating,
-/area/glace)
-"FD" = (
-/obj/structure/cable/yellow{
+/obj/structure/cable/cyan{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/space)
+"Dh" = (
+/obj/structure/closet/walllocker_double/south{
+	name = "Radioactive Gear"
+	},
+/obj/item/clothing/suit/radiation,
+/obj/item/clothing/suit/radiation,
+/obj/item/clothing/head/radiation,
+/obj/item/clothing/head/radiation,
+/obj/item/device/geiger,
+/obj/item/device/geiger,
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/space)
+"Dp" = (
+/obj/structure/table/steel,
+/obj/machinery/cell_charger,
+/obj/random/tech_supply,
+/obj/random/tech_supply,
+/obj/random/tech_supply,
+/obj/machinery/firealarm/angled/hidden{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/eris/steel/techfloor,
+/area/space)
+"DK" = (
+/obj/machinery/disposal,
+/obj/effect/catwalk_plated/dark,
+/obj/machinery/alarm/angled/hidden{
+	dir = 1;
+	req_one_access = list()
+	},
+/turf/simulated/floor/plating,
+/area/space)
+"DT" = (
 /obj/structure/cable/yellow{
 	d1 = 2;
-	d2 = 4;
-	icon_state = "2-4"
+	d2 = 8;
+	icon_state = "2-8"
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
-/area/glace)
-"GH" = (
-/obj/structure/low_wall/bay/reinforced/orange,
-/obj/structure/window/bay/phoronreinforced,
-/obj/machinery/door/blast/angled{
-	id = "glacialengineport";
-	layer = 3.3;
-	name = "Reactor Blast Door"
-	},
-/turf/simulated/floor/plating,
-/area/glace)
-"GX" = (
-/obj/machinery/door/airlock/angled_bay/hatch{
-	frequency = 1379;
-	id_tag = "glacial_airlock_interior";
-	locked = 1;
-	name = "Engine Access";
-	stripe_color = "#333333"
-	},
-/turf/simulated/floor/plating,
-/area/glace)
-"Hl" = (
+/area/space)
+"DV" = (
+/turf/simulated/floor/tiled/eris/steel/techfloor,
+/area/space)
+"Es" = (
 /obj/structure/table/reinforced,
 /obj/machinery/light,
 /turf/simulated/floor/plating,
-/area/glace)
-"Hy" = (
-/obj/machinery/power/port_gen/pacman/super/potato,
-/obj/structure/cable/yellow{
-	d2 = 4;
-	icon_state = "0-4"
-	},
-/turf/simulated/floor/plating,
-/area/glace)
-"Im" = (
-/obj/structure/closet/radiation,
-/obj/item/clothing/glasses/meson,
-/obj/item/clothing/glasses/meson,
-/turf/simulated/floor/plating,
-/area/glace)
-"IE" = (
-/obj/machinery/computer/gyrotron_control{
-	id_tag = "glacial"
-	},
-/turf/simulated/floor/plating,
-/area/glace)
-"Na" = (
-/obj/machinery/light{
-	dir = 4
-	},
-/turf/simulated/floor/plating,
-/area/glace)
-"Nq" = (
-/turf/simulated/wall/r_lead,
-/area/glace)
-"NV" = (
-/obj/effect/overmap/visitable/ship/glace,
-/turf/space,
 /area/space)
-"Os" = (
+"Fe" = (
+/obj/structure/closet/walllocker_double/north{
+	name = "Tool Cabnet"
+	},
+/obj/item/weapon/storage/toolbox/electrical,
+/obj/item/weapon/storage/toolbox/mechanical,
+/obj/item/stack/cable_coil/green,
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/space)
+"FP" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 9
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/space)
+"Gn" = (
 /obj/machinery/door/airlock/angled_bay/hatch{
 	door_color = null;
 	locked = 1;
@@ -364,57 +1021,432 @@
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/reinforced,
-/area/glace)
-"OY" = (
-/obj/structure/bed/chair/office/dark{
+/area/space)
+"GY" = (
+/obj/structure/sign/warning/radioactive{
+	pixel_y = 32
+	},
+/obj/machinery/light{
 	dir = 1
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
-/area/glace)
-"Pi" = (
+/area/space)
+"Hk" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/space)
+"Hq" = (
+/obj/structure/low_wall/bay/reinforced/orange,
+/obj/structure/window/bay/phoronreinforced,
+/obj/machinery/door/blast/angled{
+	dir = 4;
+	id = "glacialengineport";
+	layer = 3.3;
+	name = "Reactor Blast Door"
+	},
+/turf/simulated/floor/plating,
+/area/space)
+"In" = (
+/obj/structure/cable/yellow{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/obj/machinery/power/hydromagnetic_trap,
+/turf/simulated/floor/reinforced/airless,
+/area/space)
+"Iu" = (
+/obj/machinery/shield_capacitor/advanced{
+	anchored = 1;
+	dir = 1
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 10
+	},
+/obj/structure/railing/grey{
+	dir = 8
+	},
+/obj/structure/cable{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/space)
+"II" = (
+/obj/machinery/fusion_fuel_injector/mapped{
+	dir = 4;
+	id_tag = "glacial"
+	},
+/turf/simulated/floor/plating,
+/area/space)
+"Jt" = (
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/space)
+"Jx" = (
 /obj/structure/cable/yellow{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/structure/cable/cyan{
+	d1 = 5;
+	d2 = 8;
+	icon_state = "5-8"
+	},
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/space)
+"JC" = (
+/obj/machinery/access_button{
+	command = "cycle_exterior";
+	dir = 4;
+	frequency = 1379;
+	master_tag = "glacial_airlock_control";
+	name = "Engine Access";
+	pixel_x = -24;
+	pixel_y = -32
+	},
+/obj/structure/cable/yellow{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/cable/yellow{
+	d1 = 5;
+	d2 = 8;
+	icon_state = "5-8"
+	},
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/space)
+"Kv" = (
+/obj/structure/table/steel,
+/obj/machinery/recharger,
+/obj/random/tech_supply,
+/obj/random/tech_supply,
+/obj/random/tech_supply,
+/obj/machinery/alarm/angled/hidden{
+	dir = 1;
+	req_one_access = list()
+	},
+/turf/simulated/floor/tiled/eris/steel/techfloor,
+/area/space)
+"Kw" = (
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/structure/cable/cyan{
+	d1 = 5;
+	d2 = 8;
+	icon_state = "5-8"
+	},
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/space)
+"KD" = (
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 10;
+	icon_state = "1-10"
+	},
+/turf/simulated/floor/plating,
+/area/space)
+"KK" = (
+/obj/structure/cable/cyan{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/obj/machinery/power/apc/angled/hidden,
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor/plating,
+/area/space)
+"KS" = (
+/obj/structure/cable/yellow{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/structure/cable/yellow{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
 /turf/simulated/floor/reinforced/airless,
-/area/glace)
-"Qb" = (
+/area/space)
+"Ln" = (
+/obj/structure/closet/walllocker_double/west{
+	name = "Misc Tools"
+	},
+/obj/item/weapon/cell/high,
+/obj/item/weapon/cell/high,
+/obj/random/maintenance/engineering,
+/obj/random/maintenance/engineering,
+/obj/item/device/radio/off{
+	channels = list("Talon" = 1)
+	},
+/obj/item/device/radio/off{
+	channels = list("Talon" = 1)
+	},
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/space)
+"LB" = (
+/obj/machinery/access_button{
+	command = "cycle_exterior";
+	dir = 8;
+	frequency = 1379;
+	master_tag = "glacial_airlock_control";
+	name = "Engine Access";
+	pixel_x = 24;
+	pixel_y = -32
+	},
+/obj/structure/cable/yellow{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/space)
+"LF" = (
+/obj/item/modular_computer/console/preset/engineering{
+	dir = 8
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/space)
+"LI" = (
+/turf/simulated/floor/tiled/steel_grid,
+/area/space)
+"LM" = (
+/obj/structure/table/steel,
+/obj/structure/closet/walllocker/medical/south,
+/obj/item/weapon/storage/firstaid/regular,
+/obj/item/weapon/storage/firstaid/fire,
+/obj/effect/floor_decal/industrial/warning,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/space)
+"LV" = (
+/obj/structure/cable/yellow{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/space)
+"MB" = (
+/obj/machinery/door/firedoor/glass,
+/obj/machinery/door/airlock/angled_bay/hatch{
+	dir = 4;
+	frequency = 1379;
+	id_tag = "glacial_airlock_exterior";
+	locked = 1;
+	name = "Engine Access";
+	stripe_color = "#333333"
+	},
+/obj/structure/cable/yellow{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/space)
+"MS" = (
+/obj/structure/railing/grey{
+	dir = 8
+	},
+/obj/structure/railing/grey,
+/turf/simulated/floor/plating,
+/area/space)
+"MZ" = (
+/obj/structure/catwalk,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/turf/simulated/floor/plating,
+/area/space)
+"Nc" = (
+/obj/structure/catwalk,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/turf/simulated/floor/plating,
+/area/space)
+"ND" = (
+/obj/structure/railing/grey{
+	dir = 4
+	},
+/obj/structure/railing/grey,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 6
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/space)
+"NG" = (
+/obj/structure/sign/warning/radioactive{
+	pixel_y = -32
+	},
+/obj/structure/table/reinforced,
+/obj/machinery/recharger,
+/obj/machinery/light,
+/turf/simulated/floor/plating,
+/area/space)
+"NT" = (
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 10;
+	icon_state = "1-10"
+	},
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/space)
+"NU" = (
+/obj/machinery/shield_capacitor/advanced{
+	anchored = 1;
+	dir = 8
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 4
+	},
+/obj/structure/cable{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/space)
+"NY" = (
+/turf/simulated/wall/r_lead,
+/area/space)
+"Pi" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/closet/walllocker_double/east{
+	name = "Electrical Cabnet"
+	},
+/obj/item/stack/cable_coil/random,
+/obj/item/clothing/gloves/yellow,
+/obj/item/weapon/storage/toolbox/electrical,
+/turf/simulated/floor/plating,
+/area/space)
+"Pq" = (
+/obj/structure/reagent_dispensers/fueltank,
+/turf/simulated/floor/tiled/eris/steel/techfloor,
+/area/space)
+"Px" = (
+/obj/structure/sign/warning/radioactive{
+	pixel_y = 32
+	},
+/obj/machinery/fusion_fuel_compressor,
+/turf/simulated/floor/plating,
+/area/space)
+"Qf" = (
+/obj/machinery/computer/gyrotron_control{
+	id_tag = "glacial"
+	},
+/obj/machinery/firealarm/angled/hidden,
+/turf/simulated/floor/plating,
+/area/space)
+"Qq" = (
+/obj/structure/cable/yellow{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/catwalk,
+/obj/machinery/alarm/angled/hidden{
+	dir = 1;
+	req_one_access = list()
+	},
+/turf/simulated/floor/plating,
+/area/space)
+"QZ" = (
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/space)
+"Rt" = (
+/obj/machinery/door/airlock/angled_bay/hatch{
+	frequency = 1379;
+	id_tag = "glacial_airlock_interior";
+	locked = 1;
+	name = "Engine Access";
+	stripe_color = "#333333"
+	},
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/space)
+"RJ" = (
+/obj/structure/table/reinforced,
+/obj/fiftyspawner/tritium,
+/obj/fiftyspawner/deuterium,
+/obj/fiftyspawner/deuterium,
+/turf/simulated/floor/plating,
+/area/space)
+"Se" = (
 /obj/structure/sign/warning/radioactive{
 	pixel_x = -32
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
-/area/glace)
-"Qu" = (
-/obj/machinery/door/blast/angled/open{
-	dir = 4;
-	id = "glacialblastengine";
-	name = "Engine Monitoring Room Blast Doors"
+/area/space)
+"Sv" = (
+/obj/machinery/vending/tool{
+	req_log_access = null
 	},
-/obj/machinery/door/airlock/angled_bay/hatch/engineering{
-	dir = 4;
-	name = "Engine Monitoring Room";
-	req_access = null
+/turf/simulated/floor/tiled/eris/steel/techfloor,
+/area/space)
+"SP" = (
+/obj/machinery/pointdefense_control{
+	id_tag = "glace_pd"
 	},
-/turf/simulated/floor/plating,
-/area/glace)
-"QE" = (
-/obj/structure/low_wall/bay/reinforced/orange,
-/obj/structure/window/bay/phoronreinforced,
-/obj/machinery/door/blast/angled/open{
-	dir = 4;
-	id = "glacialblastengine";
-	name = "Engine Monitoring Room Blast Doors"
-	},
-/turf/simulated/floor/plating/eris/under,
-/area/glace)
-"Rj" = (
-/turf/simulated/wall/bay/r_wall/orange,
-/area/glace)
-"Rw" = (
-/turf/simulated/floor/reinforced/airless,
-/area/glace)
-"RS" = (
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/space)
+"SX" = (
 /obj/machinery/button/remote/blast_door{
 	desc = "A remote control-switch for the engine charging port.";
 	id = "glacialengineport";
@@ -423,8 +1455,8 @@
 	req_access = null
 	},
 /turf/simulated/floor/plating,
-/area/glace)
-"Sx" = (
+/area/space)
+"Tc" = (
 /obj/machinery/computer/fusion_core_control{
 	id_tag = "glacial"
 	},
@@ -432,34 +1464,168 @@
 	dir = 1
 	},
 /turf/simulated/floor/plating,
-/area/glace)
-"Ud" = (
-/obj/structure/sign/warning/radioactive{
-	pixel_y = -32
-	},
-/obj/machinery/light,
+/area/space)
+"Td" = (
 /obj/structure/cable/yellow{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/space)
+"TT" = (
+/obj/machinery/power/smes{
+	capacity = 2e+007;
+	charge = 1e+007;
+	input_attempt = 1;
+	input_level_max = 2e+006;
+	output_level = 600000;
+	output_level_max = 2e+006
+	},
+/obj/structure/railing/grey{
+	dir = 1
+	},
+/obj/structure/cable{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/turf/simulated/floor/plating,
+/area/space)
+"UB" = (
+/obj/structure/closet/emergsuit_wall{
+	dir = 4;
+	pixel_x = 32
+	},
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/space)
+"UD" = (
+/obj/effect/catwalk_plated/dark,
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/cable{
 	d1 = 1;
 	d2 = 8;
 	icon_state = "1-8"
 	},
 /turf/simulated/floor/plating,
-/area/glace)
-"YO" = (
+/area/space)
+"UJ" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8
+	},
+/obj/structure/railing/grey{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/space)
+"Vr" = (
 /obj/machinery/disposal/wall{
 	dir = 8
 	},
+/obj/effect/catwalk_plated/dark,
 /turf/simulated/floor/plating,
-/area/glace)
-"YT" = (
-/obj/structure/sign/warning/radioactive{
-	pixel_y = -32
+/area/space)
+"VI" = (
+/obj/machinery/power/apc/angled/hidden,
+/obj/structure/cable{
+	d2 = 4;
+	icon_state = "0-4"
 	},
-/obj/structure/table/reinforced,
-/obj/machinery/recharger,
-/obj/machinery/light,
+/obj/effect/catwalk_plated/dark,
 /turf/simulated/floor/plating,
-/area/glace)
+/area/space)
+"VM" = (
+/obj/machinery/power/terminal{
+	dir = 4
+	},
+/obj/structure/cable/yellow{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/obj/structure/sign/warning/radioactive{
+	pixel_x = -32
+	},
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/simulated/floor/plating,
+/area/space)
+"VZ" = (
+/obj/machinery/vending/engineering{
+	req_access = null;
+	req_log_access = null
+	},
+/turf/simulated/floor/tiled/eris/steel/techfloor,
+/area/space)
+"Wk" = (
+/obj/structure/closet/radiation,
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/space)
+"Wv" = (
+/turf/simulated/floor/reinforced/airless,
+/area/space)
+"WS" = (
+/obj/machinery/door/airlock/angled_bay/hatch{
+	frequency = 1379;
+	id_tag = "glacial_airlock_interior";
+	locked = 1;
+	name = "Engine Access";
+	stripe_color = "#333333"
+	},
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/space)
+"XJ" = (
+/obj/machinery/ntnet_relay,
+/obj/machinery/light/small{
+	dir = 8
+	},
+/obj/structure/sign/department/telecoms{
+	pixel_x = -32
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/space)
+"XK" = (
+/obj/machinery/power/smes/buildable{
+	RCon_tag = null;
+	charge = 2e+006;
+	input_attempt = 1;
+	input_level = 100000;
+	output_level = 200000
+	},
+/obj/structure/railing/grey{
+	dir = 4
+	},
+/obj/structure/cable/cyan{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/turf/simulated/floor/plating,
+/area/space)
+"XU" = (
+/obj/machinery/shield_gen/external/advanced{
+	anchored = 1
+	},
+/obj/structure/railing/grey{
+	dir = 8
+	},
+/obj/structure/cable{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/space)
 
 (1,1,1) = {"
 aU
@@ -742,7 +1908,7 @@ aU
 aU
 aU
 aU
-NV
+gk
 aU
 "}
 (3,1,1) = {"
@@ -6060,21 +7226,21 @@ aU
 aU
 aU
 aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
+mA
+mA
+mA
+mA
+mA
+mA
+mA
+mA
+mA
+mA
+mA
+mA
+mA
+mA
+mA
 aU
 aU
 aU
@@ -6202,21 +7368,21 @@ aU
 aU
 aU
 aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
+mo
+mo
+mo
+mo
+mo
+mo
+mo
+mo
+mo
+mo
+mo
+mo
+mo
+mo
+mo
 aU
 aU
 aU
@@ -6344,21 +7510,21 @@ aU
 aU
 aU
 aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
+Bw
+Bw
+Bw
+Bw
+Bw
+Bw
+Bw
+Bw
+Bw
+Bw
+Bw
+Bw
+Bw
+Bw
+Bw
 aU
 aU
 aU
@@ -6486,21 +7652,21 @@ aU
 aU
 aU
 aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
+Bw
+NY
+NY
+NY
+NY
+NY
+NY
+NY
+NY
+NY
+NY
+NY
+NY
+NY
+Bw
 aU
 aU
 aU
@@ -6628,21 +7794,21 @@ aU
 aU
 aU
 aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
+Bw
+NY
+NY
+Bw
+Bw
+Bw
+Bw
+Bw
+Bw
+Bw
+Bw
+Bw
+Bw
+NY
+Bw
 aU
 aU
 aU
@@ -6770,21 +7936,21 @@ aU
 aU
 aU
 aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
+Bw
+NY
+NY
+Bw
+QZ
+hy
+QZ
+Se
+QZ
+QZ
+hy
+cH
+Bw
+NY
+Bw
 aU
 aU
 aU
@@ -6912,21 +8078,21 @@ aU
 aU
 aU
 aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
+Bw
+NY
+NY
+Bw
+QZ
+mo
+II
+II
+II
+mo
+mo
+QZ
+Bw
+NY
+Bw
 aU
 aU
 aU
@@ -7054,21 +8220,21 @@ aU
 aU
 aU
 aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
+Bw
+NY
+NY
+Bw
+QZ
+Bw
+Hq
+Hq
+Hq
+Bw
+mo
+QZ
+Bw
+NY
+Bw
 aU
 aU
 aU
@@ -7196,21 +8362,21 @@ aU
 aU
 aU
 aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
+Bw
+NY
+NY
+Bw
+QZ
+vy
+gH
+Wv
+gH
+vy
+mo
+hE
+Bw
+NY
+Bw
 aU
 aU
 aU
@@ -7338,21 +8504,21 @@ aU
 aU
 aU
 aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
+Bw
+NY
+NY
+Bw
+GY
+vy
+KS
+wX
+gs
+Gn
+uq
+kW
+Bw
+NY
+Bw
 aU
 aU
 aU
@@ -7480,25 +8646,25 @@ aU
 aU
 aU
 aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
+Bw
+NY
+NY
+Bw
+QZ
+vy
+In
+Wv
+In
+vy
+aL
+Qq
+Bw
+NY
+Bw
+Bw
+Bw
+Bw
+Bw
 aU
 aU
 aU
@@ -7622,25 +8788,25 @@ aU
 aU
 aU
 aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
+Bw
+NY
+NY
+Bw
+QZ
+Bw
+Hq
+Hq
+Hq
+Bw
+SX
+LV
+Bw
+NY
+Bw
+Px
+bb
+RJ
+Bw
 aU
 aU
 aU
@@ -7764,25 +8930,25 @@ aU
 aU
 aU
 aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
+Bw
+NY
+NY
+Bw
+QZ
+mo
+lt
+lt
+lt
+mo
+mo
+DT
+Rt
+wq
+Rt
+iq
+Kw
+uW
+Bw
 aU
 aU
 aU
@@ -7906,25 +9072,25 @@ aU
 aU
 aU
 aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
+Bw
+NY
+NY
+Bw
+pb
+CV
+Jt
+Jt
+Jt
+gi
+CV
+ph
+WS
+no
+WS
+bk
+LV
+Es
+Bw
 aU
 aU
 aU
@@ -8048,25 +9214,25 @@ aU
 aU
 aU
 aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
+Bw
+NY
+NY
+Bw
+Bw
+Bw
+dr
+dr
+dr
+dS
+Bw
+Bw
+Bw
+NY
+Bw
+dR
+LV
+DK
+Bw
 aU
 aU
 aU
@@ -8190,25 +9356,25 @@ aU
 aU
 aU
 aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
+Bw
+NY
+NY
+NY
+NY
+Bw
+BZ
+QZ
+QZ
+KK
+Bw
+NY
+NY
+NY
+Bw
+dt
+LB
+Wk
+Bw
 aU
 aU
 aU
@@ -8332,25 +9498,25 @@ aU
 aU
 aU
 aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
+Bw
+Bw
+Bw
+Bw
+NY
+Bw
+Tc
+sB
+QZ
+NG
+Bw
+NY
+Bw
+Bw
+Bw
+bx
+MB
+Bw
+Bw
 aU
 aU
 aU
@@ -8474,25 +9640,25 @@ aU
 aU
 aU
 aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
+Bw
+Sv
+DV
+Bw
+NY
+Bw
+Qf
+QZ
+Vr
+Bv
+Bw
+NY
+Bw
+VM
+kO
+Jx
+JC
+Dh
+Bw
 aU
 aU
 aU
@@ -8616,25 +9782,25 @@ aU
 aU
 aU
 aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
+Bw
+VZ
+DV
+Bw
+NY
+NY
+NY
+ac
+NY
+NY
+NY
+NY
+Bw
+XK
+KD
+nF
+LV
+VI
+Bw
 aU
 aU
 aU
@@ -8758,25 +9924,25 @@ aU
 aU
 aU
 aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
+Bw
+CP
+re
+Bw
+Bw
+Bw
+NY
+zT
+gR
+tf
+NY
+Bw
+Bw
+Fe
+nF
+kQ
+tI
+zo
+Bw
 aU
 aU
 aU
@@ -8900,25 +10066,25 @@ aU
 aU
 aU
 aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
+Bw
+ml
+DV
+rV
+Dp
+Bw
+NY
+NY
+NY
+QZ
+NY
+Bw
+xe
+NT
+mv
+Td
+yf
+wW
+Bw
 aU
 aU
 aU
@@ -9042,25 +10208,25 @@ aU
 aU
 aU
 aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
+Bw
+Pq
+DV
+dl
+Kv
+Bw
+Bw
+Bw
+Bw
+ac
+Bw
+Bw
+pY
+QZ
+kD
+bO
+Bo
+rl
+Bw
 aU
 aU
 aU
@@ -9182,27 +10348,27 @@ aU
 aU
 aU
 aU
-Rj
-Rj
-Rj
-Rj
-Rj
-Rj
-Rj
-Rj
-Rj
-Rj
-Rj
-Rj
-Rj
-Rj
-Rj
 aU
 aU
-aU
-aU
-aU
-aU
+Bw
+Bw
+LI
+rk
+Bw
+Bw
+SP
+XJ
+rS
+QZ
+Se
+vg
+QZ
+QZ
+kD
+TT
+ew
+ew
+Bw
 aU
 aU
 aU
@@ -9324,27 +10490,27 @@ aU
 aU
 aU
 aU
-Rj
-Nq
-Nq
-Nq
-Nq
-Nq
-Nq
-Nq
-Nq
-Nq
-Nq
-Nq
-Nq
-Nq
-Rj
 aU
 aU
-aU
-aU
-aU
-aU
+Bw
+hB
+QZ
+rW
+vg
+Ln
+QZ
+QZ
+lO
+ft
+ft
+ft
+ft
+ft
+kS
+sx
+Pi
+hl
+Bw
 aU
 aU
 aU
@@ -9466,33 +10632,33 @@ aU
 aU
 aU
 aU
-Rj
-Nq
-Nq
-Rj
-Rj
-Rj
-Rj
-Rj
-Rj
-Rj
-Rj
-Rj
-Rj
-Nq
-Rj
 aU
 aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
+aN
+ft
+ft
+Nc
+MZ
+ft
+MZ
+ft
+hh
+QZ
+FP
+Hk
+UJ
+rq
+Bw
+Bw
+Bw
+Bw
+Bw
+Bw
+Bw
+Bw
+Bw
+Bw
+Bw
 aU
 aU
 aU
@@ -9608,23 +10774,23 @@ aU
 aU
 aU
 aU
-Rj
-Nq
-Nq
-Rj
-dc
-uh
-dc
-Qb
-dc
-dc
-uh
-dc
-Rj
-Nq
-Rj
 aU
 aU
+Bw
+lh
+xr
+lh
+rW
+MS
+rW
+hX
+rW
+UB
+dq
+mL
+xT
+LM
+Bw
 aU
 aU
 aU
@@ -9750,23 +10916,23 @@ aU
 aU
 aU
 aU
-Rj
-Nq
-Nq
-Rj
-dc
-dc
-mz
-mz
-mz
-dc
-tl
-Hy
-Rj
-Nq
-Rj
 aU
 aU
+Bw
+Bw
+Bw
+Bw
+uu
+kf
+XU
+Iu
+UD
+Bw
+nS
+uF
+LF
+pi
+Bw
 aU
 aU
 aU
@@ -9892,23 +11058,23 @@ aU
 aU
 aU
 aU
-Rj
-Nq
-Nq
-Rj
-dc
-Rj
-fF
-fF
-fF
-Rj
-dc
-qD
-Rj
-Nq
-Rj
 aU
 aU
+Bw
+mo
+mo
+Bw
+CQ
+nQ
+NU
+ND
+uP
+Bw
+Bw
+Bw
+Bw
+Bw
+Bw
 aU
 aU
 aU
@@ -10034,33 +11200,33 @@ aU
 aU
 aU
 aU
-Rj
-Nq
-Nq
-Rj
-dc
-GH
-Rw
-Rw
-Rw
-GH
-dc
-qD
-Rj
-Nq
-Rj
+aU
+aU
+Bw
+mo
+mo
+Bw
+Cf
+lX
+pL
+lX
+hl
+Bw
 aU
 aU
 aU
 aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
+Bw
+Bw
+Bw
+Bw
+Bw
+Bw
+Bw
+Bw
+Bw
+Bw
+Bw
 aU
 aU
 aU
@@ -10176,21 +11342,21 @@ aU
 aU
 aU
 aU
-Rj
-Nq
-Nq
-Rj
-vN
-GH
-Rw
-dZ
-Pi
-Os
-FD
-Ud
-Rj
-Nq
-Rj
+aU
+aU
+Bw
+Bw
+Bw
+Bw
+Bw
+Bw
+Bw
+Bw
+Bw
+Bw
+aU
+aU
+aU
 aU
 aU
 aU
@@ -10318,25 +11484,25 @@ aU
 aU
 aU
 aU
-Rj
-Nq
-Nq
-Rj
-dc
-GH
-Rw
-Rw
-Rw
-GH
-un
-dc
-Rj
-Nq
-Rj
-Rj
-Rj
-Rj
-Rj
+aU
+aU
+aU
+aU
+aU
+aU
+aU
+aU
+aU
+aU
+mo
+aU
+aU
+aU
+aU
+aU
+aU
+aU
+aU
 aU
 aU
 aU
@@ -10460,25 +11626,25 @@ aU
 aU
 aU
 aU
-Rj
-Nq
-Nq
-Rj
-dc
-Rj
-fF
-fF
-fF
-Rj
-RS
-dc
-Rj
-Nq
-Rj
-Bo
-rz
-xE
-Rj
+aU
+aU
+aU
+aU
+aU
+aU
+aU
+aU
+aU
+aU
+mo
+aU
+aU
+aU
+aU
+aU
+aU
+aU
+aU
 aU
 aU
 aU
@@ -10602,25 +11768,25 @@ aU
 aU
 aU
 aU
-Rj
-Nq
-Nq
-Rj
-dc
-dc
-pk
-pk
-pk
-dc
-dc
-dc
-GX
-gh
-GX
-dc
-dc
-sl
-Rj
+aU
+aU
+aU
+aU
+aU
+aU
+aU
+aU
+aU
+aU
+mo
+aU
+aU
+aU
+aU
+aU
+aU
+aU
+aU
 aU
 aU
 aU
@@ -10744,25 +11910,25 @@ aU
 aU
 aU
 aU
-Rj
-Nq
-Nq
-Rj
-dc
-Na
-dc
-dc
-dc
-dc
-Na
-Cq
-GX
-gh
-GX
-cX
-dc
-Hl
-Rj
+aU
+aU
+aU
+aU
+aU
+aU
+aU
+aU
+aU
+aU
+mo
+aU
+aU
+aU
+aU
+aU
+aU
+aU
+aU
 aU
 aU
 aU
@@ -10886,25 +12052,25 @@ aU
 aU
 aU
 aU
-Rj
-Nq
-Nq
-Rj
-Rj
-Rj
-QE
-QE
-QE
-Qu
-Rj
-Rj
-Rj
-Nq
-Rj
-nF
-dc
-qC
-Rj
+aU
+aU
+aU
+aU
+aU
+aU
+aU
+aU
+aU
+aU
+mo
+aU
+aU
+aU
+aU
+aU
+aU
+aU
+aU
 aU
 aU
 aU
@@ -11028,25 +12194,25 @@ aU
 aU
 aU
 aU
-Rj
-Nq
-Nq
-Nq
-Nq
-Rj
-xP
-dc
-dc
-dc
-Rj
-Nq
-Nq
-Nq
-Rj
-eq
-Ak
-Im
-Rj
+aU
+aU
+aU
+aU
+aU
+aU
+aU
+aU
+aU
+aU
+mo
+aU
+aU
+aU
+aU
+aU
+aU
+aU
+aU
 aU
 aU
 aU
@@ -11170,25 +12336,25 @@ aU
 aU
 aU
 aU
-Rj
-Rj
-Rj
-Rj
-Nq
-Rj
-Sx
-OY
-dc
-YT
-Rj
-Nq
-Rj
-Rj
-Rj
-Dg
-Dg
-Rj
-Rj
+aU
+aU
+aU
+aU
+aU
+aU
+aU
+aU
+aU
+aU
+mo
+aU
+aU
+aU
+aU
+aU
+aU
+aU
+aU
 aU
 aU
 aU
@@ -11315,21 +12481,21 @@ aU
 aU
 aU
 aU
-Rj
-Nq
-Rj
-IE
-dc
-YO
-Im
-Rj
-Nq
-Rj
 aU
-Rj
-Rj
-wH
-Rj
+aU
+aU
+aU
+aU
+aU
+aU
+mo
+aU
+aU
+aU
+aU
+aU
+aU
+aU
 aU
 aU
 aU
@@ -11457,16 +12623,16 @@ aU
 aU
 aU
 aU
-Rj
-Nq
-Nq
-Nq
-fM
-Nq
-Nq
-Nq
-Nq
-Rj
+aU
+aU
+aU
+aU
+aU
+aU
+aU
+mo
+aU
+aU
 aU
 aU
 aU
@@ -11599,16 +12765,16 @@ aU
 aU
 aU
 aU
-Rj
-Rj
-Rj
-Nq
-oi
-lQ
-yb
-Nq
-Rj
-Rj
+aU
+aU
+aU
+aU
+aU
+aU
+aU
+mo
+aU
+aU
 aU
 aU
 aU
@@ -11743,13 +12909,13 @@ aU
 aU
 aU
 aU
-Rj
-Nq
-Nq
-Nq
-dc
-Nq
-Rj
+aU
+aU
+aU
+aU
+aU
+mo
+aU
 aU
 aU
 aU
@@ -11885,13 +13051,13 @@ aU
 aU
 aU
 aU
-Rj
-Rj
-Rj
-Rj
-fM
-Rj
-Rj
+aU
+aU
+aU
+aU
+aU
+mo
+aU
 aU
 aU
 aU
@@ -12027,13 +13193,13 @@ aU
 aU
 aU
 aU
-mC
-mC
-mC
-td
-Rj
-td
-mC
+aU
+aU
+aU
+aU
+aU
+mo
+aU
 aU
 aU
 aU
@@ -12174,7 +13340,7 @@ aU
 aU
 aU
 aU
-aU
+mo
 aU
 aU
 aU
@@ -12316,7 +13482,7 @@ aU
 aU
 aU
 aU
-aU
+mo
 aU
 aU
 aU
@@ -12458,7 +13624,7 @@ aU
 aU
 aU
 aU
-aU
+mo
 aU
 aU
 aU
@@ -12600,7 +13766,7 @@ aU
 aU
 aU
 aU
-aU
+mo
 aU
 aU
 aU
@@ -12742,7 +13908,7 @@ aU
 aU
 aU
 aU
-aU
+mo
 aU
 aU
 aU
@@ -12884,7 +14050,7 @@ aU
 aU
 aU
 aU
-aU
+mo
 aU
 aU
 aU
@@ -13026,7 +14192,7 @@ aU
 aU
 aU
 aU
-aU
+mo
 aU
 aU
 aU
@@ -13168,7 +14334,7 @@ aU
 aU
 aU
 aU
-aU
+mo
 aU
 aU
 aU
@@ -13310,7 +14476,7 @@ aU
 aU
 aU
 aU
-aU
+mo
 aU
 aU
 aU
@@ -13449,13 +14615,13 @@ aU
 aU
 aU
 aU
-aU
-aU
-aU
-aU
-aU
-aU
-aU
+Bw
+Bw
+Bw
+Bw
+Bw
+Bw
+Bw
 aU
 aU
 aU
