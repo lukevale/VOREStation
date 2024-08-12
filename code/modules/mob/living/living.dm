@@ -50,14 +50,17 @@
 			B.owner = tf_mob_holder
 			tf_mob_holder.vore_organs |= B
 			vore_organs -= B
-
 	if(tf_mob_holder)
 		tf_mob_holder = null
 	//VOREStation Addition End
-
-	qdel(selected_image)
-	QDEL_NULL(vorePanel) //VOREStation Add
-	QDEL_LIST_NULL(vore_organs) //VOREStation Add
+	if(hud_list) //prune out images in hud_list
+		for(var/item in hud_list)
+			if(item)
+				item = null
+	if(selected_image)
+		selected_image = null
+	//QDEL_NULL(vorePanel) //VOREStation Add commented and moved to /mob
+	//QDEL_LIST_NULL(vore_organs) //VOREStation Add commented and moved to /mob
 	temp_language_sources = null //VOREStation Add
 	temp_languages = null //VOREStation Add
 
@@ -109,14 +112,29 @@
 		confirm2 = tgui_alert(usr, "Pressing this buttom will really kill you, no going back", "Are you sure?", list("Yes", "No")) //Swapped answers to protect from accidental double clicks.
 	if (src.health < 0 && stat != DEAD && confirm1 == "Yes" && confirm2 == "Yes") // Checking both confirm1 and confirm2 for good measure. I don't trust TGUI.
 		src.death()
-		to_chat(src, "<font color='blue'>You have given up life and succumbed to death.</font>")
+		to_chat(src, span_blue("You have given up life and succumbed to death."))
 	else
 		if(stat == DEAD)
-			to_chat(src, "<font color='blue'>As much as you'd like, you can't die when already dead</font>")
+			to_chat(src, span_blue("As much as you'd like, you can't die when already dead"))
 		else if(confirm1 == "No" || confirm2 == "No")
-			to_chat(src, "<font color='blue'>You chose to live another day.</font>")
+			to_chat(src, span_blue("You chose to live another day."))
 		else
-			to_chat(src, "<font color='blue'>You are not injured enough to succumb to death!</font>")
+			to_chat(src, span_blue("You are not injured enough to succumb to death!"))
+
+/mob/living/verb/toggle_afk()
+	set name = "Toggle AFK"
+	set category = "IC"
+	set desc = "Mark yourself as Away From Keyboard, or clear that status!"
+	if(away_from_keyboard)
+		remove_status_indicator("afk")
+		to_chat(src, "<span class='notice'>You are no longer marked as AFK.</span>")
+		away_from_keyboard = FALSE
+		manual_afk = FALSE
+	else
+		add_status_indicator("afk")
+		to_chat(src, "<span class='notice'>You are now marked as AFK.</span>")
+		away_from_keyboard = TRUE
+		manual_afk = TRUE
 
 /mob/living/proc/updatehealth()
 	if(status_flags & GODMODE)
@@ -1294,7 +1312,7 @@
 /datum/component/character_setup/proc/character_setup_click(source, location, control, params, user)
 	var/mob/owner = user
 	if(owner.client?.prefs)
-		INVOKE_ASYNC(owner.client.prefs, /datum/preferences/proc/ShowChoices, owner)
+		INVOKE_ASYNC(owner.client.prefs, TYPE_PROC_REF(/datum/preferences, ShowChoices), owner)
 
 /**
  * Screen object for vore panel
@@ -1307,5 +1325,18 @@
 
 /mob/living/set_dir(var/new_dir)
 	. = ..()
-	if(size_multiplier != 1 || icon_scale_x != 1 && center_offset > 0)
+	if(size_multiplier != 1 || icon_scale_x != DEFAULT_ICON_SCALE_X && center_offset > 0)
 		update_transform(TRUE)
+
+/mob/living
+	var/toggled_sleeping = FALSE
+
+/mob/living/verb/mob_sleep()
+	set name = "Sleep"
+	set category = "IC"
+	if(!toggled_sleeping && alert(src, "Are you sure you wish to go to sleep? You will snooze until you use the Sleep verb again.", "Sleepy Time", "No", "Yes") == "No")
+		return
+	toggled_sleeping = !toggled_sleeping
+	to_chat(src, SPAN_NOTICE("You are [toggled_sleeping ? "now sleeping. Use the Sleep verb again to wake up" : "no longer sleeping"]."))
+	if(toggled_sleeping)
+		Sleeping(1)

@@ -682,7 +682,7 @@
 		var/list/selected = TLV["temperature"]
 		var/max_temperature = min(selected[3] - T0C, MAX_TEMPERATURE)
 		var/min_temperature = max(selected[2] - T0C, MIN_TEMPERATURE)
-		var/input_temperature = tgui_input_number(usr, "What temperature would you like the system to mantain? (Capped between [min_temperature] and [max_temperature]C)", "Thermostat Controls", target_temperature - T0C, max_temperature, min_temperature)
+		var/input_temperature = tgui_input_number(usr, "What temperature would you like the system to mantain? (Capped between [min_temperature] and [max_temperature]C)", "Thermostat Controls", target_temperature - T0C, max_temperature, min_temperature, round_value = FALSE)
 		if(isnum(input_temperature))
 			if(input_temperature > max_temperature || input_temperature < min_temperature)
 				to_chat(usr, "Temperature must be between [min_temperature]C and [max_temperature]C")
@@ -736,7 +736,7 @@
 			var/env = params["env"]
 
 			var/name = params["var"]
-			var/value = tgui_input_number(usr, "New [name] for [env]:", name, TLV[env][name])
+			var/value = tgui_input_number(usr, "New [name] for [env]:", name, TLV[env][name], min_value=-1, round_value = FALSE)
 			if(!isnull(value) && !..())
 				if(value < 0)
 					TLV[env][name] = -1
@@ -846,3 +846,21 @@
 #undef LOAD_TLV_VALUES
 #undef TEST_TLV_VALUES
 #undef DECLARE_TLV_VALUES
+
+#undef AALARM_MODE_SCRUBBING
+#undef AALARM_MODE_REPLACEMENT
+#undef AALARM_MODE_PANIC
+#undef AALARM_MODE_CYCLE
+#undef AALARM_MODE_FILL
+#undef AALARM_MODE_OFF
+
+#undef AALARM_SCREEN_MAIN
+#undef AALARM_SCREEN_VENT
+#undef AALARM_SCREEN_SCRUB
+#undef AALARM_SCREEN_MODE
+#undef AALARM_SCREEN_SENSORS
+
+#undef AALARM_REPORT_TIMEOUT
+
+#undef MAX_TEMPERATURE
+#undef MIN_TEMPERATURE

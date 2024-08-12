@@ -93,6 +93,14 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 			else // Welp.
 				loot = produce_common_item()
 
+			//VOREstation edit - Randomized map objects were put in loot piles, so handle them...
+			if(istype(loot,/obj/random))
+				var/obj/random/randy = loot
+				var/new_I = randy.spawn_item()
+				qdel(loot)
+				loot = new_I // swap it
+			//VOREstation edit end
+
 			if(loot)
 				searched_by |= user.ckey
 				loot.forceMove(get_turf(src))
@@ -349,7 +357,7 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 		/obj/item/weapon/stock_parts/subspace/treatment,
 		/obj/item/frame,
 		/obj/item/broken_device/random,
-		/obj/item/borg/upgrade/restart,
+		/obj/item/borg/upgrade/utility/restart,
 		/obj/item/weapon/cell,
 		/obj/item/weapon/cell/high,
 		/obj/item/weapon/cell/device,
@@ -407,10 +415,10 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 		/obj/item/device/tvcamera,
 		/obj/item/device/universal_translator,
 		/obj/item/device/aicard,
-		/obj/item/borg/upgrade/jetpack,
-		/obj/item/borg/upgrade/advhealth,
-		/obj/item/borg/upgrade/vtec,
-		/obj/item/borg/upgrade/tasercooler,
+		/obj/item/borg/upgrade/advanced/jetpack,
+		/obj/item/borg/upgrade/advanced/advhealth,
+		/obj/item/borg/upgrade/basic/vtec,
+		/obj/item/borg/upgrade/restricted/tasercooler,
 		/obj/item/mecha_parts/mecha_equipment/weapon/energy/riggedlaser,
 		/obj/item/mecha_parts/mecha_equipment/tool/drill/diamonddrill,
 		/obj/item/rig_module/device/drill,
@@ -917,11 +925,11 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 
 	rare_loot = list(
 		/obj/item/weapon/cell/super,
-		/obj/item/borg/upgrade/restart,
-		/obj/item/borg/upgrade/jetpack,
-		/obj/item/borg/upgrade/tasercooler,
-		/obj/item/borg/upgrade/syndicate,
-		/obj/item/borg/upgrade/vtec
+		/obj/item/borg/upgrade/utility/restart,
+		/obj/item/borg/upgrade/advanced/jetpack,
+		/obj/item/borg/upgrade/restricted/tasercooler,
+		/obj/item/borg/upgrade/basic/syndicate,
+		/obj/item/borg/upgrade/basic/vtec
 		)
 
 // Contains old mediciation, most of it unidentified and has a good chance of being useless.

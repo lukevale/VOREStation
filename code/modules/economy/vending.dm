@@ -270,7 +270,7 @@ GLOBAL_LIST_EMPTY(vending_products)
 
 		// This is not a status display message, since it's something the character
 		// themselves is meant to see BEFORE putting the money in
-		to_chat(usr, "\icon[cashmoney][bicon(cashmoney)] <span class='warning'>That is not enough money.</span>")
+		to_chat(usr, "[icon2html(cashmoney, user.client)] <span class='warning'>That is not enough money.</span>")
 		return 0
 
 	if(istype(cashmoney, /obj/item/weapon/spacecash))
@@ -684,6 +684,23 @@ GLOBAL_LIST_EMPTY(vending_products)
 	src.set_dir(turn(src.dir, 270))
 	return 1
 
+//VOREstation edit: counter-clockwise rotation
+/obj/machinery/vending/verb/rotate_counterclockwise()
+	set name = "Rotate Vending Machine Counter-Clockwise"
+	set category = "Object"
+	set src in oview(1)
+
+	if (src.can_rotate == 0)
+		to_chat(usr, "<span class='warning'>\The [src] cannot be rotated.</span>")
+		return 0
+
+	if (src.anchored || usr:stat)
+		to_chat(usr, "<span class='filter_notice'>It is bolted down!</span>")
+		return 0
+	src.set_dir(turn(src.dir, 90))
+	return 1
+//VOREstation edit end
+
 /obj/machinery/vending/verb/check_logs()
 	set name = "Check Vending Logs"
 	set category = "Object"
@@ -737,7 +754,7 @@ GLOBAL_LIST_EMPTY(vending_products)
 		return
 
 	for(var/mob/O in hearers(src, null))
-		O.show_message("<span class='game say'><span class='name'>\The [src]</span> beeps, \"[message]\"</span>",2)
+		O.show_message("<span class='npcsay'><span class='name'>\The [src]</span> beeps, \"[message]\"</span>",2)
 	return
 
 /obj/machinery/vending/power_change()

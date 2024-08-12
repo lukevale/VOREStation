@@ -205,6 +205,11 @@
 		occupantData["bodyTempF"] = (((H.bodytemperature-T0C) * 1.8) + 32)
 
 		occupantData["hasBorer"] = H.has_brain_worms()
+		occupantData["colourblind"] = null
+		for(var/datum/modifier/M in H.modifiers)
+			if(!isnull(M.wire_colors_replace))
+				occupantData["colourblind"] = LAZYLEN(M.wire_colors_replace)
+				break
 
 		var/bloodData[0]
 		if(H.vessel)
@@ -352,7 +357,7 @@
 			P.info += "<b>Time of scan:</b> [stationtime2text()]<br><br>"
 			P.info += "[generate_printing_text()]"
 			P.info += "<br><br><b>Notes:</b><br>"
-			P.name = "Body Scan - [name] ([stationtime2text()]"
+			P.name = "Body Scan - [name] ([stationtime2text()])"
 		else
 			return FALSE
 

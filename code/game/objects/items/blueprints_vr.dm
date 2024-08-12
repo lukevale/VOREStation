@@ -55,14 +55,6 @@
 /area/submap/casino_event
 	name = "\improper Space Casino"
 
-
-
-//TG blueprints.
-#define AREA_ERRNONE 0
-#define AREA_STATION 1
-#define AREA_SPACE 2
-#define AREA_SPECIAL 3
-
 /obj/item/areaeditor
 	name = "area modification item"
 	icon = 'icons/obj/items.dmi'
@@ -108,7 +100,7 @@
 			to_chat(user, span_notice("You add some more writing material to the [src] with the [blueprint]!"))
 			return
 		else if(blueprint.uses_charges && blueprint.charges) //Getting from another with limited charges.
-			var/to_add = tgui_input_number(user, "How many charges do you want to add to the [src]?", "[blueprint]", missing_charges)
+			var/to_add = tgui_input_number(user, "How many charges do you want to add to the [src]?", "[blueprint]", missing_charges, blueprint.charges)
 			if(!isnull(to_add) && blueprint.charges >= to_add)
 				to_chat(user, span_notice("You add some more writing material to the [src] with the [blueprint]!"))
 				blueprint.charges -= to_add

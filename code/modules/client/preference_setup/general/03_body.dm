@@ -4,8 +4,8 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	var/equip_preview_mob = EQUIP_PREVIEW_ALL
 	var/animations_toggle = FALSE
 
-	var/icon/bgstate = "000"
-	var/list/bgstate_options = list("000", "midgrey", "FFF", "white", "steel", "techmaint", "dark", "plating", "reinforced")
+	var/icon/bgstate = "steel"
+	var/list/bgstate_options = list("steel", "000", "midgrey", "FFF", "white", "techmaint", "desert", "grass", "snow")
 
 	var/ear_style		// Type of selected ear style
 	var/r_ears = 30		// Ear color.
@@ -418,7 +418,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 
 		for(var/BP in mark_datum.body_parts)
 			var/obj/item/organ/external/O = character.organs_by_name[BP]
-			if(O)
+			if(O && islist(O.markings) && islist(pref.body_markings[M]) && islist(pref.body_markings[M][BP]))
 				O.markings[M] = list("color" = pref.body_markings[M][BP]["color"], "datum" = mark_datum, "priority" = priority, "on" = pref.body_markings[M][BP]["on"])
 	character.markings_len = priority
 
@@ -738,6 +738,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 			var/min_age = get_min_age()
 			var/max_age = get_max_age()
 			pref.age = max(min(pref.age, max_age), min_age)
+			pref.blood_color = setting_species.blood_color // VOREstation edit
 
 			return TOPIC_REFRESH_UPDATE_PREVIEW
 

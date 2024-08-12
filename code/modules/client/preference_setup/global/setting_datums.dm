@@ -226,7 +226,13 @@ var/list/_client_preferences_by_type
 
 /datum/client_preference/show_typing_indicator/toggled(var/mob/preference_mob, var/enabled)
 	if(!enabled)
-		preference_mob.set_typing_indicator(FALSE)
+		preference_mob.client?.stop_thinking()
+
+/datum/client_preference/show_typing_indicator_subtle
+	description ="Typing indicator (subtle)"
+	key = "SHOW_TYPING_SUBTLE"
+	enabled_description = "Show"
+	disabled_description = "Hide"
 
 /datum/client_preference/show_ooc
 	description ="OOC chat"
@@ -330,6 +336,12 @@ var/list/_client_preferences_by_type
 	enabled_description = "On"
 	disabled_description = "Off"
 
+/datum/client_preference/vore_health_bars
+	description = "Vore Health Bars"
+	key = "VORE_HEALTH_BARS"
+	enabled_description = "Enabled"
+	disabled_description = "Disabled"
+
 /datum/client_preference/runechat_mob
 	description = "Runechat (Mobs)"
 	key = "RUNECHAT_MOB"
@@ -388,6 +400,26 @@ var/list/_client_preferences_by_type
 	enabled_description = "Extended"
 	disabled_description = "Default"
 
+/datum/client_preference/auto_afk
+	description = "Automatic AFK Status"
+	key = "AUTO_AFK"
+	enabled_by_default = TRUE
+	enabled_description = "Automatic"
+	disabled_description = "Manual Only"
+
+/datum/client_preference/tgui_say
+	description = "TGUI Say: Use TGUI For Say Input"
+	key = "TGUI_SAY"
+	enabled_by_default = TRUE
+	enabled_description = "Yes"
+	disabled_description = "No"
+
+/datum/client_preference/tgui_say_light
+	description = "TGUI Say: Use Light Mode"
+	key = "TGUI_SAY_LIGHT_MODE"
+	enabled_by_default = FALSE
+	enabled_description = "Yes"
+	disabled_description = "No"
 
 /********************
 * Staff Preferences *

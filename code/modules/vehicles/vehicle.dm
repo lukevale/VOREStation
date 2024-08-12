@@ -70,16 +70,20 @@
 		riding_datum.handle_vehicle_offsets() // So the person in back goes to the front.
 
 /obj/vehicle/Move(var/newloc, var/direction, var/movetime)
-	if(world.time < l_move_time + move_delay) //This AND the riding datum move speed limit?
+	// VOREstation edit - Zmoving for falling
+	var/turf/newturf = newloc
+	var/zmove = (newturf && z != newturf.z)
+
+	if(!zmove && world.time < l_move_time + move_delay) //This AND the riding datum move speed limit? // VOREstation edit end
 		return
 
-	if(mechanical && on && powered && cell.charge < charge_use)
+	if(!zmove && mechanical && on && powered && cell.charge < charge_use) // VOREstation edit - zmove doesn't run this
 		turn_off()
 		return
 
 	. = ..()
 
-	if(mechanical && on && powered)
+	if(!zmove && mechanical && on && powered) // VOREstation edit - zmove doesn't run this
 		cell.use(charge_use)
 
 	//Dummy loads do not have to be moved as they are just an overlay
@@ -111,7 +115,7 @@
 						health = min(maxhealth, health+10)
 						user.setClickCooldown(user.get_attack_speed(W))
 						playsound(src, T.usesound, 50, 1)
-						user.visible_message("<font color='red'>[user] repairs [src]!</font>","<font color='blue'> You repair [src]!</font>")
+						user.visible_message(span_red("[user] repairs [src]!"),span_blue("You repair [src]!"))
 					else
 						to_chat(user, "<span class='notice'>Unable to repair with the maintenance panel closed.</span>")
 				else
@@ -226,7 +230,7 @@
 		return TRUE
 
 /obj/vehicle/proc/explode()
-	src.visible_message("<font color='red'><B>[src] blows apart!</B></font>", 1)
+	src.visible_message(span_red("<B>[src] blows apart!</B>"), 1)
 	var/turf/Tsec = get_turf(src)
 
 	//stuns people who are thrown off a train that has been blown up
@@ -402,7 +406,7 @@
 	if(!damage)
 		return
 	visible_message("<span class='danger'>[user] [attack_message] the [src]!</span>")
-	user.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name]</font>")
+	user.attack_log += text("\[[time_stamp()]\] [span_red("attacked [src.name]")]")
 	user.do_attack_animation(src)
 	src.health -= damage
 	if(mechanical && prob(10))

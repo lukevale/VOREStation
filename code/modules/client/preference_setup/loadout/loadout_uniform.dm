@@ -374,6 +374,10 @@
 	display_name = "halter top"
 	path = /obj/item/clothing/under/haltertop
 
+/datum/gear/uniform/tanktop
+	display_name = "tank top"
+	path = /obj/item/clothing/under/tanktop
+
 /datum/gear/uniform/revealingdress
 	display_name = "revealing dress"
 	path = /obj/item/clothing/under/dress/revealingdress
@@ -512,6 +516,10 @@
 	display_name = "high-waisted trousers"
 	path = /obj/item/clothing/under/dress/hightrousers
 
+/datum/gear/uniform/vampirehunter
+	display_name = "18th century outfit"
+	path = /obj/item/clothing/under/vampirehunter
+
 /*
  * 80s
  */
@@ -587,6 +595,19 @@
 	"feminine black baggy turtleneck"=/obj/item/clothing/under/turtlebaggy/black_fem
 	)
 	gear_tweaks += list(new/datum/gear_tweak/path(turtlebaggys))
+
+//colorable sweaters
+/datum/gear/uniform/bigsweaters
+	display_name = "sweater selection, colorable"
+	path = /obj/item/clothing/under/bigsweater
+
+/datum/gear/uniform/bigsweaters/New()
+	..()
+	var/list/bigsweaters = list(
+	"cableknit sweater"=/obj/item/clothing/under/bigsweater,
+	"keyhole sweater"=/obj/item/clothing/under/bigsweater/keyhole
+	)
+	gear_tweaks += list(new/datum/gear_tweak/path(bigsweaters), gear_tweak_free_color_choice)
 
 //half-moon outfit
 /datum/gear/uniform/halfmoon

@@ -506,7 +506,9 @@
 					/obj/item/clothing/under/color/white = 5,
 					/obj/item/clothing/under/color/yellow = 5,
 					/obj/item/clothing/shoes/black = 20,
-					/obj/item/clothing/shoes/white = 20)
+					/obj/item/clothing/shoes/white = 20,
+					/obj/item/clothing/gloves/watch = 20
+					)
 	prices = list()
 
 /obj/machinery/vending/loadout/accessory
@@ -599,6 +601,13 @@
 					/obj/item/clothing/accessory/wcoat/swvest = 5,
 					/obj/item/clothing/accessory/wcoat/swvest/blue = 5,
 					/obj/item/clothing/accessory/wcoat/swvest/red = 5,
+					/obj/item/clothing/accessory/wristband = 5,
+					/obj/item/clothing/accessory/wristbandcollection = 5,
+					/obj/item/clothing/accessory/wristbandcollection/pink = 5,
+					/obj/item/clothing/accessory/wristbandcollection/les = 5,
+					/obj/item/clothing/accessory/wristbandcollection/bi = 5,
+					/obj/item/clothing/accessory/wristbandcollection/trans = 5,
+					/obj/item/clothing/accessory/wristbandcollection/ace = 5,
 					/obj/item/weapon/storage/wallet = 5,
 					/obj/item/weapon/storage/wallet/poly = 5,
 					/obj/item/weapon/storage/wallet/womens = 5,
@@ -643,7 +652,11 @@
 					/obj/item/clothing/accessory/pride/pan = 5,
 					/obj/item/clothing/accessory/pride/lesbian = 5,
 					/obj/item/clothing/accessory/pride/intersex = 5,
-					/obj/item/clothing/accessory/pride/vore = 5)
+					/obj/item/clothing/accessory/pride/vore = 5,
+					/obj/item/clothing/gloves/watch = 5,
+					/obj/item/clothing/gloves/watch/silver = 5,
+					/obj/item/clothing/gloves/watch/gold = 5
+					)
 	prices = list(/obj/item/clothing/accessory = 50,
 					/obj/item/clothing/accessory/armband/med/color = 50,
 					/obj/item/clothing/accessory/asymmetric = 50,
@@ -728,6 +741,13 @@
 					/obj/item/clothing/accessory/wcoat/swvest = 50,
 					/obj/item/clothing/accessory/wcoat/swvest/blue = 50,
 					/obj/item/clothing/accessory/wcoat/swvest/red = 50,
+					/obj/item/clothing/accessory/wristband = 10,
+					/obj/item/clothing/accessory/wristbandcollection = 30,
+					/obj/item/clothing/accessory/wristbandcollection/pink = 30,
+					/obj/item/clothing/accessory/wristbandcollection/les = 30,
+					/obj/item/clothing/accessory/wristbandcollection/bi = 30,
+					/obj/item/clothing/accessory/wristbandcollection/trans = 30,
+					/obj/item/clothing/accessory/wristbandcollection/ace = 30,
 					/obj/item/weapon/storage/wallet = 50,
 					/obj/item/weapon/storage/wallet/poly = 50,
 					/obj/item/weapon/storage/wallet/womens = 50,
@@ -768,7 +788,11 @@
 					/obj/item/clothing/accessory/pride/pan = 50,
 					/obj/item/clothing/accessory/pride/lesbian = 50,
 					/obj/item/clothing/accessory/pride/intersex = 50,
-					/obj/item/clothing/accessory/pride/vore = 50)
+					/obj/item/clothing/accessory/pride/vore = 50,
+					/obj/item/clothing/gloves/watch = 50,
+					/obj/item/clothing/gloves/watch/silver = 100,
+					/obj/item/clothing/gloves/watch/gold = 200
+					)
 	premium = list(/obj/item/weapon/bedsheet/rainbow = 1)
 	contraband = list(/obj/item/clothing/mask/gas/clown_hat = 1,
 	                   /obj/item/clothing/accessory/collar/collarplanet_earth = 5)
@@ -951,6 +975,8 @@
 					/obj/item/clothing/under/utility = 5,
 					/obj/item/clothing/under/utility/grey = 5,
 					/obj/item/clothing/under/utility/blue = 5,
+					/obj/item/clothing/under/utility/tan = 5,
+					/obj/item/clothing/under/utility/green = 5,
 					/obj/item/clothing/under/fluff/v_nanovest = 5,
 					/obj/item/clothing/under/dress/westernbustle = 5,
 					/obj/item/clothing/under/wedding/bride_white = 5,
@@ -1129,6 +1155,8 @@
 					/obj/item/clothing/under/utility = 50,
 					/obj/item/clothing/under/utility/grey = 50,
 					/obj/item/clothing/under/utility/blue = 50,
+					/obj/item/clothing/under/utility/tan = 50,
+					/obj/item/clothing/under/utility/green = 50,
 					/obj/item/clothing/under/fluff/v_nanovest = 50,
 					/obj/item/clothing/under/dress/westernbustle = 50,
 					/obj/item/clothing/under/wedding/bride_white = 50,
@@ -1191,7 +1219,7 @@
 /obj/machinery/vending/loadout/overwear
 	name = "Big D's Best"
 	desc = "A special vendor using compressed matter cartridges to store large amounts of overwear!"
-	product_ads = "Dress your best! It's what big D would want.;Overwear for all occasions!;Big D has what you need if what you need is some form of jacket!;Need a new hoodie? Bid D has you covered.;Big D says you need a new suit!;Big D smiles when he sees you in one of his coats!"
+	product_ads = "Dress your best! It's what Big D would want.;Overwear for all occasions!;Big D has what you need if what you need is some form of jacket!;Need a new hoodie? Big D has you covered.;Big D says you need a new suit!;Big D smiles when he sees you in one of his coats!"
 	icon_state = "suit"
 	vend_delay = 16
 	products = list(/obj/item/clothing/suit/storage/apron = 5,
@@ -1250,6 +1278,17 @@
 					/obj/item/clothing/suit/storage/toggle/brown_jacket/nanotrasen/sleeveless = 5,
 					/obj/item/clothing/suit/storage/miljacket = 5,
 					/obj/item/clothing/suit/storage/miljacket/alt = 5,
+					/obj/item/clothing/suit/storage/miljacket/patchless = 5,
+					/obj/item/clothing/suit/storage/miljacket/tan = 5,
+					/obj/item/clothing/suit/storage/miljacket/tan/patchless = 5,
+					/obj/item/clothing/suit/storage/miljacket/grey = 5,
+					/obj/item/clothing/suit/storage/miljacket/grey/patchless = 5,
+					/obj/item/clothing/suit/storage/miljacket/navy = 5,
+					/obj/item/clothing/suit/storage/miljacket/navy/patchless = 5,
+					/obj/item/clothing/suit/storage/miljacket/black = 5,
+					/obj/item/clothing/suit/storage/miljacket/black/patchless = 5,
+					/obj/item/clothing/suit/storage/miljacket/white = 5,
+					/obj/item/clothing/suit/storage/miljacket/white/patchless = 5,
 					/obj/item/clothing/suit/storage/miljacket/green = 5,
 					/obj/item/clothing/suit/storage/apron/overalls = 5,
 					/obj/item/clothing/suit/storage/toggle/peacoat = 5,
@@ -1342,6 +1381,17 @@
 					/obj/item/clothing/suit/storage/toggle/brown_jacket/nanotrasen/sleeveless = 100,
 					/obj/item/clothing/suit/storage/miljacket = 100,
 					/obj/item/clothing/suit/storage/miljacket/alt = 100,
+					/obj/item/clothing/suit/storage/miljacket/patchless = 100,
+					/obj/item/clothing/suit/storage/miljacket/tan = 100,
+					/obj/item/clothing/suit/storage/miljacket/tan/patchless = 100,
+					/obj/item/clothing/suit/storage/miljacket/grey = 100,
+					/obj/item/clothing/suit/storage/miljacket/grey/patchless = 100,
+					/obj/item/clothing/suit/storage/miljacket/navy = 100,
+					/obj/item/clothing/suit/storage/miljacket/navy/patchless = 100,
+					/obj/item/clothing/suit/storage/miljacket/black = 100,
+					/obj/item/clothing/suit/storage/miljacket/black/patchless = 100,
+					/obj/item/clothing/suit/storage/miljacket/white = 100,
+					/obj/item/clothing/suit/storage/miljacket/white/patchless = 100,
 					/obj/item/clothing/suit/storage/miljacket/green = 100,
 					/obj/item/clothing/suit/storage/apron/overalls = 100,
 					/obj/item/clothing/suit/storage/toggle/peacoat = 100,
@@ -3569,4 +3619,32 @@
 					/obj/item/weapon/reagent_containers/food/snacks/packaged/pasty = 10,
 					/obj/item/weapon/reagent_containers/food/snacks/packaged/scotchegg = 10,
 					/obj/item/weapon/reagent_containers/food/snacks/packaged/porkpie = 10
+					)
+
+/obj/machinery/vending/nukie
+	name = "Nukies Energy Drinks"
+	desc = "A vending machine stocked full of the most potent energy drinks on the market."
+	icon = 'icons/obj/vending_vr.dmi'
+	icon_state = "nukie"
+	product_slogans = "Contains one gram of caffeine!;Keep going, go on forever!;It'll blow you away!;Nukies is not responsible for any deaths occurred in a period of 24 hours after consuming our products!"
+	product_ads = "Get your peach blasted!;Pop your cherry here!;Dare you swallow the bursting banana?;Try our limited edition flavour!"
+	products = list(/obj/item/weapon/reagent_containers/food/drinks/cans/nukie_peach = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/nukie_pear = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/nukie_cherry = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/nukie_melon = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/nukie_banana = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/nukie_rose = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/nukie_lemon = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/nukie_fruit = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/nukie_special = 1)
+
+	prices = list(/obj/item/weapon/reagent_containers/food/drinks/cans/nukie_peach = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/nukie_pear = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/nukie_cherry = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/nukie_melon = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/nukie_banana = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/nukie_rose = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/nukie_lemon = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/nukie_fruit = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/nukie_special = 100
 					)

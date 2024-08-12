@@ -35,6 +35,7 @@ You can also set the stat of a NIF to NIF_TEMPFAIL without any issues to disable
 	var/tmp/list/nifsofts[TOTAL_NIF_SOFTWARE]	// All our nifsofts
 	var/tmp/list/nifsofts_life = list()			// Ones that want to be talked to on life()
 	var/owner									// Owner character name
+	var/owner_key								// Account associated with the nif
 	var/examine_msg								//Message shown on examine.
 
 	var/tmp/vision_flags = 0		// Flags implants set for faster lookups
@@ -155,6 +156,7 @@ You can also set the stat of a NIF to NIF_TEMPFAIL without any issues to disable
 				return
 			if(H.mind)
 				owner = H.mind.name
+				owner_key = H.ckey
 			implant(H)
 		return TRUE
 
@@ -280,16 +282,18 @@ You can also set the stat of a NIF to NIF_TEMPFAIL without any issues to disable
 	//Firsties
 	if(!install_done)
 		if(human.mind.name == owner)
+			owner_key = human.ckey
 			install_done = world.time + 1 MINUTE
 			notify("Welcome back, [owner]! Performing quick-calibration...")
 		else if(!owner)
+			owner_key = human.ckey
 			install_done = world.time + 35 MINUTES
 			notify("Adapting to new user...")
 			sleep(5 SECONDS)
 			notify("Adjoining optic [human.isSynthetic() ? "interface" : "nerve"], please be patient.",TRUE)
 		else
 			notify("You are not an authorized user for this device. Please contact [owner].",TRUE)
-			unimplant()
+			unimplant(human)
 			stat = NIF_TEMPFAIL
 			return FALSE
 
@@ -383,7 +387,7 @@ You can also set the stat of a NIF to NIF_TEMPFAIL without any issues to disable
 
 	last_notification = message // TGUI Hook
 
-	to_chat(human,"<span class='filter_nif'><b>\[\icon[src.big_icon][bicon(src.big_icon)]NIF\]</b> displays, \"<span class='[alert ? "danger" : "notice"]'>[message]</span>\"</span>")
+	to_chat(human,"<span class='filter_nif'><b>\[[icon2html(src.big_icon, human.client)]NIF\]</b> displays, \"<span class='[alert ? "danger" : "notice"]'>[message]</span>\"</span>")
 	if(prob(1)) human.visible_message("<span class='notice'>\The [human] [pick(look_messages)].</span>")
 	if(alert)
 		human << bad_sound
@@ -457,7 +461,10 @@ You can also set the stat of a NIF to NIF_TEMPFAIL without any issues to disable
 
 //Uninstall a piece of software
 /obj/item/device/nif/proc/uninstall(var/datum/nifsoft/old_soft)
-	var/datum/nifsoft/NS = nifsofts[old_soft.list_pos]
+	var/datum/nifsoft/NS
+	if(nifsofts)
+		NS = nifsofts[old_soft.list_pos]
+
 	if(!NS || NS != old_soft)
 		return FALSE //what??
 

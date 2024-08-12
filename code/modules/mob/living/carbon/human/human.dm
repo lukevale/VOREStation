@@ -7,6 +7,17 @@
 
 	has_huds = TRUE 					//We do have HUDs (like health, wanted, status, not inventory slots)
 
+
+	var/vore_capacity = 3
+	var/vore_capacity_ex = list("stomach" = 3, "taur belly" = 3)
+	var/vore_fullness_ex = list("stomach" = 0, "taur belly" = 0)
+	var/vore_icon_bellies = list("stomach", "taur belly")
+	var/struggle_anim_stomach = FALSE
+	var/struggle_anim_taur = FALSE
+	var/vore_sprite_color = list("stomach" = "#FFFFFF", "taur belly" = "#FFFFFF")
+	var/vore_sprite_multiply = list("stomach" = TRUE, "taur belly" = TRUE)
+	var/vore_fullness = 0
+
 	var/embedded_flag					//To check if we've need to roll for damage on movement while an item is imbedded in us.
 	var/obj/item/weapon/rig/wearing_rig // This is very not good, but it's much much better than calling get_rig() every update_canmove() call.
 	var/last_push_time					//For human_attackhand.dm, keeps track of the last use of disarm
@@ -19,6 +30,9 @@
 	var/can_defib = 1					//Horrible damage (like beheadings) will prevent defibbing organics.
 	var/active_regen = FALSE //Used for the regenerate proc in human_powers.dm
 	var/active_regen_delay = 300
+	var/list/teleporters = list() //Used for lleill abilities
+
+	var/rest_dir = 0					//To lay down in a specific direction
 
 /mob/living/carbon/human/Initialize(mapload, var/new_species = null)
 	if(!dna)
@@ -57,10 +71,17 @@
 
 /mob/living/carbon/human/Destroy()
 	human_mob_list -= src
+	/* //Chomp REMOVE - this is done on mob/living/Destroy
 	for(var/organ in organs)
 		qdel(organ)
-	QDEL_NULL(nif)	//VOREStation Add
+	*/
+	if(nif)
+		QDEL_NULL(nif)	//VOREStation Add
 	worn_clothing.Cut()
+
+
+	if(vessel)
+		QDEL_NULL(vessel)
 	return ..()
 
 /mob/living/carbon/human/Stat()
@@ -371,7 +392,7 @@
 												U.handle_regular_hud_updates()
 
 			if(!modified)
-				to_chat(usr, "<span class='filter_notice'><font color='red'>Unable to locate a data core entry for this person.</font></span>")
+				to_chat(usr, "<span class='filter_notice'>[span_red("Unable to locate a data core entry for this person.")]</span>")
 
 	if (href_list["secrecord"])
 		if(hasHUD(usr,"security"))
@@ -401,7 +422,7 @@
 								read = 1
 
 			if(!read)
-				to_chat(usr, "<span class='filter_notice'><font color='red'>Unable to locate a data core entry for this person.</font></span>")
+				to_chat(usr, "<span class='filter_notice'>[span_red("Unable to locate a data core entry for this person.")]</span>")
 
 	if (href_list["secrecordComment"])
 		if(hasHUD(usr,"security"))
@@ -428,7 +449,7 @@
 								to_chat(usr, "<span class='filter_notice'><a href='?src=\ref[src];secrecordadd=`'>\[Add comment\]</a></span>")
 
 			if(!read)
-				to_chat(usr, "<span class='filter_notice'><font color='red'>Unable to locate a data core entry for this person.</font></span>")
+				to_chat(usr, "<span class='filter_notice'>[span_red("Unable to locate a data core entry for this person.")]</span>")
 
 	if (href_list["secrecordadd"])
 		if(hasHUD(usr,"security"))
@@ -490,7 +511,7 @@
 											U.handle_regular_hud_updates()
 
 			if(!modified)
-				to_chat(usr, "<span class='filter_notice'><font color='red'>Unable to locate a data core entry for this person.</font></span>")
+				to_chat(usr, "<span class='filter_notice'>[span_red("Unable to locate a data core entry for this person.")]</span>")
 
 	if (href_list["medrecord"])
 		if(hasHUD(usr,"medical"))
@@ -521,7 +542,7 @@
 								read = 1
 
 			if(!read)
-				to_chat(usr, "<span class='filter_notice'><font color='red'>Unable to locate a data core entry for this person.</font></span>")
+				to_chat(usr, "<span class='filter_notice'>[span_red("Unable to locate a data core entry for this person.")]</span>")
 
 	if (href_list["medrecordComment"])
 		if(hasHUD(usr,"medical"))
@@ -548,7 +569,7 @@
 								to_chat(usr, "<span class='filter_notice'><a href='?src=\ref[src];medrecordadd=`'>\[Add comment\]</a></span>")
 
 			if(!read)
-				to_chat(usr, "<span class='filter_notice'><font color='red'>Unable to locate a data core entry for this person.</font></span>")
+				to_chat(usr, "<span class='filter_notice'>[span_red("Unable to locate a data core entry for this person.")]</span>")
 
 	if (href_list["medrecordadd"])
 		if(hasHUD(usr,"medical"))
@@ -607,7 +628,7 @@
 								read = 1
 
 			if(!read)
-				to_chat(usr, "<span class='filter_notice'><font color='red'>Unable to locate a data core entry for this person.</font></span>")
+				to_chat(usr, "<span class='filter_notice'>[span_red("Unable to locate a data core entry for this person.")]</span>")
 
 	if (href_list["emprecordComment"])
 		if(hasHUD(usr,"best"))
@@ -634,7 +655,7 @@
 								to_chat(usr, "<span class='filter_notice'><a href='?src=\ref[src];emprecordadd=`'>\[Add comment\]</a></span>")
 
 			if(!read)
-				to_chat(usr, "<span class='filter_notice'><font color='red'>Unable to locate a data core entry for this person.</font></span>")
+				to_chat(usr, "<span class='filter_notice'>[span_red("Unable to locate a data core entry for this person.")]</span>")
 
 	if (href_list["emprecordadd"])
 		if(hasHUD(usr,"best"))
@@ -798,7 +819,7 @@
 /mob/living/carbon/human/proc/play_xylophone()
 	if(!src.xylophone)
 		var/datum/gender/T = gender_datums[get_visible_gender()]
-		visible_message("<span class='filter_notice'><font color='red'>\The [src] begins playing [T.his] ribcage like a xylophone. It's quite spooky.</font></span>","<span class='notice'>You begin to play a spooky refrain on your ribcage.</span>","<span class='filter_notice'><font color='red'>You hear a spooky xylophone melody.</font></span>")
+		visible_message("<span class='filter_notice'>[span_red("\The [src] begins playing [T.his] ribcage like a xylophone. It's quite spooky.")]</span>","<span class='notice'>You begin to play a spooky refrain on your ribcage.</span>","<span class='filter_notice'>[span_red("You hear a spooky xylophone melody.")]</span>")
 		var/song = pick('sound/effects/xylophone1.ogg','sound/effects/xylophone2.ogg','sound/effects/xylophone3.ogg')
 		playsound(src, song, 50, 1, -1)
 		xylophone = 1
@@ -889,7 +910,7 @@
 	regenerate_icons()
 	check_dna()
 	var/datum/gender/T = gender_datums[get_visible_gender()]
-	visible_message("<span class='notice'>\The [src] morphs and changes [T.his] appearance!</span>", "<span class='notice'>You change your appearance!</span>", "<span class='filter_notice'><font color='red'>Oh, god!  What the hell was that?  It sounded like flesh getting squished and bone ground into a different shape!</font></span>")
+	visible_message("<span class='notice'>\The [src] morphs and changes [T.his] appearance!</span>", "<span class='notice'>You change your appearance!</span>", "<span class='filter_notice'>[span_red("Oh, god!  What the hell was that?  It sounded like flesh getting squished and bone ground into a different shape!")]</span>")
 
 /mob/living/carbon/human/proc/remotesay()
 	set name = "Project mind"
@@ -912,10 +933,10 @@
 
 	var/say = sanitize(tgui_input_text(usr, "What do you wish to say?"))
 	if(mRemotetalk in target.mutations)
-		target.show_message("<span class='filter_say'><font color='blue'>You hear [src.real_name]'s voice: [say]</font></span>")
+		target.show_message("<span class='filter_say'>[span_blue("You hear [src.real_name]'s voice: [say]")]</span>")
 	else
-		target.show_message("<span class='filter_say'><font color='blue'>You hear a voice that seems to echo around the room: [say]</font></span>")
-	usr.show_message("<span class='filter_say'><font color='blue'>You project your mind into [target.real_name]: [say]</font></span>")
+		target.show_message("<span class='filter_say'>[span_blue("You hear a voice that seems to echo around the room: [say]")]</span>")
+	usr.show_message("<span class='filter_say'>[span_blue("You project your mind into [target.real_name]: [say]")]</span>")
 	log_say("(TPATH to [key_name(target)]) [say]",src)
 	for(var/mob/observer/dead/G in mob_list)
 		G.show_message("<span class='filter_say'><i>Telepathic message from <b>[src]</b> to <b>[target]</b>: [say]</i></span>")
@@ -1211,7 +1232,7 @@
 	if(species.default_language)
 		add_language(species.default_language)
 
-	if(species.icon_scale_x != 1 || species.icon_scale_y != 1)
+	if(species.icon_scale_x != DEFAULT_ICON_SCALE_X || species.icon_scale_y != DEFAULT_ICON_SCALE_Y)
 		update_transform()
 
 	if(example)						//VOREStation Edit begin
@@ -1269,6 +1290,7 @@
 			vessel.maximum_volume = species.blood_volume
 		fixblood()
 		species.update_attack_types() //VOREStation Edit - Required for any trait that updates unarmed_types in setup.
+		species.update_vore_belly_def_variant()
 
 	// Rebuild the HUD. If they aren't logged in then login() should reinstantiate it for them.
 	update_hud()
@@ -1615,6 +1637,12 @@
 /mob/living/carbon/human/can_feel_pain(var/obj/item/organ/check_organ)
 	if(isSynthetic())
 		return 0
+	//RS ADD START
+	if(!digest_pain && (isbelly(src.loc) || istype(src.loc, /turf/simulated/floor/water/digestive_enzymes)))
+		var/obj/belly/b = src.loc
+		if(b.digest_mode == DM_DIGEST || b.digest_mode == DM_SELECT)
+			return FALSE
+	//RS ADD END
 	for(var/datum/modifier/M in modifiers)
 		if(M.pain_immunity == TRUE)
 			return 0
@@ -1764,3 +1792,35 @@
 
 /mob/living/carbon/human/get_mob_riding_slots()
 	return list(back, head, wear_suit)
+
+/mob/living/carbon/human/proc/update_fullness()
+	var/list/new_fullness = list()
+	vore_fullness = 0
+	for(var/belly_class in vore_icon_bellies)
+		new_fullness[belly_class] = 0
+	for(var/obj/belly/B as anything in vore_organs)
+		new_fullness[B.belly_sprite_to_affect] += B.GetFullnessFromBelly()
+	for(var/belly_class in vore_icon_bellies)
+		new_fullness[belly_class] /= size_multiplier //Divided by pred's size so a macro mob won't get macro belly from a regular prey.
+		new_fullness[belly_class] = round(new_fullness[belly_class], 1) // Because intervals of 0.25 are going to make sprite artists cry.
+		vore_fullness_ex[belly_class] = min(vore_capacity_ex[belly_class], new_fullness[belly_class])
+		vore_fullness += new_fullness[belly_class]
+	vore_fullness = min(vore_capacity, vore_fullness)
+	update_vore_belly_sprite()
+	update_vore_tail_sprite()
+
+/mob/living/carbon/human/verb/lay_down_left()
+	set name = "Rest-Left"
+
+	rest_dir = -1
+	resting = !resting
+	to_chat(src, "<span class='notice'>You are now [resting ? "resting" : "getting up"].</span>")
+	update_canmove()
+
+/mob/living/carbon/human/verb/lay_down_right()
+	set name = "Rest-Right"
+
+	rest_dir = 1
+	resting = !resting
+	to_chat(src, "<span class='notice'>You are now [resting ? "resting" : "getting up"].</span>")
+	update_canmove()

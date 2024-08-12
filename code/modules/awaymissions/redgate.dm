@@ -11,7 +11,8 @@
 	var/obj/structure/redgate/target
 	var/secret = FALSE	//If either end of the redgate has this enabled, ghosts will not be able to click to teleport
 	var/list/exceptions = list(
-		/obj/structure/ore_box
+		/obj/structure/ore_box,
+		/obj/structure/bed/roller
 		)	//made it a var so that GMs or map makers can selectively allow things to pass through
 	var/list/restrictions = list(
 		/mob/living/simple_mob/vore/overmap/stardog,
@@ -30,12 +31,12 @@
 /obj/structure/redgate/proc/teleport(var/mob/M as mob)
 	var/keycheck = TRUE
 	if (!istype(M,/mob/living))		//We only want mob/living, no bullets or mechs or AI eyes or items
-		if(M.type in exceptions)
+		if(is_type_in_list(M, exceptions))
 			keycheck = FALSE		//we'll allow it
 		else
 			return
 
-	if(M.type in restrictions)	//Some stuff we don't want to bring EVEN IF it has a key.
+	if(is_type_in_list(M, restrictions))	//Some stuff we don't want to bring EVEN IF it has a key.
 		return
 
 	for(var/obj/O in M.contents)
@@ -53,9 +54,22 @@
 	var/turf/ourturf = find_our_turf(M)		//Find the turf on the opposite side of the target
 	if(!ourturf.check_density(TRUE,TRUE))	//Make sure there isn't a wall there
 		M.unbuckle_all_mobs(TRUE)
-		M.stop_pulling()
-		playsound(src,'sound/effects/ominous-hum-2.ogg', 100,1)
-		M.forceMove(ourturf)		//Let's just do forcemove, I don't really want people teleporting to weird places if they have bluespace stuff
+		if(istype(M,/mob/living) && M.pulling)
+			var/atom/movable/pulled = M.pulling
+			M.stop_pulling()
+			playsound(src,'sound/effects/ominous-hum-2.ogg', 100,1)
+			M.forceMove(ourturf)
+			if(is_type_in_list(pulled, exceptions))
+				for(var/mob/living/buckled_on in pulled.buckled_mobs)
+					if(!buckled_on.key || is_type_in_list(M, restrictions))
+						pulled.unbuckle_mob(buckled_on, TRUE)
+				pulled.forceMove(ourturf)
+				M.continue_pulling(pulled)
+			else
+				to_chat(M, "<span class='notice'>The redgate refused your pulled item.</span>")
+		else
+			playsound(src,'sound/effects/ominous-hum-2.ogg', 100,1)
+			M.forceMove(ourturf)		//Let's just do forcemove, I don't really want people teleporting to weird places if they have bluespace stuff
 	else
 		to_chat(M, "<span class='notice'>Something blocks your way.</span>")
 
@@ -1062,6 +1076,340 @@
 /area/redgate/fantasy/mines
 	name = "Fantasy house"
 	icon_state = "green"
+
+//WELCOME TO THE JUNGLE
+
+/area/redgate/jungle
+	name = "Jungle"
+	icon_state = "red"
+	requires_power = 0
+
+/area/redgate/jungle/aboveground
+	name = "Jungle"
+	icon_state = "red"
+
+/area/redgate/jungle/temple
+	name = "Jungle temple"
+	icon_state = "yellow"
+
+/area/redgate/jungle/westcaves
+	name = "Jungle west caves"
+	icon_state = "yellow"
+
+/area/redgate/jungle/eastcaves
+	name = "Jungle east caves"
+	icon_state = "yellow"
+
+/area/redgate/jungle/southcaves
+	name = "Jungle south caves"
+	icon_state = "yellow"
+
+/area/redgate/jungle/deepforest
+	name = "Jungle deep forest"
+	icon_state = "yellow"
+
+/area/redgate/jungle/facilitynw
+	name = "Jungle facility north-west"
+	icon_state = "yellow"
+	lightswitch = 0
+
+/area/redgate/jungle/facilityne
+	name = "Jungle facility north-east"
+	icon_state = "yellow"
+	lightswitch = 0
+
+/area/redgate/jungle/facilitysw
+	name = "Jungle facility south-west"
+	icon_state = "yellow"
+	lightswitch = 0
+
+/area/redgate/jungle/facilityse
+	name = "Jungle facility south-east"
+	icon_state = "yellow"
+	lightswitch = 0
+
+/area/redgate/jungle/underwaterwest
+	name = "Jungle underwater west"
+	icon_state = "purple"
+	forced_ambience = list('sound/effects/underwater.ogg')
+
+/area/redgate/jungle/underwaterswamp
+	name = "Jungle underwater swamp"
+	icon_state = "purple"
+	forced_ambience = list('sound/effects/underwater.ogg')
+
+/area/redgate/jungle/underwaterpong
+	name = "Jungle underwater pond"
+	icon_state = "purple"
+	forced_ambience = list('sound/effects/underwater.ogg')
+
+/area/redgate/jungle/underwatercave
+	name = "Jungle underwater cave"
+	icon_state = "yellow"
+
+/area/redgate/jungle/underwatercaveswamp
+	name = "Jungle underwater swamp cave"
+	icon_state = "yellow"
+
+/area/redgate/jungle/underwatercavepond
+	name = "Jungle underwater pond cave"
+	icon_state = "yellow"
+
+/area/redgate/jungle/murderroom
+	name = "Jungle trophy room"
+	icon_state = "yellow"
+
+/area/redgate/jungle/facilitybar
+	name = "Jungle facility bar"
+	icon_state = "yellow"
+
+/area/redgate/jungle/facilitycasino
+	name = "Jungle facility casino"
+	icon_state = "yellow"
+
+//Facility locations
+
+/area/redgate/facility
+	name = "Facility"
+	icon_state = "red"
+	requires_power = 0
+
+/area/redgate/facility/ne
+	name = "Facility - North East"
+
+/area/redgate/facility/nw
+	name = "Facility - North West"
+
+/area/redgate/facility/sw
+	name = "Facility - South West"
+
+/area/redgate/facility/se
+	name = "Facility - South East"
+
+/area/redgate/facility/medbay
+	name = "Facility - Medbay"
+	icon_state = "yellow"
+
+/area/redgate/facility/securitylobby
+	name = "Facility - Security Lobby"
+	icon_state = "yellow"
+
+/area/redgate/facility/security
+	name = "Facility - Security"
+	icon_state = "yellow"
+
+/area/redgate/facility/tram
+	name = "Facility - Tram"
+	icon_state = "yellow"
+
+/area/redgate/facility/entrance
+	name = "Facility - Entrance"
+	icon_state = "yellow"
+
+/area/redgate/facility/lab1
+	name = "Facility - Lab 1"
+	icon_state = "yellow"
+
+/area/redgate/facility/lab2
+	name = "Facility - Lab 2"
+	icon_state = "yellow"
+
+/area/redgate/facility/lab3
+	name = "Facility - Lab 3"
+	icon_state = "yellow"
+
+/area/redgate/facility/lab4
+	name = "Facility - Lab 4"
+	icon_state = "yellow"
+
+/area/redgate/facility/lab5
+	name = "Facility - Lab 5"
+	icon_state = "yellow"
+
+/area/redgate/facility/lab6
+	name = "Facility - Lab 6"
+	icon_state = "yellow"
+
+/area/redgate/facility/lab7
+	name = "Facility - Lab 7"
+	icon_state = "yellow"
+
+/area/redgate/facility/lab8
+	name = "Facility - Lab 8"
+	icon_state = "yellow"
+
+/area/redgate/facility/cell1
+	name = "Facility - Cell 1"
+	icon_state = "green"
+
+/area/redgate/facility/cell2
+	name = "Facility - Cell 2"
+	icon_state = "green"
+
+/area/redgate/facility/cell3
+	name = "Facility - Cell 3"
+	icon_state = "green"
+
+/area/redgate/facility/cell4
+	name = "Facility - Cell 4"
+	icon_state = "green"
+
+/area/redgate/facility/cell5
+	name = "Facility - Cell 5"
+	icon_state = "green"
+
+/area/redgate/facility/cell6
+	name = "Facility - Cell 6"
+	icon_state = "green"
+
+/area/redgate/facility/cell7
+	name = "Facility - Cell 7"
+	icon_state = "green"
+
+/area/redgate/facility/cell8
+	name = "Facility - Cell 8"
+	icon_state = "green"
+
+/area/redgate/facility/cell9
+	name = "Facility - Cell 9"
+	icon_state = "green"
+
+/area/redgate/facility/cell10
+	name = "Facility - Cell 10"
+	icon_state = "green"
+
+/area/redgate/facility/cell11
+	name = "Facility - Cell 11"
+	icon_state = "green"
+
+/area/redgate/facility/cell12
+	name = "Facility - Cell 12"
+	icon_state = "green"
+
+/area/redgate/facility/cell13
+	name = "Facility - Cell 13"
+	icon_state = "green"
+
+/area/redgate/facility/cell14
+	name = "Facility - Cell 14"
+	icon_state = "green"
+
+/area/redgate/facility/cell15
+	name = "Facility - Cell 15"
+	icon_state = "green"
+
+/area/redgate/facility/cell16
+	name = "Facility - Cell 16"
+	icon_state = "green"
+
+/area/redgate/facility/cell17
+	name = "Facility - Cell 17"
+	icon_state = "green"
+
+/area/redgate/facility/cell18
+	name = "Facility - Cell 18"
+	icon_state = "green"
+
+/area/redgate/facility/cell19
+	name = "Facility - Cell 19"
+	icon_state = "green"
+
+/area/redgate/facility/cell20
+	name = "Facility - Cell 20"
+	icon_state = "green"
+
+/area/redgate/facility/cell21
+	name = "Facility - Cell 21"
+	icon_state = "green"
+
+/area/redgate/facility/cell22
+	name = "Facility - Cell 22"
+	icon_state = "green"
+
+/area/redgate/facility/cell23
+	name = "Facility - Cell 23"
+	icon_state = "green"
+
+/area/redgate/facility/cell24
+	name = "Facility - Cell 24"
+	icon_state = "green"
+
+/area/redgate/facility/cell25
+	name = "Facility - Cell 25"
+	icon_state = "green"
+
+/area/redgate/facility/cell26
+	name = "Facility - Cell 26"
+	icon_state = "green"
+
+/area/redgate/facility/cell27
+	name = "Facility - Cell 28"
+	icon_state = "green"
+
+/area/redgate/facility/cell29
+	name = "Facility - Cell 29"
+	icon_state = "green"
+
+/area/redgate/facility/office1
+	name = "Facility - Office 1"
+	icon_state = "green"
+
+/area/redgate/facility/office2
+	name = "Facility - Office 2"
+	icon_state = "green"
+
+/area/redgate/facility/office3
+	name = "Facility - Office 3"
+	icon_state = "green"
+
+/area/redgate/facility/office4
+	name = "Facility - Office 4"
+	icon_state = "green"
+
+/area/redgate/facility/office5
+	name = "Facility - Office 5"
+	icon_state = "green"
+
+/area/redgate/facility/office6
+	name = "Facility - Office 6"
+	icon_state = "green"
+
+/area/redgate/facility/office7
+	name = "Facility - Office 7"
+	icon_state = "green"
+
+/area/redgate/facility/office8
+	name = "Facility - Office 8"
+	icon_state = "green"
+
+/area/redgate/facility/office9
+	name = "Facility - Office 9"
+	icon_state = "green"
+
+/area/redgate/facility/office10
+	name = "Facility - Office 10"
+	icon_state = "green"
+
+/area/redgate/facility/office11
+	name = "Facility - Office 11"
+	icon_state = "green"
+
+/area/redgate/facility/office12
+	name = "Facility - Office 12"
+	icon_state = "green"
+
+/area/redgate/facility/office13
+	name = "Facility - Office 13"
+	icon_state = "green"
+
+/area/redgate/facility/office14
+	name = "Facility - Office 14"
+	icon_state = "green"
+
+/area/redgate/facility/office15
+	name = "Facility - Office 15"
+	icon_state = "green"
+
 
 //HIIIIGHWAY TO THE! LASER-DOME!
 /area/redgate/laserdome

@@ -148,6 +148,7 @@
 	revive()
 	mutations.Remove(HUSK)
 	setBrainLoss(braindamage)
+	species.update_vore_belly_def_variant()
 
 	if(!uninjured)
 		nutrition = old_nutrition * 0.5
@@ -430,7 +431,7 @@
 		to_chat(src, "You cannot bite in your current state.")
 		return
 	if(B.vessel.total_volume <= 0 || B.isSynthetic()) //Do they have any blood in the first place, and are they synthetic?
-		to_chat(src, "<font color='red'>There appears to be no blood in this prey...</font>")
+		to_chat(src, span_red("There appears to be no blood in this prey..."))
 		return
 
 	last_special = world.time + 600
@@ -468,9 +469,9 @@
 
 
 	if(noise)
-		src.visible_message("<font color='red'><b>[src] moves their head next to [B]'s neck, seemingly looking for something!</b></font>")
+		src.visible_message(span_red("<b>[src] moves their head next to [B]'s neck, seemingly looking for something!</b>"))
 	else
-		src.visible_message("<font color='red'><i>[src] moves their head next to [B]'s neck, seemingly looking for something!</i></font>", range = 1)
+		src.visible_message(span_red("<i>[src] moves their head next to [B]'s neck, seemingly looking for something!</i>"), range = 1)
 
 	if(bleed) //Due to possibility of missing/misclick and missing the bleeding cues, we are warning the scene members of BLEEDING being on
 		to_chat(src, SPAN_WARNING("This is going to cause [B] to keep bleeding!"))
@@ -479,9 +480,9 @@
 	if(do_after(src, 300, B)) //Thrirty seconds.
 		if(!Adjacent(B)) return
 		if(noise)
-			src.visible_message("<font color='red'><b>[src] suddenly extends their fangs and plunges them down into [B]'s neck!</b></font>")
+			src.visible_message(span_red("<b>[src] suddenly extends their fangs and plunges them down into [B]'s neck!</b>"))
 		else
-			src.visible_message("<font color='red'><i>[src] suddenly extends their fangs and plunges them down into [B]'s neck!</i></font>", range = 1)
+			src.visible_message(span_red("<i>[src] suddenly extends their fangs and plunges them down into [B]'s neck!</i>"), range = 1)
 		if(bleed)
 			B.apply_damage(10, BRUTE, BP_HEAD, blocked = 0, soaked = 0, sharp = TRUE, edge = FALSE)
 			var/obj/item/organ/external/E = B.get_organ(BP_HEAD)
@@ -1232,9 +1233,9 @@
 			return
 		if(target.buckled) //how are you buckled in the water?!
 			target.buckled.unbuckle_mob()
-		target.visible_message("<span class='warning'>\The [target] suddenly disappears, being dragged into the water!</span>",\
-			"<span class='danger'>You are dragged below the water and feel yourself slipping directly into \the [src]'s [vore_selected]!</span>")
-		to_chat(src, "<span class='notice'>You successfully drag \the [target] into the water, slipping them into your [vore_selected].</span>")
+		target.visible_message("<span class='vwarning'>\The [target] suddenly disappears, being dragged into the water!</span>",\
+			"<span class='vdanger'>You are dragged below the water and feel yourself slipping directly into \the [src]'s [vore_selected]!</span>")
+		to_chat(src, "<span class='vnotice'>You successfully drag \the [target] into the water, slipping them into your [vore_selected].</span>")
 		target.forceMove(src.vore_selected)
 
 /mob/living/carbon/human/proc/toggle_pain_module()
@@ -1308,8 +1309,8 @@
 			to_chat(src, "<span class='warning'>You need to be closer to do that.</span>")
 			return
 
-		visible_message("<span class='notice'>\The [src] attempts to snatch up [target]!</span>", \
-						"<span class='notice'>You attempt to snatch up [target]!</span>" )
+		visible_message("<span class='vnotice'>\The [src] attempts to snatch up [target]!</span>", \
+						"<span class='vnotice'>You attempt to snatch up [target]!</span>" )
 		playsound(src, 'sound/vore/sunesound/pred/schlorp.ogg', 25)
 
 		//Code to shoot the beam here.
@@ -1529,3 +1530,145 @@
 
 		if(Adjacent(target))	//We leapt at them but we didn't manage to hit them, let's see if we're next to them
 			target.Weaken(2)	//get knocked down, idiot
+
+
+/mob/living/proc/injection() // Allows the user to inject reagents into others somehow, like stinging, or biting.
+	set name = "Injection"
+	set category = "Abilities"
+	set desc = "Inject another being with something!"
+
+	if(stat || paralysis || weakened || stunned || world.time < last_special) //Epic copypasta from tongue grabbing.
+		to_chat(src, "<span class='warning'>You can't do that in your current state.</span>")
+		return
+
+	last_special = world.time + 10 //Anti-spam.
+
+	var/list/choices = list("Inject")
+
+	if(trait_injection_reagents.len > 1) //Should never happen, but who knows!
+		choices += "Change reagent"
+	else if(!trait_injection_selected)
+		trait_injection_selected = trait_injection_reagents[1]
+
+	choices += "Change amount"
+	choices += "Change verb"
+	choices += "Chemical Refresher"
+
+	var/choice = tgui_alert(src, "Do you wish to inject somebody, or adjust settings?", "Selection List", choices)
+
+	if(choice == "Change reagent")
+		var/reagent_choice = tgui_input_list(usr, "Choose which reagent to inject!", "Select reagent", trait_injection_reagents)
+		if(reagent_choice)
+			trait_injection_selected = reagent_choice
+		to_chat(src, "<span class='notice'>You prepare to inject [trait_injection_amount] units of [trait_injection_selected ? "[trait_injection_selected]" : "...nothing. Select a reagent before trying to inject anything."]</span>")
+		return
+	if(choice == "Change amount")
+		var/amount_choice = tgui_input_number(usr, "How much of the reagent do you want to inject? (Up to 5 units) (Can select 0 for a bite that doesn't inject venom!)", "How much?", trait_injection_amount, 5, 0)
+		if(amount_choice >= 0)
+			trait_injection_amount = amount_choice
+		to_chat(src, "<span class='notice'>You prepare to inject [trait_injection_amount] units of [trait_injection_selected ? "[trait_injection_selected]" : "...nothing. Select a reagent before trying to inject anything."]</span>")
+		return
+	if(choice == "Change verb")
+		var/verb_choice = tgui_input_text(usr, "Choose the percieved manner of injection, such as 'bites' or 'stings', don't be misleading or abusive. This will show up in game as ('X' 'Verb' 'Y'. Example: X bites Y.)", "How are you injecting?", trait_injection_verb, max_length = 60) //Whoaa there cowboy don't put a novel in there.
+		if(verb_choice)
+			trait_injection_verb = verb_choice
+		to_chat(src, "<span class='notice'>You will [trait_injection_verb] your targets.</span>")
+		return
+	if(choice == "Chemical Refresher")
+		var/output = {"<B>Chemical Refresher!</B><HR>
+					<B>Options for venoms</B><BR>
+					<BR>
+					<B>Size Chemicals</B><BR>
+					Microcillin: Will make someone shrink. <br>
+					Macrocillin: Will make someone grow. <br>
+					Normalcillin: Will make someone normal size. <br>
+					Note: 1 unit = 100% size diff. 0.01 unit = 1% size diff. <br>
+					Note: Normacillin stops at 100%  size. <br>
+					<br>
+					<B>Gender Chemicals</B><BR>
+					Androrovir: Will transform someone's sex to male. <br>
+					Gynorovir: Will transform someone's sex to female. <br>
+					Androgynorovir: Will transform someone's sex to plural. <br>
+					<br>
+					<B>Special Chemicals</B><BR>
+					Stoxin: Will make someone drowsy. <br>
+					Rainbow Toxin: Will make someone see rainbows. <br>
+					Paralysis Toxin: Will make someone paralyzed. <br>
+					Numbing Enzyme: Will make someone unable to feel pain. <br>
+					Pain Enzyme: Will make someone feel amplified pain. <br>
+					<br>
+					<B>Side Notes</B><BR>
+					You can select a value of 0 to inject nothing! <br>
+					Overdose threshold for most chemicals is 30 units. <br>
+					Exceptions to OD is: (Numbing Enzyme:20)<br>
+					You can also bite synthetics, but due to how synths work, they won't have anything injected into them.
+					<br>
+					"}
+		usr << browse(output,"window=chemicalrefresher")
+		return
+	else
+		var/list/targets = list() //IF IT IS NOT BROKEN. DO NOT FIX IT. AND KEEP COPYPASTING IT  (Pointing Rick Dalton: "That's my code!" ~CL)
+
+		for(var/mob/living/carbon/L in living_mobs(1, TRUE)) //Noncarbons don't even process reagents so don't bother listing others.
+			if(!istype(L, /mob/living/carbon))
+				continue
+			if(L == src) //no getting high off your own supply, get a nif or something, nerd.
+				continue
+			if(!L.resizable && (trait_injection_selected == "macrocillin" || trait_injection_selected == "microcillin" || trait_injection_selected == "normalcillin")) // If you're using a size reagent, ignore those with pref conflicts.
+				continue
+			if(!L.allow_spontaneous_tf && (trait_injection_selected == "androrovir" || trait_injection_selected == "gynorovir" || trait_injection_selected == "androgynorovir")) // If you're using a TF reagent, ignore those with pref conflicts.
+				continue
+			targets += L
+
+		if(!(targets.len))
+			to_chat(src, "<span class='notice'>No eligible targets found.</span>")
+			return
+
+		var/mob/living/target = tgui_input_list(src, "Please select a target.", "Victim", targets)
+
+		if(!target)
+			return
+
+		if(!istype(target, /mob/living/carbon)) //Safety.
+			to_chat(src, "<span class='warning'>That won't work on that kind of creature! (Only works on crew/monkeys)</span>")
+			return
+
+
+		var/synth = 0
+		if(target.isSynthetic())
+			synth = 1
+
+		if(!trait_injection_selected)
+			to_chat(src, "<span class='notice'>You need to select a reagent.</span>")
+			return
+
+		if(!trait_injection_verb)
+			to_chat(src, "<span class='notice'>Somehow, you forgot your means of injecting. (Select a verb!)</span>")
+			return
+
+		if(do_after(src, 50, target)) //A decent enough timer.
+			add_attack_logs(src,target,"Injection trait ([trait_injection_selected], [trait_injection_amount])")
+			if(target.reagents && (trait_injection_amount > 0) && !synth)
+				target.reagents.add_reagent(trait_injection_selected, trait_injection_amount)
+			var/ourmsg = "<span class='warning'>[usr] [trait_injection_verb] [target] "
+			switch(zone_sel.selecting)
+				if(BP_HEAD)
+					ourmsg += "on the head!"
+				if(BP_TORSO)
+					ourmsg += "on the chest!"
+				if(BP_GROIN)
+					ourmsg += "on the groin!"
+				if(BP_R_ARM, BP_L_ARM)
+					ourmsg += "on the arm!"
+				if(BP_R_HAND, BP_L_HAND)
+					ourmsg += "on the hand!"
+				if(BP_R_LEG, BP_L_LEG)
+					ourmsg += "on the leg!"
+				if(BP_R_FOOT, BP_L_FOOT)
+					ourmsg += "on the foot!"
+				if("mouth")
+					ourmsg += "on the mouth!"
+				if("eyes")
+					ourmsg += "on the eyes!"
+			ourmsg += "</span>"
+			visible_message(ourmsg)

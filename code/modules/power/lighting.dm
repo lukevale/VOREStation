@@ -4,10 +4,6 @@
 
 
 // status values shared between lighting fixtures and items
-#define LIGHT_OK 0
-#define LIGHT_EMPTY 1
-#define LIGHT_BROKEN 2
-#define LIGHT_BURNED 3
 #define LIGHT_BULB_TEMPERATURE 400 //K - used value for a 60W bulb
 #define LIGHTING_POWER_FACTOR 2		//5W per luminosity * range		//VOREStation Edit: why the fuck are lights eating so much power, 2W per thing
 #define LIGHT_EMERGENCY_POWER_USE 0.2 //How much power emergency lights will consume per tick
@@ -777,7 +773,7 @@ var/global/list/light_type_cache = list()
 		if(H.species.can_shred(H))
 			user.setClickCooldown(user.get_attack_speed())
 			for(var/mob/M in viewers(src))
-				M.show_message("<font color='red'>[user.name] smashed the light!</font>", 3, "You hear a tinkle of breaking glass", 2)
+				M.show_message(span_red("[user.name] smashed the light!"), 3, "You hear a tinkle of breaking glass", 2)
 			broken()
 			return
 
@@ -1106,7 +1102,7 @@ var/global/list/light_type_cache = list()
 					brightness_range = new_range
 
 			if("Normal Brightness")
-				var/new_power = tgui_input_number(usr, "Choose the new brightness of the light! (0.01 - [init_brightness_power])", "", init_brightness_power, init_brightness_power, 0.01, 0)
+				var/new_power = tgui_input_number(usr, "Choose the new brightness of the light! (0.01 - [init_brightness_power])", "", init_brightness_power, init_brightness_power, 0.01, round_value=FALSE)
 				if(new_power)
 					brightness_power = new_power
 
@@ -1121,7 +1117,7 @@ var/global/list/light_type_cache = list()
 					nightshift_range = new_range
 
 			if("Nightshift Brightness")
-				var/new_power = tgui_input_number(usr, "Choose the new brightness of the light! (0.01 - [init_nightshift_power])", "", init_nightshift_power, init_nightshift_power, 0.01)
+				var/new_power = tgui_input_number(usr, "Choose the new brightness of the light! (0.01 - [init_nightshift_power])", "", init_nightshift_power, init_nightshift_power, 0.01, round_value=FALSE)
 				if(new_power)
 					nightshift_power = new_power
 
@@ -1165,7 +1161,7 @@ var/global/list/light_type_cache = list()
 
 /obj/item/weapon/light/proc/shatter()
 	if(status == LIGHT_OK || status == LIGHT_BURNED)
-		src.visible_message("<font color='red'>[name] shatters.</font>","<font color='red'> You hear a small glass object shatter.</font>")
+		src.visible_message(span_red("[name] shatters."),span_red("You hear a small glass object shatter."))
 		status = LIGHT_BROKEN
 		force = 5
 		sharp = TRUE
@@ -1179,3 +1175,7 @@ var/global/list/light_type_cache = list()
 	icon = 'icons/obj/lighting.dmi'
 	icon_state = "lampshade"
 	w_class = ITEMSIZE_TINY
+
+#undef LIGHT_BULB_TEMPERATURE
+#undef LIGHTING_POWER_FACTOR
+#undef LIGHT_EMERGENCY_POWER_USE

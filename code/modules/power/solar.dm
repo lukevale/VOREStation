@@ -1,4 +1,4 @@
-//#define SOLAR_MAX_DIST 40		//VOREStation Removal
+//# define SOLAR_MAX_DIST 40		//VOREStation Removal
 #define SOLAR_AUTO_START_NO     0 // Will never start itself.
 #define SOLAR_AUTO_START_YES    1 // Will always start itself.
 #define SOLAR_AUTO_START_CONFIG 2 // Will start itself if config allows it (default is no).
@@ -267,7 +267,7 @@ GLOBAL_LIST_EMPTY(solars_list)
 	var/targetdir = 0		// target angle in manual tracking (since it updates every game minute)
 	var/track = 0			// 0= off  1=timed  2=auto (tracker)
 	var/trackrate = 600		// 300-900 seconds
-	var/nexttime = 0		// time for a panel to rotate of 1� in manual tracking
+	var/nexttime = 0		// time for a panel to rotate of 1° in manual tracking
 	var/obj/machinery/power/tracker/connected_tracker = null
 	var/needs_panel_check	// Powernet has been updated, need to check if panels are still connected.
 	var/connected_power		// Sum of power supplied by connected panels.
@@ -416,7 +416,7 @@ GLOBAL_LIST_EMPTY(solars_list)
 		playsound(src, I.usesound, 50, 1)
 		if(do_after(user, 20))
 			if (src.stat & BROKEN)
-				to_chat(user, "<font color='blue'>The broken glass falls out.</font>")
+				to_chat(user, span_blue("The broken glass falls out."))
 				var/obj/structure/frame/A = new /obj/structure/frame/computer( src.loc )
 				new /obj/item/weapon/material/shard( src.loc )
 				var/obj/item/weapon/circuitboard/solar_control/M = new /obj/item/weapon/circuitboard/solar_control( A )
@@ -428,7 +428,7 @@ GLOBAL_LIST_EMPTY(solars_list)
 				A.anchored = TRUE
 				qdel(src)
 			else
-				to_chat(user, "<font color='blue'>You disconnect the monitor.</font>")
+				to_chat(user, span_blue("You disconnect the monitor."))
 				var/obj/structure/frame/A = new /obj/structure/frame/computer( src.loc )
 				var/obj/item/weapon/circuitboard/solar_control/M = new /obj/item/weapon/circuitboard/solar_control( A )
 				for (var/obj/C in src)
@@ -451,9 +451,9 @@ GLOBAL_LIST_EMPTY(solars_list)
 			connected_tracker.unset_control()
 
 	if(track==1 && trackrate) //manual tracking and set a rotation speed
-		if(nexttime <= world.time) //every time we need to increase/decrease the angle by 1�...
+		if(nexttime <= world.time) //every time we need to increase/decrease the angle by 1°...
 			targetdir = (targetdir + trackrate/abs(trackrate) + 360) % 360 	//... do it
-			nexttime += 36000/abs(trackrate) //reset the counter for the next 1�
+			nexttime += 36000/abs(trackrate) //reset the counter for the next 1°
 
 	if(needs_panel_check)
 		for(var/obj/machinery/power/solar/S in connected_panels)
@@ -552,3 +552,7 @@ GLOBAL_LIST_EMPTY(solars_list)
 /obj/item/weapon/paper/solar
 	name = "paper- 'Going green! Setup your own solar array instructions.'"
 	info = "<h1>Welcome</h1><p>At greencorps we love the environment, and space. With this package you are able to help mother nature and produce energy without any usage of fossil fuel or phoron! Singularity energy is dangerous while solar energy is safe, which is why it's better. Now here is how you setup your own solar array.</p><p>You can make a solar panel by wrenching the solar assembly onto a cable node. Adding a glass panel, reinforced or regular glass will do, will finish the construction of your solar panel. It is that easy!</p><p>Now after setting up 19 more of these solar panels you will want to create a solar tracker to keep track of our mother nature's gift, the SSsun.sun. These are the same steps as before except you insert the tracker equipment circuit into the assembly before performing the final step of adding the glass. You now have a tracker! Now the last step is to add a computer to calculate the SSsun.sun's movements and to send commands to the solar panels to change direction with the SSsun.sun. Setting up the solar computer is the same as setting up any computer, so you should have no trouble in doing that. You do need to put a wire node under the computer, and the wire needs to be connected to the tracker.</p><p>Congratulations, you should have a working solar array. If you are having trouble, here are some tips. Make sure all solar equipment are on a cable node, even the computer. You can always deconstruct your creations if you make a mistake.</p><p>That's all to it, be safe, be green!</p>"
+
+#undef SOLAR_AUTO_START_NO
+#undef SOLAR_AUTO_START_YES
+#undef SOLAR_AUTO_START_CONFIG

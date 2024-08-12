@@ -4,7 +4,7 @@
 	desc = "A miniature nanite fabricator for a medigun."
 	catalogue_data = list(/datum/category_item/catalogue/information/organization/vey_med)
 	icon_state = "ml3m_batt"
-	origin_tech = list(TECH_BIO = 2, TECH_MATERIAL = 1, TECH_MAGNETS = 2)
+	origin_tech = list(TECH_BIO = 2, TECH_MATERIAL = 1, TECH_MAGNET = 2)
 
 /obj/item/projectile/beam/medical_cell
 	name = "\improper healing beam"
@@ -322,7 +322,7 @@
 /obj/item/projectile/beam/medical_cell/shrink/on_hit(var/mob/living/carbon/human/target)
 	if(istype(target, /mob/living/carbon/human))
 		target.resize(0.5)
-		target.show_message("<font color='blue'>The beam fires into your body, changing your size!</font>")
+		target.show_message(span_blue("The beam fires into your body, changing your size!"))
 		target.update_icon()
 	else
 		return 1
@@ -336,7 +336,7 @@
 /obj/item/projectile/beam/medical_cell/grow/on_hit(var/mob/living/carbon/human/target)
 	if(istype(target, /mob/living/carbon/human))
 		target.resize(2.0)
-		target.show_message("<font color='blue'>The beam fires into your body, changing your size!</font>")
+		target.show_message(span_blue("The beam fires into your body, changing your size!"))
 		target.update_icon()
 	else
 		return 1
@@ -350,7 +350,7 @@
 /obj/item/projectile/beam/medical_cell/normalsize/on_hit(var/mob/living/carbon/human/target)
 	if(istype(target, /mob/living/carbon/human))
 		target.resize(1)
-		target.show_message("<font color='blue'>The beam fires into your body, changing your size!</font>")
+		target.show_message(span_blue("The beam fires into your body, changing your size!"))
 		target.update_icon()
 	else
 		return 1

@@ -59,7 +59,7 @@
 			if("Description")
 				var/str = sanitize(tgui_input_text(usr,"Label text?","Set label",""))
 				if(!str || !length(str))
-					to_chat(user, "<font color='red'>Invalid text.</font>")
+					to_chat(user, span_red("Invalid text."))
 					return
 				if(!examtext && !nameset)
 					examtext = str
@@ -171,7 +171,7 @@
 			if("Description")
 				var/str = sanitize(tgui_input_text(usr,"Label text?","Set label",""))
 				if(!str || !length(str))
-					to_chat(user, "<font color='red'>Invalid text.</font>")
+					to_chat(user, span_red("Invalid text."))
 					return
 				if(!examtext && !nameset)
 					examtext = str
@@ -241,7 +241,7 @@
 	if(user in target) //no wrapping closets that you are inside - it's not physically possible
 		return
 
-	user.attack_log += text("\[[time_stamp()]\] <font color='blue'>Has used [src.name] on \ref[target]</font>")
+	user.attack_log += text("\[[time_stamp()]\] [span_blue("Has used [src.name] on \ref[target]")]")
 
 
 	if (istype(target, /obj/item) && !(istype(target, /obj/item/weapon/storage) && !istype(target,/obj/item/weapon/storage/box)))
@@ -305,7 +305,7 @@
 		else if(src.amount < 3)
 			to_chat(user, "<span class='warning'>You need more paper.</span>")
 	else
-		to_chat(user, "<font color='blue'>The object you are trying to wrap is unsuitable for the sorting machinery!</font>")
+		to_chat(user, span_blue("The object you are trying to wrap is unsuitable for the sorting machinery!"))
 	if (src.amount <= 0)
 		new /obj/item/weapon/c_tube( src.loc )
 		qdel(src)
@@ -315,7 +315,7 @@
 /obj/item/weapon/packageWrap/examine(mob/user)
 	. = ..()
 	if(get_dist(user, src) <= 0)
-		. += "<font color='blue'>There are [amount] units of package wrap left!</font>"
+		. += span_blue("There are [amount] units of package wrap left!")
 
 /obj/structure/bigDelivery/Destroy()
 	if(wrapped) //sometimes items can disappear. For example, bombs. --rastaf0
@@ -348,11 +348,23 @@
 		ui = new(user, src, "DestinationTagger", name)
 		ui.open()
 
+/obj/item/device/destTagger/tgui_static_data(mob/user)
+	var/list/data = ..()
+	var/list/taggers = list()
+	var/list/tagger_levels = list()
+	for(var/tag in GLOB.tagger_locations)
+		var/z_level = GLOB.tagger_locations[tag]
+		taggers += list(list("tag" = tag, "level" = z_level))
+		tagger_levels += list(list("z" = z_level, "location" = using_map.get_zlevel_name(z_level)))
+	data["taggerLevels"] = tagger_levels
+	data["taggerLocs"] = taggers
+
+	return data
+
 /obj/item/device/destTagger/tgui_data(mob/user, datum/tgui/ui)
 	var/list/data = ..()
 
 	data["currTag"] = currTag
-	data["taggerLocs"] = GLOB.tagger_locations
 
 	return data
 

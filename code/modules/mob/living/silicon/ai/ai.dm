@@ -24,6 +24,7 @@ var/list/ai_verbs_default = list(
 	/mob/living/silicon/ai/proc/toggle_camera_light,
 	/mob/living/silicon/ai/proc/take_image,
 	/mob/living/silicon/ai/proc/view_images,
+	/mob/living/silicon/ai/proc/delete_images,
 	/mob/living/silicon/ai/proc/toggle_multicam_verb,
 	/mob/living/silicon/ai/proc/add_multicam_verb
 )
@@ -475,7 +476,7 @@ var/list/ai_verbs_default = list(
 		if(target && (!istype(target, /mob/living/carbon/human) || html_decode(href_list["trackname"]) == target:get_face_name()))
 			ai_actual_track(target)
 		else
-			to_chat(src, "<span class='filter_warning'><font color='red'>System error. Cannot locate [html_decode(href_list["trackname"])].</font></span>")
+			to_chat(src, "<span class='filter_warning'>[span_red("System error. Cannot locate [html_decode(href_list["trackname"])].")]</span>")
 		return
 
 	if(href_list["trackbot"])

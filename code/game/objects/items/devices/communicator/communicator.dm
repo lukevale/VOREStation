@@ -302,7 +302,7 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 /obj/item/device/communicator/Destroy()
 	for(var/mob/living/voice/voice in contents)
 		voice_mobs.Remove(voice)
-		to_chat(voice, "<span class='danger'>\icon[src][bicon(src)] Connection timed out with remote host.</span>")
+		to_chat(voice, "<span class='danger'>[icon2html(src, voice.client)] Connection timed out with remote host.</span>")
 		qdel(voice)
 	close_connection(reason = "Connection timed out")
 
@@ -376,3 +376,13 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 		return
 
 	icon_state = initial(icon_state)
+
+#undef HOMETAB
+#undef PHONTAB
+#undef CONTTAB
+#undef MESSTAB
+#undef NEWSTAB
+#undef NOTETAB
+#undef WTHRTAB
+#undef MANITAB
+#undef SETTTAB

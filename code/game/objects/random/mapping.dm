@@ -85,7 +85,8 @@
 				prob(5);/obj/machinery/vending/sovietvend,
 				prob(5);/obj/machinery/vending/radren,
 				prob(3);/obj/machinery/vending/altevian,
-				prob(5);/obj/machinery/vending/desatti) //VOREStation Edit End
+				prob(5);/obj/machinery/vending/desatti,
+				prob(5);/obj/machinery/vending/nukie) //VOREStation Edit End
 
 /obj/random/vendorfood //Random food vendors for station use
 	name = "random snack vending machine"
@@ -114,7 +115,8 @@
 				/obj/machinery/vending/cola/soft,
 				/obj/machinery/vending/bepis,
 				/obj/machinery/vending/sovietsoda,
-				/obj/machinery/vending/radren)
+				/obj/machinery/vending/radren,
+				/obj/machinery/vending/nukie)
 //VOREStation Edit End
 
 /obj/random/obstruction //Large objects to block things off in maintenance
@@ -138,7 +140,7 @@
 	name = "Random Land Mine"
 	desc = "This is a random land mine."
 	icon = 'icons/obj/weapons.dmi'
-	icon_state = "uglymine"
+	icon_state = "landmine"
 	spawn_nothing_percentage = 25
 
 /obj/random/landmine/item_to_spawn()
@@ -913,6 +915,7 @@
 				/obj/item/clothing/head/soft/purple,
 				/obj/item/weapon/storage/belt/janitor,
 				/obj/item/clothing/shoes/galoshes,
+				/obj/item/clothing/glasses/hud/janitor,
 				/obj/item/weapon/storage/bag/trash,
 				/obj/item/device/lightreplacer,
 				/obj/item/weapon/reagent_containers/spray/cleaner,
@@ -1191,6 +1194,7 @@
 				/obj/item/clothing/head/soft/purple,
 				/obj/item/weapon/storage/belt/janitor,
 				/obj/item/clothing/shoes/galoshes,
+				/obj/item/clothing/glasses/hud/janitor,
 				/obj/item/weapon/storage/bag/trash,
 				/obj/item/device/lightreplacer,
 				/obj/item/weapon/reagent_containers/spray/cleaner,

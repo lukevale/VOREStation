@@ -4,6 +4,7 @@
 /mob/verb/whisper(message as text)
 	set name = "Whisper"
 	set category = "IC"
+	set hidden = 1
 	//VOREStation Addition Start
 	if(forced_psay)
 		psay(message)
@@ -15,21 +16,24 @@
 /mob/verb/say_verb(message as text)
 	set name = "Say"
 	set category = "IC"
+	set hidden = 1
 	//VOREStation Addition Start
 	if(forced_psay)
 		psay(message)
 		return
 	//VOREStation Addition End
 
-	set_typing_indicator(FALSE)
+	client?.stop_thinking()
 	usr.say(message)
 
 /mob/verb/me_verb(message as message)
 	set name = "Me"
 	set category = "IC"
+	set desc = "Emote to nearby people (and your pred/prey)"
+	set hidden = 1
 
 	if(say_disabled)	//This is here to try to identify lag problems
-		to_chat(usr, "<font color='red'>Speech is currently admin-disabled.</font>")
+		to_chat(usr, span_red("Speech is currently admin-disabled."))
 		return
 	//VOREStation Addition Start
 	if(forced_psay)
@@ -45,7 +49,7 @@
 	message = sanitize_or_reflect(message,src) //VOREStation Edit - Reflect too-long messages (within reason)
 	//VOREStation Edit End
 
-	set_typing_indicator(FALSE)
+	client?.stop_thinking()
 	if(use_me)
 		custom_emote(usr.emote_type, message)
 	else

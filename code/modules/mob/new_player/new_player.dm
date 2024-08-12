@@ -25,6 +25,12 @@
 	verbs |= /mob/proc/insidePanel
 	initialized = TRUE // Explicitly don't use Initialize().  New players join super early and use New()
 
+
+/mob/new_player/Destroy()
+	if(panel)
+		QDEL_NULL(panel)
+	. = ..()
+
 /mob/new_player/verb/new_player_panel()
 	set src = usr
 	new_player_panel_proc()
@@ -33,9 +39,14 @@
 /mob/new_player/proc/new_player_panel_proc()
 	var/output = "<div align='center'>"
 
-	output += "<b>Current Map:</b><br>"
-	output += "[using_map.full_name]"
-	output +="<hr>"
+	output += "<b>Map:</b> [using_map.full_name]<br>"
+	output += "<b>Station Time:</b> [stationtime2text()]<br>"
+
+	if(!ticker || ticker.current_state <= GAME_STATE_PREGAME)
+		output += "<b>Server Initializing!</b>"
+	else
+		output += "<b>Round Duration:</b> [roundduration2text()]<br>"
+	output += "<hr>"
 
 	output += "<p><a href='byond://?src=\ref[src];show_preferences=1'>Character Setup</A></p>"
 
@@ -94,7 +105,7 @@
 		client.prefs.lastlorenews = GLOB.news_data.newsindex
 		SScharacter_setup.queue_preferences_save(client.prefs)
 
-	panel = new(src, "Welcome","Welcome", 210, 300, src) // VOREStation Edit
+	panel = new(src, "Welcome","Welcome", 210, 320, src) // VOREStation Edit
 	panel.set_window_options("can_close=0")
 	panel.set_content(output)
 	panel.open()
@@ -150,15 +161,15 @@
 		new_player_panel_proc()
 
 	if(href_list["observe"])
-		if(tgui_alert(src,"Are you sure you wish to observe? If you do, make sure to not use any knowledge gained from observing if you decide to join later.","Player Setup",list("Yes","No")) == "Yes")
+		if(tgui_alert(src,"Are you sure you wish to observe? If you do, make sure to not use any knowledge gained from observing if you decide to join later.","Observe Round?",list("Yes","No")) == "Yes")
 			if(!client)	return 1
 
 			//Make a new mannequin quickly, and allow the observer to take the appearance
-			var/mob/living/carbon/human/dummy/mannequin = new()
+			var/mob/living/carbon/human/dummy/mannequin = get_mannequin(client.ckey)
 			client.prefs.dress_preview_mob(mannequin)
 			var/mob/observer/dead/observer = new(mannequin)
 			observer.moveToNullspace() //Let's not stay in our doomed mannequin
-			qdel(mannequin)
+			//qdel(mannequin)
 
 			spawning = 1
 			if(client.media)
@@ -190,7 +201,7 @@
 	if(href_list["late_join"])
 
 		if(!ticker || ticker.current_state != GAME_STATE_PLAYING)
-			to_chat(usr, "<font color='red'>The round is either not ready, or has already finished...</font>")
+			to_chat(usr, span_red("The round is either not ready, or has already finished..."))
 			return
 
 		var/time_till_respawn = time_till_respawn()
@@ -423,7 +434,7 @@
 	if (src != usr)
 		return 0
 	if(!ticker || ticker.current_state != GAME_STATE_PLAYING)
-		to_chat(usr, "<font color='red'>The round is either not ready, or has already finished...</font>")
+		to_chat(usr, span_red("The round is either not ready, or has already finished..."))
 		return 0
 	if(!config.enter_allowed)
 		to_chat(usr, "<span class='notice'>There is an administrative lock on entering the game!</span>")

@@ -15,6 +15,7 @@
 	origin_tech = list(TECH_BLUESPACE = 4)
 	modifystate = "sizegun-shrink"
 	battery_lock = 1
+	var/backfire = 0
 	var/size_set_to = 1
 	firemodes = list(
 		list(mode_name		= "select size",
@@ -25,11 +26,20 @@
 
 /obj/item/weapon/gun/energy/sizegun/New()
 	..()
-	verbs += PROC_REF(select_size)
+	verbs += /obj/item/weapon/gun/energy/sizegun/proc/select_size
+	verbs += /obj/item/weapon/gun/energy/sizegun/proc/spin_dial
 
 /obj/item/weapon/gun/energy/sizegun/attack_self(mob/user)
 	. = ..()
 	select_size()
+
+/obj/item/weapon/gun/energy/sizegun/proc/spin_dial()
+	set name = "Spin Size Dial"
+	set category = "Object"
+	set src in view(1)
+
+	size_set_to = (rand(25,200)) /100
+	usr.visible_message("<span class='warning'>\The [usr] spins the size dial to a random value!</span>","<span class='notice'>You spin the dial to a random value!</span>")
 
 /obj/item/weapon/gun/energy/sizegun/consume_next_projectile()
 	. = ..()
@@ -124,6 +134,54 @@
 	size_set_to = clamp((size_select/100), 0, 1000) //eheh
 	to_chat(usr, "<span class='notice'>You set the size to [size_select]%</span>")
 
+/obj/item/weapon/gun/energy/sizegun/afterattack(atom/A, mob/living/user, adjacent, params)
+	if(adjacent) return //A is adjacent, is the user, or is on the user's person
+
+	if(backfire)
+		if(prob(50))
+			to_chat(user, "<span class='notice'>\The [src] backfires and consumes its entire charge!</span>")
+			Fire(user, user)
+			power_supply.charge = 0
+			var/mob/living/M = loc // TGMC Ammo HUD
+			if(istype(M)) // TGMC Ammo HUD
+				M?.hud_used.update_ammo_hud(M, src)
+			return
+		else
+			return ..()
+	else
+		return ..()
+
+/obj/item/weapon/gun/energy/sizegun/attack(atom/A, mob/living/user, adjacent, params)
+	if(backfire)
+		if(prob(50))
+			to_chat(user, "<span class='notice'>\The [src] backfires and consumes its entire charge!</span>")
+			Fire(user, user)
+			power_supply.charge = 0
+			var/mob/living/M = loc // TGMC Ammo HUD
+			if(istype(M)) // TGMC Ammo HUD
+				M?.hud_used.update_ammo_hud(M, src)
+			return
+		else
+			return ..()
+	else
+		return ..()
+
+
+/obj/item/weapon/gun/energy/sizegun/attackby(var/obj/item/A as obj, mob/user as mob)
+	if(A.has_tool_quality(TOOL_WIRECUTTER))
+		if(backfire)
+			to_chat(user, "<span class='warning'>You repair the damage to the \the [src].</span>")
+			backfire = 0
+			name = "size gun"
+		else
+			to_chat(user, "<span class='warning'>You snip a wire on \the [src], making it less reliable.</span>")
+			backfire = 1
+			name = "unstable size gun"
+	..()
+
+/obj/item/weapon/gun/energy/sizegun/backfire
+	name = "unstable size gun"
+	backfire = 1
 
 /obj/item/weapon/gun/energy/sizegun/mounted
 	name = "mounted size gun"
@@ -155,7 +213,7 @@
 				M.visible_message("<span class='warning'>\The [H]'s bracelet flashes and absorbs the beam!</span>","<span class='notice'>Your bracelet flashes and absorbs the beam!</span>")
 				return
 		if(!M.resize(set_size, uncapped = M.has_large_resize_bounds(), ignore_prefs = ignoring_prefs))
-			to_chat(M, "<font color='blue'>The beam fires into your body, changing your size!</font>")
+			to_chat(M, span_blue("The beam fires into your body, changing your size!"))
 		M.update_icon()
 		return
 	return 1
@@ -175,7 +233,7 @@
 
 		M.resize(set_size, uncapped = TRUE, ignore_prefs = TRUE) // Always ignores prefs, caution is advisable
 
-		to_chat(M, "<font color='blue'>The beam fires into your body, changing your size!</font>")
+		to_chat(M, span_blue("The beam fires into your body, changing your size!"))
 		M.update_icon()
 		return
 	return 1

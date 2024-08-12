@@ -1,25 +1,8 @@
-#define MECHA_INT_FIRE 1
-#define MECHA_INT_TEMP_CONTROL 2
-#define MECHA_INT_SHORT_CIRCUIT 4
-#define MECHA_INT_TANK_BREACH 8
-#define MECHA_INT_CONTROL_LOST 16
-
-#define MECHA_PROC_MOVEMENT 1
-#define MECHA_PROC_DAMAGE   2
-#define MECHA_PROC_INT_TEMP 4
-
-#define MELEE 1
-#define RANGED 2
-
 #define MECHA_OPERATING     0
 #define MECHA_BOLTS_SECURED 1
 #define MECHA_PANEL_LOOSE   2
 #define MECHA_CELL_OPEN     3
 #define MECHA_CELL_OUT      4
-
-#define MECH_FACTION_NT "nano"
-#define MECH_FACTION_SYNDI "syndi"
-#define MECH_FACTION_NONE "none"
 
 /obj/mecha
 	name = "Mecha"
@@ -538,7 +521,7 @@
 	if(equipment?.len)
 		. += "It's equipped with:"
 		for(var/obj/item/mecha_parts/mecha_equipment/ME in equipment)
-			. += "\icon[ME][bicon(ME)] [ME]"
+			. += "[icon2html(ME,user.client)] [ME]"
 
 /obj/mecha/proc/drop_item()//Derpfix, but may be useful in future for engineering exosuits.
 	return
@@ -622,7 +605,7 @@
 		show_radial_occupant(user)
 		return
 	if(state)
-		occupant_message("<font color='red'>Maintenance protocols in effect</font>")
+		occupant_message(span_red("Maintenance protocols in effect"))
 		return
 
 	if(phasing)//Phazon and other mechs with phasing.
@@ -792,7 +775,7 @@
 
 	if(defence_mode)//Check if we are currently locked down
 		if(world.time - last_message > 20)
-			src.occupant_message("<font color='red'>Unable to move while in defence mode</font>")
+			src.occupant_message(span_red("Unable to move while in defence mode"))
 			last_message = world.time
 		return 0
 
@@ -810,7 +793,7 @@
 		if(health < initial(health) - initial(health)/3)
 			overload = 0
 			step_energy_drain = initial(step_energy_drain)
-			src.occupant_message("<font color='red'>Leg actuators damage threshold exceded. Disabling overload.</font>")
+			src.occupant_message(span_red("Leg actuators damage threshold exceded. Disabling overload."))
 
 
 	var/move_result = 0
@@ -979,12 +962,12 @@
 	internal_damage &= ~int_dam_flag
 	switch(int_dam_flag)
 		if(MECHA_INT_TEMP_CONTROL)
-			occupant_message("<font color='blue'><b>Life support system reactivated.</b></font>")
+			occupant_message(span_blue("<b>Life support system reactivated.</b>"))
 			start_process(MECHA_PROC_INT_TEMP)
 		if(MECHA_INT_FIRE)
-			occupant_message("<font color='blue'><b>Internal fire extinquished.</b></font>")
+			occupant_message(span_blue("<b>Internal fire extinquished.</b>"))
 		if(MECHA_INT_TANK_BREACH)
-			occupant_message("<font color='blue'><b>Damaged internal tank has been sealed.</b></font>")
+			occupant_message(span_blue("<b>Damaged internal tank has been sealed.</b>"))
 	return
 
 
@@ -1097,9 +1080,9 @@
 		src.take_damage(15)	//The take_damage() proc handles armor values
 		if(prob(25))	//Hulks punch hard but lets not give them consistent internal damage.
 			src.check_for_internal_damage(list(MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST))
-		user.visible_message("<font color='red'><b>[user] hits [src.name], doing some damage.</b></font>", "<font color='red'><b>You hit [src.name] with all your might. The metal creaks and bends.</b></font>")
+		user.visible_message(span_red("<b>[user] hits [src.name], doing some damage.</b>"), span_red("<b>You hit [src.name] with all your might. The metal creaks and bends.</b>"))
 	else
-		user.visible_message("<font color='red'><b>[user] hits [src.name]. Nothing happens.</b></font>","<font color='red'><b>You hit [src.name] with no visible effect.</b></font>")
+		user.visible_message(span_red("<b>[user] hits [src.name]. Nothing happens.</b>"),span_red("<b>You hit [src.name] with no visible effect.</b>"))
 		src.log_append_to_last("Armor saved.")
 	return
 
@@ -1377,8 +1360,8 @@
 
 	else
 		pass_damage_reduc_mod = 1		//Just making sure.
-		src.occupant_message("<font color='red'><b>[user] hits [src] with [W].</b></font>")
-		user.visible_message("<font color='red'><b>[user] hits [src] with [W].</b></font>", "<font color='red'><b>You hit [src] with [W].</b></font>")
+		src.occupant_message(span_red("<b>[user] hits [src] with [W].</b>"))
+		user.visible_message(span_red("<b>[user] hits [src] with [W].</b>"), span_red("<b>You hit [src] with [W].</b>"))
 
 		var/pass_damage = W.force
 		pass_damage = (pass_damage*pass_damage_reduc_mod)	//Apply the reduction of damage from not having enough armor penetration. This is not regular armor values at play.
@@ -2439,7 +2422,7 @@
 /obj/mecha/proc/occupant_message(message as text)
 	if(message)
 		if(src.occupant && src.occupant.client)
-			to_chat(src.occupant, "\icon[src][bicon(src)] [message]")
+			to_chat(src.occupant, "[icon2html(src, src.occupant.client)] [message]")
 	return
 
 /obj/mecha/proc/log_message(message as text,red=null)
@@ -2555,7 +2538,7 @@
 	if(href_list["toggle_maint_access"])
 		if(usr != src.occupant)	return
 		if(state)
-			occupant_message("<font color='red'>Maintenance protocols in effect</font>")
+			occupant_message(span_red("Maintenance protocols in effect"))
 			return
 		maint_access = !maint_access
 		send_byjax(src.occupant,"exosuit.browser","t_maint_access","[maint_access?"Forbid":"Permit"] maintenance protocols")
@@ -2580,7 +2563,7 @@
 		if(!in_range(src, usr))	return
 		var/mob/user = top_filter.getMob("user")
 		if(user)
-			var/new_pressure = tgui_input_number(user,"Input new output pressure","Pressure setting",internal_tank_valve)
+			var/new_pressure = tgui_input_number(user,"Input new output pressure","Pressure setting",internal_tank_valve, round_value=FALSE)
 			if(new_pressure)
 				internal_tank_valve = new_pressure
 				to_chat(user, "The internal pressure valve has been set to [internal_tank_valve]kPa.")
@@ -2647,10 +2630,10 @@
 		if(do_after(100))
 			if(T == src.loc)
 				src.clearInternalDamage(MECHA_INT_CONTROL_LOST)
-				src.occupant_message("<font color='blue'>Recalibration successful.</font>")
+				src.occupant_message(span_blue("Recalibration successful."))
 				src.log_message("Recalibration of coordination system finished with 0 errors.")
 			else
-				src.occupant_message("<font color='red'>Recalibration failed.</font>")
+				src.occupant_message(span_red("Recalibration failed."))
 				src.log_message("Recalibration of coordination system failed with 1 error.",1)
 	if(href_list["drop_from_cargo"])
 		var/obj/O = locate(href_list["drop_from_cargo"])
@@ -2795,7 +2778,7 @@
 		src.log_append_to_last("Armor saved.")
 		src.occupant_message("<span class='notice'>\The [user]'s attack is stopped by the armor.</span>")
 		visible_message("<b>\The [user]</b> rebounds off [src.name]'s armor!")
-		user.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name]</font>")
+		user.attack_log += text("\[[time_stamp()]\] [span_red("attacked [src.name]")]")
 		playsound(src, 'sound/weapons/slash.ogg', 50, 1, -1)
 
 	else if(damage < temp_damage_minimum)//Pathetic damage levels just don't harm MECH.
@@ -2810,7 +2793,7 @@
 		if(damage > internal_damage_minimum)	//Only decently painful attacks trigger a chance of mech damage.
 			src.check_for_internal_damage(list(MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST))
 		visible_message("<span class='danger'>[user] [attack_message] [src]!</span>")
-		user.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name]</font>")
+		user.attack_log += text("\[[time_stamp()]\] [span_red("attacked [src.name]")]")
 
 	return 1
 
@@ -2911,3 +2894,9 @@
 	playsound(src, 'sound/effects/attackblob.ogg', 50, 1)
 
 	return ..()
+
+#undef MECHA_OPERATING
+#undef MECHA_BOLTS_SECURED
+#undef MECHA_PANEL_LOOSE
+#undef MECHA_CELL_OPEN
+#undef MECHA_CELL_OUT

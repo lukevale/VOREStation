@@ -168,9 +168,6 @@ Example: USING PROCCALL = BLOCKING, SELECT = FORCE_NULLS, PRIORITY = HIGH SELECT
 #define SDQL2_STATE_SWITCHING 5
 #define SDQL2_STATE_HALTING 6
 
-#define SDQL2_VALID_OPTION_TYPES list("proccall", "select", "priority", "autogc")
-#define SDQL2_VALID_OPTION_VALUES list("async", "blocking", "force_nulls", "skip_nulls", "high", "normal", "keep_alive")
-
 #define SDQL2_OPTION_SELECT_OUTPUT_SKIP_NULLS			(1<<0)
 #define SDQL2_OPTION_BLOCKING_CALLS						(1<<1)
 #define SDQL2_OPTION_HIGH_PRIORITY						(1<<2)		//High priority SDQL query, allow using almost all of the tick.
@@ -1046,7 +1043,7 @@ GLOBAL_DATUM_INIT(sdql2_vv_statobj, /obj/effect/statclick/SDQL2_VV_all, new(null
 
 		else if(char == "'")
 			if(word != "")
-				to_chat(usr, "<font color='red'>SDQL2: You have an error in your SDQL syntax, unexpected ' in query: \"<font color=gray>[query_text]</font>\" following \"<font color=gray>[word]</font>\". Please check your syntax, and try again.</font>")
+				to_chat(usr, span_red("SDQL2: You have an error in your SDQL syntax, unexpected ' in query: \"[span_gray("[query_text]")]\" following \"[span_gray("[word]")]\". Please check your syntax, and try again."))
 				return null
 
 			word = "'"
@@ -1066,7 +1063,7 @@ GLOBAL_DATUM_INIT(sdql2_vv_statobj, /obj/effect/statclick/SDQL2_VV_all, new(null
 					word += char
 
 			if(i > len)
-				to_chat(usr, "<font color='red'>SDQL2: You have an error in your SDQL syntax, unmatched ' in query: \"<font color=gray>[query_text]</font>\". Please check your syntax, and try again.</font>")
+				to_chat(usr, span_red("SDQL2: You have an error in your SDQL syntax, unmatched ' in query: \"[span_gray("[query_text]")]\". Please check your syntax, and try again."))
 				return null
 
 			query_list += "[word]'"
@@ -1074,7 +1071,7 @@ GLOBAL_DATUM_INIT(sdql2_vv_statobj, /obj/effect/statclick/SDQL2_VV_all, new(null
 
 		else if(char == "\"")
 			if(word != "")
-				to_chat(usr, "<font color='red'>SDQL2: You have an error in your SDQL syntax, unexpected \" in query: \"<font color=gray>[query_text]</font>\" following \"<font color=gray>[word]</font>\". Please check your syntax, and try again.</font>")
+				to_chat(usr, span_red("SDQL2: You have an error in your SDQL syntax, unexpected \" in query: \"[span_gray("[query_text]")]\" following \"[span_gray("[word]")]\". Please check your syntax, and try again."))
 				return null
 
 			word = "\""
@@ -1094,7 +1091,7 @@ GLOBAL_DATUM_INIT(sdql2_vv_statobj, /obj/effect/statclick/SDQL2_VV_all, new(null
 					word += char
 
 			if(i > len)
-				to_chat(usr, "<font color='red'>SDQL2: You have an error in your SDQL syntax, unmatched \" in query: \"<font color=gray>[query_text]</font>\". Please check your syntax, and try again.</font>")
+				to_chat(usr, span_red("SDQL2: You have an error in your SDQL syntax, unmatched \" in query: \"[span_gray("[query_text]")]\". Please check your syntax, and try again."))
 				return null
 
 			query_list += "[word]\""
@@ -1123,3 +1120,29 @@ GLOBAL_DATUM_INIT(sdql2_vv_statobj, /obj/effect/statclick/SDQL2_VV_all, new(null
 
 /obj/effect/statclick/SDQL2_VV_all/Click()
 	usr.client.debug_variables(GLOB.sdql2_queries)
+
+#undef SDQL_qdel_datum
+
+#undef SDQL2_STATE_ERROR
+#undef SDQL2_STATE_IDLE
+#undef SDQL2_STATE_PRESEARCH
+#undef SDQL2_STATE_SEARCHING
+#undef SDQL2_STATE_EXECUTING
+#undef SDQL2_STATE_SWITCHING
+#undef SDQL2_STATE_HALTING
+
+// 2 undefs missing here still because of SDQL_2_parser
+
+#undef SDQL2_OPTION_SELECT_OUTPUT_SKIP_NULLS
+#undef SDQL2_OPTION_BLOCKING_CALLS
+#undef SDQL2_OPTION_HIGH_PRIORITY
+#undef SDQL2_OPTION_DO_NOT_AUTOGC
+
+#undef SDQL2_OPTIONS_DEFAULT
+
+#undef SDQL2_IS_RUNNING
+#undef SDQL2_HALT_CHECK
+
+#undef SDQL2_TICK_CHECK
+
+#undef SDQL2_STAGE_SWITCH_CHECK

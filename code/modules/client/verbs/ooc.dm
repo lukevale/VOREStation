@@ -63,6 +63,7 @@
 		if(holder.rights & R_ADMIN && holder.rights & R_BAN) //Admins
 			ooc_style = "admin"
 
+	msg = GLOB.is_valid_url.Replace(msg,"<span class='linkify'>$1</span>")
 
 	for(var/client/target in GLOB.clients)
 		if(target.is_preference_enabled(/datum/client_preference/show_ooc))
@@ -111,7 +112,7 @@
 		if(!config.dooc_allowed && (mob.stat == DEAD))
 			to_chat(usr, "<span class='danger'>OOC for dead mobs has been turned off.</span>")
 			return
-		if(prefs.muted & MUTE_OOC)
+		if(prefs.muted & MUTE_LOOC)
 			to_chat(src, "<span class='danger'>You cannot use OOC (muted).</span>")
 			return
 		if(findtext(msg, "byond://") && !config.allow_byond_links)
@@ -133,7 +134,7 @@
 	log_looc(msg,src)
 
 	if(msg)
-		handle_spam_prevention(MUTE_OOC)
+		handle_spam_prevention(MUTE_LOOC)
 
 	var/mob/source = mob.get_looc_source()
 	var/turf/T = get_turf(source)
@@ -169,6 +170,8 @@
 	for(var/client/admin in GLOB.admins)
 		if(!(admin in receivers) && admin.is_preference_enabled(/datum/client_preference/holder/show_rlooc))
 			r_receivers |= admin
+
+	msg = GLOB.is_valid_url.Replace(msg,"<span class='linkify'>$1</span>")
 
 	// Send a message
 	for(var/client/target in receivers)

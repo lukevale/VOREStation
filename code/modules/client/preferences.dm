@@ -1,5 +1,3 @@
-#define SAVE_RESET -1
-
 var/list/preferences_datums = list()
 
 /datum/preferences
@@ -29,13 +27,11 @@ var/list/preferences_datums = list()
 	var/tgui_fancy = TRUE
 	var/tgui_lock = FALSE
 	var/tgui_input_mode = FALSE			// All the Input Boxes (Text,Number,List,Alert)
-	var/tgui_input_lock = FALSE
 	var/tgui_large_buttons = TRUE
 	var/tgui_swapped_buttons = FALSE
 	var/obfuscate_key = FALSE
 	var/obfuscate_job = FALSE
 	var/chat_timestamp = FALSE
-	var/throwmode_loud = FALSE
 
 	//character preferences
 	var/real_name						//our character's name
@@ -51,6 +47,7 @@ var/list/preferences_datums = list()
 	var/blood_reagents = "default"		//blood restoration reagents
 	var/backbag = 2						//backpack type
 	var/pdachoice = 1					//PDA type
+	var/shoe_hater = FALSE				//RS ADD - if true, will spawn with no shoes
 	var/h_style = "Bald"				//Hair type
 	var/r_hair = 0						//Hair color
 	var/g_hair = 0						//Hair color
@@ -292,7 +289,7 @@ var/list/preferences_datums = list()
 	popup.open(FALSE) // Skip registring onclose on the browser pane
 	onclose(user, "preferences_window", src) // We want to register on the window itself
 
-/datum/preferences/proc/update_character_previews(mutable_appearance/MA)
+/datum/preferences/proc/update_character_previews(var/mob/living/carbon/human/mannequin)
 	if(!client)
 		return
 
@@ -321,8 +318,11 @@ var/list/preferences_datums = list()
 			O.pref = src
 			LAZYSET(char_render_holders, "[D]", O)
 			client.screen |= O
+		mannequin.set_dir(D)
+		mannequin.update_tail_showing()
+		mannequin.ImmediateOverlayUpdate()
+		var/mutable_appearance/MA = new(mannequin)
 		O.appearance = MA
-		O.dir = D
 		O.screen_loc = preview_screen_locs["[D]"]
 
 /datum/preferences/proc/show_character_previews()
@@ -369,9 +369,9 @@ var/list/preferences_datums = list()
 			open_load_dialog(usr)
 			return 1
 	else if(href_list["resetslot"])
-		if("No" == tgui_alert(usr, "This will reset the current slot. Continue?", "Reset current slot?", list("No", "Yes")))
+		if("Yes" != tgui_alert(usr, "This will reset the current slot. Continue?", "Reset current slot?", list("No", "Yes")))
 			return 0
-		if("No" == tgui_alert(usr, "Are you completely sure that you want to reset this character slot?", "Reset current slot?", list("No", "Yes")))
+		if("Yes" != tgui_alert(usr, "Are you completely sure that you want to reset this character slot?", "Reset current slot?", list("No", "Yes")))
 			return 0
 		load_character(SAVE_RESET)
 		sanitize_preferences()

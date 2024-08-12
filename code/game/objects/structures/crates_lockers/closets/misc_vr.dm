@@ -194,7 +194,7 @@
 		/obj/item/weapon/storage/backpack/parachute,
 		/obj/item/weapon/material/knife/tacknife/survival,
 		/obj/item/clothing/head/pilot_vr,
-		/obj/item/clothing/under/rank/pilot1,
+		/obj/item/clothing/under/rank/pilot1/no_webbing,
 		/obj/item/clothing/suit/storage/toggle/bomber/pilot,
 		/obj/item/clothing/shoes/boots/winter/explorer,
 		/obj/item/clothing/mask/gas/half,
@@ -210,7 +210,12 @@
 		/obj/item/weapon/cell/device,
 		/obj/item/device/radio,
 		/obj/item/device/gps/explorer,
-		/obj/item/weapon/gun/energy/gun/protector/pilotgun/locked)
+		/obj/item/weapon/gun/energy/gun/protector/pilotgun/locked,
+		/obj/item/clothing/gloves/watch/survival,
+		/obj/item/clothing/accessory/storage/webbing/pilot1,
+		/obj/item/clothing/accessory/storage/webbing/pilot2,
+		/obj/item/device/emergency_beacon
+		)
 
 /obj/structure/closet/secure_closet/pilot/Initialize()
 	if(prob(50))

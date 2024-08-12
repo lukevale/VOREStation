@@ -1,10 +1,5 @@
 #define DNA_BLOCK_SIZE 3
 
-// Buffer datatype flags.
-#define DNA2_BUF_UI 1
-#define DNA2_BUF_UE 2
-#define DNA2_BUF_SE 4
-
 #define PAGE_UI "ui"
 #define PAGE_SE "se"
 #define PAGE_BUFFER "buffer"
@@ -217,7 +212,7 @@
 		if(!M.client && M.mind)
 			for(var/mob/observer/dead/ghost in player_list)
 				if(ghost.mind == M.mind)
-					to_chat(ghost, "<b><font color = #330033><font size = 3>Your corpse has been placed into a cloning scanner. Return to your body if you want to be resurrected/cloned!</b> (Verbs -> Ghost -> Re-enter corpse)</font></font>")
+					to_chat(ghost, span_interface("<font size = 3><b>Your corpse has been placed into a cloning scanner. Return to your body if you want to be resurrected/cloned!</b> (Verbs -> Ghost -> Re-enter corpse)</font>"))
 					break
 	SStgui.update_uis(src)
 
@@ -792,6 +787,7 @@
 		else
 			return FALSE
 
+#undef DNA_BLOCK_SIZE
 
 #undef PAGE_UI
 #undef PAGE_SE

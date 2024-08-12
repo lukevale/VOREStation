@@ -87,16 +87,21 @@
 
 	if(parent && parent.children)
 		parent.children -= src
+		parent = null
 
 	if(children)
 		for(var/obj/item/organ/external/C in children)
+			children -= C
+			C.parent = null
 			qdel(C)
 
 	if(internal_organs)
 		for(var/obj/item/organ/O in internal_organs)
+			internal_organs -= O
 			qdel(O)
 
 	if(splinted && splinted.loc == src)
+		splinted.loc = null
 		qdel(splinted)
 	splinted = null
 
@@ -1426,3 +1431,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 			var/datum/sprite_accessory/marking/mark = markings[M]["datum"]
 			if(mark.hide_body_parts && (organ_tag in mark.hide_body_parts))
 				return 1
+
+#undef DROPLIMB_THRESHOLD_EDGE
+#undef DROPLIMB_THRESHOLD_TEAROFF
+#undef DROPLIMB_THRESHOLD_DESTROY

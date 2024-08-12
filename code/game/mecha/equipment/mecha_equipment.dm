@@ -1,13 +1,5 @@
 //DO NOT ADD MECHA PARTS TO THE GAME WITH THE DEFAULT "SPRITE ME" SPRITE!
 //I'm annoyed I even have to tell you this! SPRITE FIRST, then commit.
-#define EQUIP_HULL		"hull"
-#define EQUIP_WEAPON	"weapon"
-#define EQUIP_UTILITY	"utility"
-#define EQUIP_SPECIAL	"core"
-//VOREStation Addition begin: MICROMECHS
-#define EQUIP_MICRO_UTILITY	"micro_utility"
-#define EQUIP_MICRO_WEAPON	"micro_weapon"
-//VOREStation Addition end: MICROMECHS
 
 /obj/item/mecha_parts/mecha_equipment
 	name = "mecha equipment"
@@ -90,7 +82,7 @@
 		if(chassis.selected == src)
 			chassis.selected = null
 		src.update_chassis_page()
-		chassis.occupant_message("<font color='red'>The [src] is destroyed!</font>")
+		chassis.occupant_message(span_red("The [src] is destroyed!"))
 		chassis.log_append_to_last("[src] is destroyed.",1)
 		if(istype(src, /obj/item/mecha_parts/mecha_equipment/weapon))//Gun
 			switch(chassis.mech_faction)
@@ -272,7 +264,7 @@
 
 /obj/item/mecha_parts/mecha_equipment/proc/occupant_message(message)
 	if(chassis)
-		chassis.occupant_message("\icon[src][bicon(src)] [message]")
+		chassis.occupant_message("[icon2html(src, chassis.occupant.client)] [message]")
 	return
 
 /obj/item/mecha_parts/mecha_equipment/proc/log_message(message)

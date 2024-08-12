@@ -6,6 +6,7 @@
 	set name = "Subtle"
 	set category = "IC"
 	set desc = "Emote to nearby people (and your pred/prey)"
+	set hidden = 1
 
 	if(say_disabled)	//This is here to try to identify lag problems
 		to_chat(usr, "Speech is currently admin-disabled.")
@@ -18,7 +19,7 @@
 	if(!message)
 		return
 
-	set_typing_indicator(FALSE)
+	client?.stop_thinking()
 	if(use_me)
 		usr.emote_vr("me",4,message)
 	else
@@ -40,7 +41,7 @@
 	if(!message)
 		return
 
-	set_typing_indicator(FALSE)
+	client?.stop_thinking()
 	if(use_me)
 		usr.emote_vr("me",4,message,TRUE)
 	else
@@ -200,6 +201,8 @@
 		for(var/mob/M as anything in vis_mobs)
 			if(isnewplayer(M))
 				continue
+			if(src.client && M && !(get_z(src) == get_z(M)))
+				message = "<span class='multizsay'>[message]</span>"
 			if(isobserver(M) && (!M.is_preference_enabled(/datum/client_preference/ghost_see_whisubtle) || \
 			!is_preference_enabled(/datum/client_preference/whisubtle_vis) && !M.client?.holder))
 				spawn(0)
@@ -252,6 +255,7 @@
 	to_chat(user,message)
 	to_chat(user, "<span class='danger'>^ This message was NOT SENT ^ -- It was [length] characters, and the limit is [MAX_MESSAGE_LEN]. It would fit in [posts] separate messages.</span>")
 #undef MAX_HUGE_MESSAGE_LEN
+#undef POST_DELIMITER_STR
 
 ///// PSAY /////
 

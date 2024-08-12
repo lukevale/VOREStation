@@ -31,7 +31,7 @@
 		report("Antibodies detected: [antigens2string(C.antibodies)]", user)
 
 /obj/item/device/antibody_scanner/proc/report(var/text, mob/user as mob)
-	to_chat(user, "<font color='blue'>\icon[src][bicon(src)] \The [src] beeps,</font> \"<font color='blue'>[text]</font>\"")
+	to_chat(user, "[span_blue("[icon2html(src, user.client)] \The [src] beeps,")] \"[span_blue("[text]")]\"")
 
 ///////////////VIRUS DISH///////////////
 
@@ -56,8 +56,10 @@
 
 /obj/item/weapon/virusdish/attackby(var/obj/item/weapon/W as obj,var/mob/living/carbon/user as mob)
 	if(istype(W,/obj/item/weapon/hand_labeler) || istype(W,/obj/item/weapon/reagent_containers/syringe))
-		return
-	..()
+		//VOREstation edit - Actually functional virus dishes
+		// Originally this returns, THEN calls ..() instead of returning the value of ..()
+		return ..()
+		//VOREstation edit end
 	if(prob(50))
 		to_chat(user, "<span class='danger'>\The [src] shatters!</span>")
 		if(virus2.infectionchance > 0)

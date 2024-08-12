@@ -10,7 +10,10 @@
 
 #define MESSAGE_TYPE_SYSTEM "system"
 #define MESSAGE_TYPE_LOCALCHAT "localchat"
+#define MESSAGE_TYPE_NPCEMOTE "npcemote"
+#define MESSAGE_TYPE_MULTIZCHAT "multizsay"
 #define MESSAGE_TYPE_PLOCALCHAT "plocalchat"
+#define MESSAGE_TYPE_HIVEMIND "hivemind"
 #define MESSAGE_TYPE_RADIO "radio"
 #define MESSAGE_TYPE_NIF "nif"
 #define MESSAGE_TYPE_INFO "info"
@@ -22,6 +25,7 @@
 #define MESSAGE_TYPE_ADMINPM "adminpm"
 #define MESSAGE_TYPE_MENTORPM "mentorpm"
 #define MESSAGE_TYPE_COMBAT "combat"
+#define MESSAGE_TYPE_CHATPRINT "chatexport"
 #define MESSAGE_TYPE_ADMINCHAT "adminchat"
 #define MESSAGE_TYPE_PRAYER "prayer"
 #define MESSAGE_TYPE_MODCHAT "modchat"

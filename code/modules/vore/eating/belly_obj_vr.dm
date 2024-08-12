@@ -1,6 +1,3 @@
-#define VORE_SOUND_FALLOFF 0.1
-#define VORE_SOUND_RANGE 3
-
 //
 //  Belly system 2.0, now using objects instead of datums because EH at datums.
 //	How many times have I rewritten bellies and vore now? -Aro
@@ -11,9 +8,16 @@
 //
 // Parent type of all the various "belly" varieties.
 //
+
+#define DM_FLAG_VORESPRITE_TAIL     0x2
+#define DM_FLAG_VORESPRITE_MARKING  0x4
+#define DM_FLAG_VORESPRITE_ARTICLE	0x8
+
+
 /obj/belly
 	name = "belly"							// Name of this location
 	desc = "It's a belly! You're in it!"	// Flavor text description of inside sight/sound/smells/feels.
+	var/message_mode = FALSE				// If all options for messages are shown
 	var/vore_sound = "Gulp"					// Sound when ingesting someone
 	var/vore_verb = "ingest"				// Verb for eating with this in messages
 	var/release_verb = "expels"				// Verb for releasing something from a stomach
@@ -28,10 +32,11 @@
 	var/immutable = FALSE					// Prevents this belly from being deleted
 	var/escapable = FALSE					// Belly can be resisted out of at any time
 	var/escapetime = 10 SECONDS				// Deciseconds, how long to escape this belly
+	var/selectchance = 0					// % Chance of stomach switching to selective mode if prey struggles
 	var/digestchance = 0					// % Chance of stomach beginning to digest if prey struggles
 	var/absorbchance = 0					// % Chance of stomach beginning to absorb if prey struggles
 	var/escapechance = 0 					// % Chance of prey beginning to escape if prey struggles.
-	var/escapechance_absorbed = 20			// % Chance of absorbed prey finishing an escape. Requires a successful escape roll against the above as well.
+	var/escapechance_absorbed = 0			// % Chance of absorbed prey finishing an escape. Requires a successful escape roll against the above as well.
 	var/escape_stun = 0						// AI controlled mobs with a number here will be weakened by the provided var when someone escapes, to prevent endless nom loops
 	var/transferchance = 0 					// % Chance of prey being trasnsfered, goes from 0-100%
 	var/transferchance_secondary = 0 		// % Chance of prey being transfered to transferchance_secondary, also goes 0-100%
@@ -43,6 +48,7 @@
 	var/shrink_grow_size = 1				// This horribly named variable determines the minimum/maximum size it will shrink/grow prey to.
 	var/transferlocation					// Location that the prey is released if they struggle and get dropped off.
 	var/transferlocation_secondary			// Secondary location that prey is released to.
+	var/transferlocation_absorb				// Location that prey is moved to if they get absorbed.
 	var/release_sound = "Splatter"			// Sound for letting someone out. Replaced from True/false
 	var/mode_flags = 0						// Stripping, numbing, etc.
 	var/fancy_vore = FALSE					// Using the new sounds?
@@ -62,6 +68,30 @@
 	var/belly_item_mult = 1 	//Multiplier for how filling items are in borg borg bellies. Items are also weighted on item size
 	var/belly_overall_mult = 1	//Multiplier applied ontop of any other specific multipliers
 
+
+	var/vore_sprite_flags = DM_FLAG_VORESPRITE_ARTICLE
+	var/tmp/static/list/vore_sprite_flag_list= list(
+		"Normal Belly Sprite" = DM_FLAG_VORESPRITE_ARTICLE,
+		//"Tail adjustment" = DM_FLAG_VORESPRITE_TAIL,
+		//"Marking addition" = DM_FLAG_VORESPRITE_MARKING
+		)
+	var/affects_vore_sprites = FALSE
+	var/count_absorbed_prey_for_sprite = TRUE
+	var/absorbed_multiplier = 1
+	var/count_liquid_for_sprite = FALSE
+	var/liquid_multiplier = 1
+	var/count_items_for_sprite = FALSE
+	var/item_multiplier = 1
+	var/health_impacts_size = TRUE
+	var/resist_triggers_animation = TRUE
+	var/size_factor_for_sprite = 1
+	var/belly_sprite_to_affect = "stomach"
+	var/datum/sprite_accessory/tail/tail_to_change_to = FALSE
+	var/tail_colouration = FALSE
+	var/tail_extra_overlay = FALSE
+	var/tail_extra_overlay2 = FALSE
+	var/undergarment_chosen = "Underwear, bottom"
+
 	// Generally just used by AI
 	var/autotransferchance = 0 				// % Chance of prey being autotransferred to transfer location
 	var/autotransferwait = 10 				// Time between trying to transfer.
@@ -71,9 +101,11 @@
 	//Actual full digest modes
 	var/tmp/static/list/digest_modes = list(DM_HOLD,DM_DIGEST,DM_ABSORB,DM_DRAIN,DM_SELECT,DM_UNABSORB,DM_HEAL,DM_SHRINK,DM_GROW,DM_SIZE_STEAL,DM_EGG)
 	//Digest mode addon flags
-	var/tmp/static/list/mode_flag_list = list("Numbing" = DM_FLAG_NUMBING, "Stripping" = DM_FLAG_STRIPPING, "Leave Remains" = DM_FLAG_LEAVEREMAINS, "Muffles" = DM_FLAG_THICKBELLY, "Affect Worn Items" = DM_FLAG_AFFECTWORN, "Jams Sensors" = DM_FLAG_JAMSENSORS, "Complete Absorb" = DM_FLAG_FORCEPSAY)
+	var/tmp/static/list/mode_flag_list = list("Numbing" = DM_FLAG_NUMBING, "Stripping" = DM_FLAG_STRIPPING, "Leave Remains" = DM_FLAG_LEAVEREMAINS, "Muffles" = DM_FLAG_THICKBELLY, "Affect Worn Items" = DM_FLAG_AFFECTWORN, "Jams Sensors" = DM_FLAG_JAMSENSORS, "Complete Absorb" = DM_FLAG_FORCEPSAY, "Spare Prosthetics" = DM_FLAG_SPARELIMB)
 	//Item related modes
 	var/tmp/static/list/item_digest_modes = list(IM_HOLD,IM_DIGEST_FOOD,IM_DIGEST)
+	//drain modes
+	var/tmp/static/list/drainmodes = list(DR_NORMAL,DR_SLEEP,DR_FAKE,DR_WEIGHT)
 
 	//List of slots that stripping handles strips
 	var/tmp/static/list/slots = list(slot_back,slot_handcuffed,slot_l_store,slot_r_store,slot_wear_mask,slot_l_hand,slot_r_hand,slot_wear_id,slot_glasses,slot_gloves,slot_head,slot_shoes,slot_belt,slot_wear_suit,slot_w_uniform,slot_s_store,slot_l_ear,slot_r_ear)
@@ -82,6 +114,7 @@
 	var/tmp/digest_mode = DM_HOLD				// Current mode the belly is set to from digest_modes (+transform_modes if human)
 	var/tmp/list/items_preserved = list()		// Stuff that wont digest so we shouldn't process it again.
 	var/tmp/recent_sound = FALSE				// Prevent audio spam
+	var/tmp/drainmode = DR_NORMAL				// Simply drains the prey then does nothing.
 
 	// Don't forget to watch your commas at the end of each line if you change these.
 	var/list/struggle_messages_outside = list(
@@ -181,13 +214,19 @@
 		"You feel your %belly beginning to become active!")
 
 	var/list/digest_chance_messages_prey = list(
-		"In response to your struggling, %owner's %belly begins to get more active...")
+		"In response to your struggling, %pred's %belly begins to get more active...")
 
 	var/list/absorb_chance_messages_owner = list(
 		"You feel your %belly start to cling onto its contents...")
 
 	var/list/absorb_chance_messages_prey = list(
-		"In response to your struggling, %owner's %belly begins to cling more tightly...")
+		"In response to your struggling, %pred's %belly begins to cling more tightly...")
+
+	var/list/select_chance_messages_owner = list(
+		"You feel your %belly beginning to become active!")
+
+	var/list/select_chance_messages_prey = list(
+		"In response to your struggling, %pred's %belly begins to get more active...")
 
 	var/list/digest_messages_owner = list(
 		"You feel %prey's body succumb to your digestive system, which breaks it apart into soft slurry.",
@@ -252,6 +291,7 @@
 	"name",
 	"desc",
 	"absorbed_desc",
+	"message_mode",
 	"vore_sound",
 	"vore_verb",
 	"release_verb",
@@ -342,6 +382,16 @@
 	"belly_mob_mult",
 	"belly_item_mult",
 	"belly_overall_mult",
+	"drainmode",
+	"vore_sprite_flags",
+	"affects_vore_sprites",
+	"count_absorbed_prey_for_sprite",
+	"resist_triggers_animation",
+	"size_factor_for_sprite",
+	"belly_sprite_to_affect",
+	"health_impacts_size",
+	"count_items_for_sprite",
+	"item_multiplier"
 	)
 
 	if (save_digest_mode == 1)
@@ -362,18 +412,31 @@
 	STOP_PROCESSING(SSbellies, src)
 	owner?.vore_organs?.Remove(src)
 	owner = null
+	for(var/mob/observer/G in src)
+		G.forceMove(get_turf(src)) //ported from CHOMPStation PR#7132
 	return ..()
 
 // Called whenever an atom enters this belly
 /obj/belly/Entered(atom/movable/thing, atom/OldLoc)
+
+	if(istype(thing, /mob/observer)) //Ports CHOMPStation PR#3072
+		if(desc) //Ports CHOMPStation PR#4772
+			//Allow ghosts see where they are if they're still getting squished along inside.
+			var/formatted_desc
+			formatted_desc = replacetext(desc, "%belly", lowertext(name)) //replace with this belly's name
+			formatted_desc = replacetext(formatted_desc, "%pred", owner) //replace with this belly's owner
+			formatted_desc = replacetext(formatted_desc, "%prey", thing) //replace with whatever mob entered into this belly
+			to_chat(thing, "<span class='notice'><B>[formatted_desc]</B></span>")
+
 	if(OldLoc in contents)
 		return //Someone dropping something (or being stripdigested)
 
 	//Generic entered message
-	to_chat(owner,"<span class='vnotice'>[thing] slides into your [lowertext(name)].</span>")
+	if(!istype(thing, /mob/observer))	//Don't have ghosts announce they're reentering the belly on death
+		to_chat(owner,"<span class='vnotice'>[thing] slides into your [lowertext(name)].</span>")
 
 	//Sound w/ antispam flag setting
-	if(vore_sound && !recent_sound)
+	if(vore_sound && !recent_sound && !istype(thing, /mob/observer))
 		var/soundfile
 		if(!fancy_vore)
 			soundfile = classic_vore_sounds[vore_sound]
@@ -410,6 +473,10 @@
 		if(M.ai_holder)
 			M.ai_holder.handle_eaten()
 
+		if (istype(owner, /mob/living/carbon/human))
+			var/mob/living/carbon/human/hum = owner
+			hum.update_fullness()
+
 	// Intended for simple mobs
 	if(!owner.client && autotransferlocation && autotransferchance > 0)
 		addtimer(CALLBACK(src, TYPE_PROC_REF(/obj/belly, check_autotransfer), thing, autotransferlocation), autotransferwait)
@@ -428,6 +495,10 @@
 				L.toggle_hud_vis()
 		if((L.stat != DEAD) && L.ai_holder)
 			L.ai_holder.go_wake()
+	if (istype(owner, /mob/living/carbon/human))
+		var/mob/living/carbon/human/hum = owner
+		hum.update_fullness()
+
 
 /obj/belly/proc/vore_fx(mob/living/L)
 	if(!istype(L))
@@ -528,6 +599,8 @@
 	for(var/atom/movable/AM as anything in contents)
 		if(isliving(AM))
 			var/mob/living/L = AM
+			if(L.stat)
+				L.SetSleeping(min(L.sleeping,20))
 			if(L.absorbed && !include_absorbed)
 				continue
 		count += release_specific_contents(AM, silent = TRUE)
@@ -551,7 +624,7 @@
 
 	//Print notifications/sound if necessary
 	if(!silent && count)
-		owner.visible_message("<font color='green'><b>[owner] [release_verb] everything from their [lowertext(name)]!</b></font>", range = privacy_range)
+		owner.visible_message("<span class='vnotice'>[span_green("<b>[owner] [release_verb] everything from their [lowertext(name)]!</b>")]</span>", range = privacy_range)
 		var/soundfile
 		if(!fancy_vore)
 			soundfile = classic_release_sounds[release_sound]
@@ -613,6 +686,12 @@
 						absorbed_count++
 				Pred.bloodstr.trans_to(Prey, Pred.reagents.total_volume / absorbed_count)
 
+	//Makes it so that if prey are heavily asleep, they will wake up shortly after release
+	if(isliving(M))
+		var/mob/living/ML = M
+		if(ML.stat)
+			ML.SetSleeping(min(ML.sleeping,20))
+
 	//Clean up our own business
 	if(!ishuman(owner))
 		owner.update_icons()
@@ -630,8 +709,8 @@
 			privacy_volume = 25
 
 	//Print notifications/sound if necessary
-	if(!silent)
-		owner.visible_message("<font color='green'><b>[owner] [release_verb] [M] from their [lowertext(name)]!</b></font>",range = privacy_range)
+	if(!silent && !isobserver(M))
+		owner.visible_message("<span class='vnotice'>[span_green("<b>[owner] [release_verb] [M] from their [lowertext(name)]!</b>")]</span>",range = privacy_range)
 		var/soundfile
 		if(!fancy_vore)
 			soundfile = classic_release_sounds[release_sound]
@@ -690,6 +769,15 @@
 	for(var/mob/living/L in contents)
 		living_count++
 
+	var/count_total = contents.len
+	for(var/mob/observer/C in contents)
+		count_total-- //Exclude any ghosts from %count
+
+	var/list/vore_contents = list()
+	for(var/G in contents)
+		if(!isobserver(G))
+			vore_contents += G //Exclude any ghosts from %prey
+
 	for(var/mob/living/P in contents)
 		if(!P.absorbed) //This is required first, in case there's a person absorbed and not absorbed in a stomach.
 			total_bulge += P.size_multiplier
@@ -699,11 +787,11 @@
 
 	formatted_message = replacetext(raw_message, "%belly", lowertext(name))
 	formatted_message = replacetext(formatted_message, "%pred", owner)
-	formatted_message = replacetext(formatted_message, "%prey", english_list(contents))
+	formatted_message = replacetext(formatted_message, "%prey", english_list(vore_contents))
 	formatted_message = replacetext(formatted_message, "%countprey", living_count)
-	formatted_message = replacetext(formatted_message, "%count", contents.len)
+	formatted_message = replacetext(formatted_message, "%count", count_total)
 
-	return("<span class='vwarning'>[formatted_message]</span>")
+	return(span_red("<i>[formatted_message]</i>"))
 
 /obj/belly/proc/get_examine_msg_absorbed()
 	if(!(contents.len) || !(examine_messages_absorbed.len) || !display_absorbed_examine)
@@ -727,7 +815,7 @@
 	formatted_message = replacetext(formatted_message, "%prey", english_list(absorbed_victims))
 	formatted_message = replacetext(formatted_message, "%countprey", absorbed_count)
 
-	return("<span class='vwarning'>[formatted_message]</span>")
+	return(span_red("<i>[formatted_message]</i>"))
 
 // The next function gets the messages set on the belly, in human-readable format.
 // This is useful in customization boxes and such. The delimiter right now is \n\n so
@@ -1011,7 +1099,9 @@
 	//Incase they have the loop going, let's double check to stop it.
 	M.stop_sound_channel(CHANNEL_PREYLOOP)
 	// Delete the digested mob
-	M.ghostize() // Make sure they're out, so we can copy attack logs and such.
+	var/mob/observer/G = M.ghostize() //Ports CHOMPStation PR#3074 Make sure they're out, so we can copy attack logs and such.
+	if(G)
+		G.forceMove(src)
 	qdel(M)
 
 // Handle a mob being absorbed
@@ -1074,7 +1164,6 @@
 			if(Mm.absorbed)
 				absorb_living(Mm)
 
-
 	if(absorbed_desc)
 		//Replace placeholder vars
 		var/formatted_abs_desc
@@ -1087,6 +1176,19 @@
 	owner.updateVRPanel()
 	if(isanimal(owner))
 		owner.update_icon()
+	// Finally, if they're to be sent to a special pudge belly, send them there
+	if(transferlocation_absorb)
+		var/obj/belly/dest_belly
+		for(var/obj/belly/B as anything in owner.vore_organs)
+			if(B.name == transferlocation_absorb)
+				dest_belly = B
+				break
+		if(!dest_belly)
+			to_chat(owner, "<span class='vwarning'>Something went wrong with your belly transfer settings. Your <b>[lowertext(name)]</b> has had its transfer location cleared as a precaution.</span>")
+			transferlocation_absorb = null
+			return
+
+		transfer_contents(M, dest_belly)
 
 // Handle a mob being unabsorbed
 /obj/belly/proc/unabsorb_living(mob/living/M)
@@ -1252,6 +1354,11 @@
 
 	var/sound/struggle_snuggle
 	var/sound/struggle_rustle = sound(get_sfx("rustle"))
+
+	if(resist_triggers_animation && affects_vore_sprites)
+		var/mob/living/carbon/human/O = owner
+		if(istype(O))
+			O.vore_belly_animation()
 
 	if(is_wet)
 		if(!fancy_vore)
@@ -1447,7 +1554,7 @@
 			digest_mode = DM_ABSORB
 			return
 
-		else if(prob(digestchance) && digest_mode != DM_DIGEST) //Finally, let's see if it should run the digest chance.
+		else if(prob(digestchance) && digest_mode != DM_DIGEST) //Then, let's see if it should run the digest chance.
 			var/digest_chance_owner_message = pick(digest_chance_messages_owner)
 			var/digest_chance_prey_message = pick(digest_chance_messages_prey)
 
@@ -1470,6 +1577,28 @@
 			to_chat(owner, digest_chance_owner_message)
 			digest_mode = DM_DIGEST
 			return
+		else if(prob(selectchance) && digest_mode != DM_SELECT) //Finally, let's see if it should run the selective mode chance.
+			var/select_chance_owner_message = pick(select_chance_messages_owner)
+			var/select_chance_prey_message = pick(select_chance_messages_prey)
+
+			select_chance_owner_message = replacetext(select_chance_owner_message, "%pred", owner)
+			select_chance_owner_message = replacetext(select_chance_owner_message, "%prey", R)
+			select_chance_owner_message = replacetext(select_chance_owner_message, "%belly", lowertext(name))
+			select_chance_owner_message = replacetext(select_chance_owner_message, "%countprey", living_count)
+			select_chance_owner_message = replacetext(select_chance_owner_message, "%count", contents.len)
+
+			select_chance_prey_message = replacetext(select_chance_prey_message, "%pred", owner)
+			select_chance_prey_message = replacetext(select_chance_prey_message, "%prey", R)
+			select_chance_prey_message = replacetext(select_chance_prey_message, "%belly", lowertext(name))
+			select_chance_prey_message = replacetext(select_chance_prey_message, "%countprey", living_count)
+			select_chance_prey_message = replacetext(select_chance_prey_message, "%count", contents.len)
+
+			select_chance_owner_message = "<span class='vwarning'>[select_chance_owner_message]</span>"
+			select_chance_prey_message = "<span class='vwarning'>[select_chance_prey_message]</span>"
+
+			to_chat(R, select_chance_prey_message)
+			to_chat(owner, select_chance_owner_message)
+			digest_mode = DM_SELECT
 
 		else //Nothing interesting happened.
 			to_chat(R, struggle_user_message)
@@ -1627,7 +1756,7 @@
 	if(!(content in src) || !istype(target))
 		return
 	content.forceMove(target)
-	if(ismob(content))
+	if(ismob(content) && !isobserver(content))
 		var/mob/ourmob = content
 		ourmob.reset_view(owner)
 	if(isitem(content))
@@ -1669,6 +1798,7 @@
 	//// Non-object variables
 	dupe.name = name
 	dupe.desc = desc
+	dupe.message_mode = message_mode
 	dupe.absorbed_desc = absorbed_desc
 	dupe.vore_sound = vore_sound
 	dupe.vore_verb = vore_verb
@@ -1721,6 +1851,15 @@
 	dupe.belly_mob_mult = belly_mob_mult
 	dupe.belly_item_mult = belly_item_mult
 	dupe.belly_overall_mult	= belly_overall_mult
+	dupe.vore_sprite_flags = vore_sprite_flags
+	dupe.affects_vore_sprites = affects_vore_sprites
+	dupe.count_absorbed_prey_for_sprite = count_absorbed_prey_for_sprite
+	dupe.resist_triggers_animation = resist_triggers_animation
+	dupe.size_factor_for_sprite = size_factor_for_sprite
+	dupe.belly_sprite_to_affect = belly_sprite_to_affect
+	dupe.health_impacts_size = health_impacts_size
+	dupe.count_items_for_sprite = count_items_for_sprite
+	dupe.item_multiplier = item_multiplier
 
 	//// Object-holding variables
 	//struggle_messages_outside - strings
@@ -1919,3 +2058,38 @@
 
 /obj/belly/container_resist(mob/M)
 	return relay_resist(M)
+
+/obj/belly/proc/GetFullnessFromBelly()
+	if(!affects_vore_sprites)
+		return 0
+	var/belly_fullness = 0
+	for(var/mob/living/M in src)
+		if(count_absorbed_prey_for_sprite || !M.absorbed)
+			var/fullness_to_add = M.size_multiplier
+			fullness_to_add *= M.mob_size / 20
+			if(M.absorbed)
+				fullness_to_add *= absorbed_multiplier
+			if(health_impacts_size)
+				fullness_to_add *= M.health / M.getMaxHealth()
+			belly_fullness += fullness_to_add
+	if(count_liquid_for_sprite)
+		belly_fullness += (reagents.total_volume / 100) * liquid_multiplier
+	if(count_items_for_sprite)
+		for(var/obj/item/I in src)
+			var/fullness_to_add = 0
+			if(I.w_class == ITEMSIZE_TINY)
+				fullness_to_add = ITEMSIZE_COST_TINY
+			else if(I.w_class == ITEMSIZE_SMALL)
+				fullness_to_add = ITEMSIZE_COST_SMALL
+			else if(I.w_class == ITEMSIZE_NORMAL)
+				fullness_to_add = ITEMSIZE_COST_NORMAL
+			else if(I.w_class == ITEMSIZE_LARGE)
+				fullness_to_add = ITEMSIZE_COST_LARGE
+			else if(I.w_class == ITEMSIZE_HUGE)
+				fullness_to_add = ITEMSIZE_COST_HUGE
+			else
+				fullness_to_add = ITEMSIZE_COST_NO_CONTAINER
+			fullness_to_add /= 32
+			belly_fullness += fullness_to_add * item_multiplier
+	belly_fullness *= size_factor_for_sprite
+	return belly_fullness

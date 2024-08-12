@@ -15,8 +15,6 @@ List of things solar grubs should be able to do:
 	Therefore, if you see the grubs, kill them while they're small, or things might escalate." // TODO: PORT SOLAR MOTHS - Rykka
 	value = CATALOGUER_REWARD_EASY
 
-#define SINK_POWER 1
-
 /mob/living/simple_mob/vore/solargrub
 	name = "juvenile solargrub"
 	desc = "A young sparkling solargrub"
@@ -52,6 +50,8 @@ List of things solar grubs should be able to do:
 	var/obj/structure/cable/attached        // the attached cable
 	var/shock_chance = 10 // Beware
 	var/tracked = FALSE
+
+	glow_override = TRUE
 
 /datum/say_list/solargrub
 	emote_see = list("squelches", "squishes")
@@ -138,6 +138,8 @@ List of things solar grubs should be able to do:
 	if(. == 0 && !is_dead())
 		set_light(2.5, 1, COLOR_YELLOW)
 		return 1
+	else if(is_dead())
+		glow_override = FALSE
 
 /mob/living/simple_mob/vore/solargrub/init_vore()
 	..()

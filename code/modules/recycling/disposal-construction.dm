@@ -25,15 +25,15 @@
 	// Disposals handle "bent"/"corner" strangely, handle this specially.
 	if(ptype == DISPOSAL_PIPE_STRAIGHT && (dir in cornerdirs))
 		ptype = DISPOSAL_PIPE_CORNER
-		switch(dir)
-			if(NORTHWEST)
-				dir = WEST
-			if(NORTHEAST)
-				dir = NORTH
-			if(SOUTHWEST)
-				dir = SOUTH
-			if(SOUTHEAST)
-				dir = EAST
+	switch(dir)
+		if(NORTHWEST)
+			dir = WEST
+		if(NORTHEAST)
+			dir = NORTH
+		if(SOUTHWEST)
+			dir = SOUTH
+		if(SOUTHEAST)
+			dir = EAST
 
 	switch(ptype)
 		if(DISPOSAL_PIPE_BIN, DISPOSAL_PIPE_OUTLET, DISPOSAL_PIPE_CHUTE)
@@ -135,6 +135,23 @@
 
 	src.set_dir(turn(src.dir, 270))
 	update()
+
+//VOREstation edit: counter-clockwise rotation
+/obj/structure/disposalconstruct/verb/rotate_counterclockwise()
+	set category = "Object"
+	set name = "Rotate Pipe Counter-Clockwise"
+	set src in view(1)
+
+	if(usr.stat)
+		return
+
+	if(anchored)
+		to_chat(usr, "You must unfasten the pipe before rotating it.")
+		return
+
+	src.set_dir(turn(src.dir, 90))
+	update()
+//VOREstation edit end
 
 /obj/structure/disposalconstruct/verb/flip()
 	set category = "Object"

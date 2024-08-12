@@ -84,6 +84,7 @@ var/global/floorIsLava = 0
 		body += {"<br><b>Mute: </b>
 			\[<A href='?src=\ref[src];[HrefToken()];mute=\ref[M];mute_type=[MUTE_IC]'><font color='[(muted & MUTE_IC)?"red":"blue"]'>IC</font></a> |
 			<A href='?src=\ref[src];[HrefToken()];mute=\ref[M];mute_type=[MUTE_OOC]'><font color='[(muted & MUTE_OOC)?"red":"blue"]'>OOC</font></a> |
+			<A href='?src=\ref[src];[HrefToken()];mute=\ref[M];mute_type=[MUTE_LOOC]'><font color='[(muted & MUTE_LOOC)?"red":"blue"]'>LOOC</font></a> |
 			<A href='?src=\ref[src];[HrefToken()];mute=\ref[M];mute_type=[MUTE_PRAY]'><font color='[(muted & MUTE_PRAY)?"red":"blue"]'>PRAY</font></a> |
 			<A href='?src=\ref[src];[HrefToken()];mute=\ref[M];mute_type=[MUTE_ADMINHELP]'><font color='[(muted & MUTE_ADMINHELP)?"red":"blue"]'>ADMINHELP</font></a> |
 			<A href='?src=\ref[src];[HrefToken()];mute=\ref[M];mute_type=[MUTE_DEADCHAT]'><font color='[(muted & MUTE_DEADCHAT)?"red":"blue"]'>DEADCHAT</font></a>\]
@@ -866,7 +867,7 @@ var/datum/announcement/minor/admin_min_announcer = new
 	else
 		to_world("<B>New players may now enter the game.</B>")
 	log_admin("[key_name(usr)] toggled new player game entering.")
-	message_admins("<font color='blue'>[key_name_admin(usr)] toggled new player game entering.</font>", 1)
+	message_admins(span_blue("[key_name_admin(usr)] toggled new player game entering."), 1)
 	world.update_status()
 	feedback_add_details("admin_verb","TE") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
@@ -892,7 +893,7 @@ var/datum/announcement/minor/admin_min_announcer = new
 		to_world("<B>You may now respawn.</B>")
 	else
 		to_world("<B>You may no longer respawn :(</B>")
-	message_admins("<font color='blue'>[key_name_admin(usr)] toggled respawn to [config.abandon_allowed ? "On" : "Off"].</font>", 1)
+	message_admins(span_blue("[key_name_admin(usr)] toggled respawn to [config.abandon_allowed ? "On" : "Off"]."), 1)
 	log_admin("[key_name(usr)] toggled respawn to [config.abandon_allowed ? "On" : "Off"].")
 	world.update_status()
 	feedback_add_details("admin_verb","TR") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
@@ -906,7 +907,7 @@ var/datum/announcement/minor/admin_min_announcer = new
 		to_world("<B>Persistence is now enabled..</B>")
 	else
 		to_world("<B>Persistence is no longer enabled.</B>")
-	message_admins("<font color='blue'>[key_name_admin(usr)] toggled persistence to [config.persistence_disabled ? "Off" : "On"].</font>", 1)
+	message_admins(span_blue("[key_name_admin(usr)] toggled persistence to [config.persistence_disabled ? "Off" : "On"]."), 1)
 	log_admin("[key_name(usr)] toggled persistence to [config.persistence_disabled ? "Off" : "On"].")
 	world.update_status()
 	feedback_add_details("admin_verb","TPD") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
@@ -920,7 +921,7 @@ var/datum/announcement/minor/admin_min_announcer = new
 		to_world("<B>Persistence is now enabled..</B>")
 	else
 		to_world("<B>Persistence is no longer enabled.</B>")
-	message_admins("<font color='blue'>[key_name_admin(usr)] toggled persistence to [config.persistence_ignore_mapload ? "Off" : "On"].</font>", 1)
+	message_admins(span_blue("[key_name_admin(usr)] toggled persistence to [config.persistence_ignore_mapload ? "Off" : "On"]."), 1)
 	log_admin("[key_name(usr)] toggled persistence to [config.persistence_ignore_mapload ? "Off" : "On"].")
 	world.update_status()
 	feedback_add_details("admin_verb","TMPD") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
@@ -952,7 +953,7 @@ var/datum/announcement/minor/admin_min_announcer = new
 	if (SSticker.current_state >= GAME_STATE_PLAYING)
 		SSticker.delay_end = !SSticker.delay_end
 		log_admin("[key_name(usr)] [SSticker.delay_end ? "delayed the round end" : "has made the round end normally"].")
-		message_admins("<font color='blue'>[key_name(usr)] [SSticker.delay_end ? "delayed the round end" : "has made the round end normally"].</font>", 1)
+		message_admins(span_blue("[key_name(usr)] [SSticker.delay_end ? "delayed the round end" : "has made the round end normally"]."), 1)
 		return
 	round_progressing = !round_progressing
 	if (!round_progressing)
@@ -968,7 +969,7 @@ var/datum/announcement/minor/admin_min_announcer = new
 	set desc="Toggle admin jumping"
 	set name="Toggle Jump"
 	config.allow_admin_jump = !(config.allow_admin_jump)
-	message_admins("<font color='blue'>Toggled admin jumping to [config.allow_admin_jump].</font>")
+	message_admins(span_blue("Toggled admin jumping to [config.allow_admin_jump]."))
 	feedback_add_details("admin_verb","TJ") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/adspawn()
@@ -976,7 +977,7 @@ var/datum/announcement/minor/admin_min_announcer = new
 	set desc="Toggle admin spawning"
 	set name="Toggle Spawn"
 	config.allow_admin_spawning = !(config.allow_admin_spawning)
-	message_admins("<font color='blue'>Toggled admin item spawning to [config.allow_admin_spawning].</font>")
+	message_admins(span_blue("Toggled admin item spawning to [config.allow_admin_spawning]."))
 	feedback_add_details("admin_verb","TAS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/adrev()
@@ -984,7 +985,7 @@ var/datum/announcement/minor/admin_min_announcer = new
 	set desc="Toggle admin revives"
 	set name="Toggle Revive"
 	config.allow_admin_rev = !(config.allow_admin_rev)
-	message_admins("<font color='blue'>Toggled reviving to [config.allow_admin_rev].</font>")
+	message_admins(span_blue("Toggled reviving to [config.allow_admin_rev]."))
 	feedback_add_details("admin_verb","TAR") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/immreboot()
@@ -994,7 +995,7 @@ var/datum/announcement/minor/admin_min_announcer = new
 	if(!usr.client.holder)	return
 	if(alert(usr, "Reboot server?","Reboot!","Yes","No") == "No") // Not tgui_alert for safety
 		return
-	to_world("<font color='red'><b>Rebooting world!</b></font> <font color='blue'>Initiated by [usr.client.holder.fakekey ? "Admin" : usr.key]!</font>")
+	to_world("[span_red("<b>Rebooting world!</b>")] [span_blue("Initiated by [usr.client.holder.fakekey ? "Admin" : usr.key]!")]")
 	log_admin("[key_name(usr)] initiated an immediate reboot.")
 
 	feedback_set_details("end_error","immediate admin reboot - by [usr.key] [usr.client.holder.fakekey ? "(stealth)" : ""]")
@@ -1260,7 +1261,7 @@ var/datum/announcement/minor/admin_min_announcer = new
 	else
 		to_world("<B>Guests may now enter the game.</B>")
 	log_admin("[key_name(usr)] toggled guests game entering [config.guests_allowed?"":"dis"]allowed.")
-	message_admins("<font color='blue'>[key_name_admin(usr)] toggled guests game entering [config.guests_allowed?"":"dis"]allowed.</font>", 1)
+	message_admins(span_blue("[key_name_admin(usr)] toggled guests game entering [config.guests_allowed?"":"dis"]allowed."), 1)
 	feedback_add_details("admin_verb","TGU") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/output_ai_laws()
